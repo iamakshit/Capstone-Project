@@ -18,16 +18,14 @@ public class UserProvider extends ContentProvider {
     // The URI Matcher used by this content provider.
     private static final UriMatcher sUriMatcher = buildUriMatcher();
     private UserDbHelper mOpenHelper;
-    private static final SQLiteQueryBuilder sWeatherByLocationSettingQueryBuilder;
+    private static final SQLiteQueryBuilder sUserByNameSettingQueryBuilder;
     static final int USER = 100;
 
 
     static{
-        sWeatherByLocationSettingQueryBuilder = new SQLiteQueryBuilder();
+        sUserByNameSettingQueryBuilder = new SQLiteQueryBuilder();
 
-        //This is an inner join which looks like
-        //weather INNER JOIN location ON weather.location_id = location._id
-        sWeatherByLocationSettingQueryBuilder.setTables(UserContract.UserEntry.TABLE_NAME);
+        sUserByNameSettingQueryBuilder.setTables(UserContract.UserEntry.TABLE_NAME);
     }
 
 
