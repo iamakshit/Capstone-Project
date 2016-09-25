@@ -31,7 +31,6 @@ public class UserDbHelper extends SQLiteOpenHelper {
                 UserEntry.COLUMN_USER_DOB_DATE + "TEXT NOT NULL, " +
                 UserEntry.COLUMN_USER_DOB_TIME + "TEXT NOT NULL, " +
                 UserEntry.COLUMN_USER_IMAGE + "TEXT NOT NULL, " +
-                UserEntry.COLUMN_CITY_NAME + "TEXT NOT NULL, " +
                 UserEntry.COLUMN_CITY_NAME + " TEXT NOT NULL, " +
                 UserEntry.COLUMN_COORD_LAT + " REAL NOT NULL, " +
                 UserEntry.COLUMN_COORD_LONG + " REAL NOT NULL " +
