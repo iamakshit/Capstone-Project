@@ -2,12 +2,14 @@ package com.android.akshitgupta.capstoneproject;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.view.Menu;
 import android.view.View;
+import android.widget.AutoCompleteTextView;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
@@ -20,7 +22,7 @@ public class AddUserActivity extends AppCompatActivity implements View.OnClickLi
 
     private EditText fromDateEtxt;
     private EditText toDateEtxt;
-
+    private AutoCompleteTextView placePicker;
     private DatePickerDialog fromDatePickerDialog;
     private TimePickerDialog toDatePickerDialog;
 
@@ -50,11 +52,13 @@ public class AddUserActivity extends AppCompatActivity implements View.OnClickLi
 
         toDateEtxt = (EditText) findViewById(R.id.dob_time);
         toDateEtxt.setInputType(InputType.TYPE_DATETIME_VARIATION_TIME);
+        placePicker = (AutoCompleteTextView) findViewById(R.id.autoCompleteTextView);
     }
 
     private void setDateTimeField() {
         fromDateEtxt.setOnClickListener((View.OnClickListener) this);
         toDateEtxt.setOnClickListener((View.OnClickListener) this);
+        placePicker.setOnClickListener((View.OnClickListener)this);
 
         Calendar newCalendar = Calendar.getInstance();
         fromDatePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
@@ -88,10 +92,17 @@ public class AddUserActivity extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onClick(View view) {
+
+
         if (view == fromDateEtxt) {
             fromDatePickerDialog.show();
         } else if (view == toDateEtxt) {
             toDatePickerDialog.show();
+        }
+        else if (view == placePicker)
+        {
+            Intent intent = new Intent(AddUserActivity.this, GeoPlacesAutoCompleteActivity.class);
+            startActivity(intent);
         }
     }
 }

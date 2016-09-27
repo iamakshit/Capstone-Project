@@ -6,7 +6,10 @@
     <string name="mark_as_default">Mark As Default</string>
     <string name="dob_date">Date of Birth</string>
     <string name="dob_time">Time of Birth</string>
-
+    <string name="name">Name</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_add_user">AddUserActivity</string>
+    <string name="geo_places_tag">GooglePlacesAutocompleteActivity</string>
+    <string name="title_activity_geo_places_auto_complete">GeoPlacesAutoCompleteActivity</string>
+
 </resources>
