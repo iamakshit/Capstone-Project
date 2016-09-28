@@ -12,5 +12,7 @@
     <string name="geo_places_tag">GooglePlacesAutocompleteActivity</string>
     <string name="title_activity_geo_places_auto_complete">GeoPlacesAutoCompleteActivity</string>
     <string name="saveText">Save And Continue</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
 
 </resources>
