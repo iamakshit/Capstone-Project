@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/content_add_user"
     android:layout_width="match_parent"
@@ -8,13 +8,25 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
     tools:context="com.android.akshitgupta.capstoneproject.AddUserActivityFragment"
     tools:showIn="@layout/activity_add_user">
 
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="92dp">
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="100dp"></Space>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:orientation="vertical">
 
         <EditText
@@ -22,6 +34,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight=".3"
+            android:paddingTop="@dimen/activity_horizontal_margin"
+            android:paddingBottom="@dimen/activity_horizontal_margin"
             android:hint="@string/name" />
 
         <AutoCompleteTextView
@@ -30,15 +44,17 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:layout_weight=".3"
+            android:paddingTop="@dimen/activity_horizontal_margin"
+            android:paddingBottom="@dimen/activity_horizontal_margin"
             android:hint="Please enter your place of birth">
-
-            <requestFocus />
         </AutoCompleteTextView>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight=".3"
+            android:paddingTop="@dimen/activity_horizontal_margin"
+            android:paddingBottom="@dimen/activity_horizontal_margin"
             android:orientation="horizontal">
 
             <EditText
@@ -56,7 +72,25 @@
                 android:hint="@string/dob_time" />
         </LinearLayout>
 
+        <Button
+            android:text="@string/saveText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/activity_horizontal_margin"
+            android:paddingBottom="@dimen/activity_horizontal_margin"
+            android:id="@+id/saveButton"
+            android:layout_weight=".3" />
+
     </LinearLayout>
 
-</RelativeLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="90dp">
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="100dp"></Space>
+    </LinearLayout>
+
+</LinearLayout>
 
