@@ -4,11 +4,8 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.android.akshitgupta.capstoneproject.user.GeoDetails;
 import com.android.akshitgupta.capstoneproject.utils.ConstantUtils;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -22,13 +19,12 @@ import java.util.ArrayList;
  * Created by akshitgupta on 29/09/16.
  */
 
-public class GeoPlacesAutoCompleteTask extends AsyncTask<String, Void, ArrayList<String>> {
-    public static final int size = 10;
-
-    public static String LOG_TAG = GeoPlacesAutoCompleteTask.class.getSimpleName();
+public class GeoPlaceDetailsTask extends AsyncTask<String, Void, ArrayList<GeoDetails>> {
+    public static String LOG_TAG = GeoPlaceDetailsTask.class.getSimpleName();
 
     @Override
-    protected ArrayList<String> doInBackground(String... params) {
+    protected ArrayList<GeoDetails> doInBackground(String... params) {
+
 
         if (params == null) {
             return null;
@@ -41,12 +37,12 @@ public class GeoPlacesAutoCompleteTask extends AsyncTask<String, Void, ArrayList
         Log.i(LOG_TAG, "Starting ...");
 
         StringBuilder baseURL = new StringBuilder();
-        baseURL.append(ConstantUtils.PLACES_API_BASE).append(ConstantUtils.TYPE_AUTOCOMPLETE).append(ConstantUtils.OUT_JSON);
-        ArrayList<String> data = new ArrayList<String>();
+        baseURL.append(ConstantUtils.PLACES_API_BASE).append(ConstantUtils.PLACE_DETAILS).append(ConstantUtils.OUT_JSON);
+        ArrayList<GeoDetails> data = new ArrayList<GeoDetails>();
         try {
 
 
-            Uri buildUri = Uri.parse(baseURL.toString()).buildUpon().appendQueryParameter(ConstantUtils.API_LANGUAGE_PARAM, ConstantUtils.API_LANGUAGE).appendQueryParameter(ConstantUtils.API_TYPES_PARAM, ConstantUtils.API_TYPES).appendQueryParameter(ConstantUtils.API_INPUT_PARAM, URLEncoder.encode(input, ConstantUtils.ENCODING_STANDARD)).appendQueryParameter(ConstantUtils.API_KEY_PARAM, ConstantUtils.AUTOCOMPLETE_API_KEY).build();
+            Uri buildUri = Uri.parse(baseURL.toString()).buildUpon().appendQueryParameter(ConstantUtils.API_PLACEID_PARAM, URLEncoder.encode(input, ConstantUtils.ENCODING_STANDARD)).appendQueryParameter(ConstantUtils.API_KEY_PARAM, ConstantUtils.AUTOCOMPLETE_API_KEY).build();
             URL url = new URL(buildUri.toString());
 
 
@@ -58,7 +54,7 @@ public class GeoPlacesAutoCompleteTask extends AsyncTask<String, Void, ArrayList
             urlConnection.connect();
             int status = urlConnection.getResponseCode();
 
-            Log.i(LOG_TAG, "Google AutoComplete API Server status :" + status);
+            Log.i(LOG_TAG, "Google Place Details API Server status :" + status);
             BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
             StringBuilder buffer = new StringBuilder();
             String line;
@@ -74,7 +70,7 @@ public class GeoPlacesAutoCompleteTask extends AsyncTask<String, Void, ArrayList
 
             jsonStr = buffer.toString();
 
-            data = getDescriptionDataFromJson(jsonStr);
+            //  data = getDescriptionDataFromJson(jsonStr);
 
         } catch (IOException e) {
             Log.e(LOG_TAG, "IOException", e);
@@ -96,25 +92,8 @@ public class GeoPlacesAutoCompleteTask extends AsyncTask<String, Void, ArrayList
 
 
         return data;
-    }
 
-    private ArrayList<String> getDescriptionDataFromJson(String jsonStr) {
-        ArrayList<String> dataList = new ArrayList<String>();
-        try {
 
-            // Create a JSON object hierarchy from the results
-            JSONObject jsonObj = new JSONObject(jsonStr);
-            JSONArray predsJsonArray = jsonObj.getJSONArray("predictions");
-
-            // Extract the Place descriptions from the results
-            dataList = new ArrayList<String>(predsJsonArray.length());
-            for (int i = 0; i < predsJsonArray.length(); i++) {
-                dataList.add(predsJsonArray.getJSONObject(i).getString("description"));
-            }
-        } catch (JSONException e) {
-            Log.e(LOG_TAG, "Cannot process JSON results", e);
-        }
-        return dataList;
     }
 
     @Override
@@ -125,7 +104,7 @@ public class GeoPlacesAutoCompleteTask extends AsyncTask<String, Void, ArrayList
     }
 
     @Override
-    protected void onPostExecute(ArrayList<String> data) {
+    protected void onPostExecute(ArrayList<GeoDetails> data) {
         Log.i(LOG_TAG, "Inside onPostExecute method");
         Log.i(LOG_TAG, "data {}" + data.toString());
 
