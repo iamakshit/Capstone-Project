@@ -64,6 +64,10 @@ public class UserProfile {
         private String coordLat;
         private String coordLong;
 
+        public User() {
+
+        }
+
         public User(Integer id, String userName, String userGender, String dobDate, String dobTIme, String userImage, String cityName, String coordLat, String coordLong) {
             this.id = id;
             this.userName = userName;
@@ -146,6 +150,21 @@ public class UserProfile {
 
         public String getCoordLong() {
             return coordLong;
+        }
+
+        @Override
+        public String toString() {
+            return "User{" +
+                    "id=" + id +
+                    ", userName='" + userName + '\'' +
+                    ", userGender='" + userGender + '\'' +
+                    ", dobDate='" + dobDate + '\'' +
+                    ", dobTIme='" + dobTIme + '\'' +
+                    ", userImage='" + userImage + '\'' +
+                    ", cityName='" + cityName + '\'' +
+                    ", coordLat='" + coordLat + '\'' +
+                    ", coordLong='" + coordLong + '\'' +
+                    '}';
         }
     }
 }

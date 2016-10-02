@@ -24,4 +24,9 @@ public class GeoDetails {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    @Override
+    public String toString() { //Should not be changed. It is based on this that list is shown
+        return  description;
+    }
 }

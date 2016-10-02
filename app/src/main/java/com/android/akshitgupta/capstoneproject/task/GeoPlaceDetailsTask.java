@@ -4,8 +4,11 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.android.akshitgupta.capstoneproject.object.GeoDetails;
+import com.android.akshitgupta.capstoneproject.object.GeoPlaceDetails;
 import com.android.akshitgupta.capstoneproject.utils.ConstantUtils;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,17 +16,16 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.ArrayList;
 
 /**
  * Created by akshitgupta on 29/09/16.
  */
 
-public class GeoPlaceDetailsTask extends AsyncTask<String, Void, ArrayList<GeoDetails>> {
+public class GeoPlaceDetailsTask extends AsyncTask<String, Void, GeoPlaceDetails> {
     public static String LOG_TAG = GeoPlaceDetailsTask.class.getSimpleName();
 
     @Override
-    protected ArrayList<GeoDetails> doInBackground(String... params) {
+    protected GeoPlaceDetails doInBackground(String... params) {
 
 
         if (params == null) {
@@ -38,7 +40,7 @@ public class GeoPlaceDetailsTask extends AsyncTask<String, Void, ArrayList<GeoDe
 
         StringBuilder baseURL = new StringBuilder();
         baseURL.append(ConstantUtils.PLACES_API_BASE).append(ConstantUtils.PLACE_DETAILS).append(ConstantUtils.OUT_JSON);
-        ArrayList<GeoDetails> data = new ArrayList<GeoDetails>();
+        GeoPlaceDetails data = new GeoPlaceDetails();
         try {
             Uri buildUri = Uri.parse(baseURL.toString()).buildUpon().appendQueryParameter(ConstantUtils.API_PLACEID_PARAM, URLEncoder.encode(input, ConstantUtils.ENCODING_STANDARD)).appendQueryParameter(ConstantUtils.API_KEY_PARAM, ConstantUtils.PLACES_API_KEY).build();
             URL url = new URL(buildUri.toString());
@@ -66,7 +68,7 @@ public class GeoPlaceDetailsTask extends AsyncTask<String, Void, ArrayList<GeoDe
             }
 
             jsonStr = buffer.toString();
-            //  data = getDescriptionDataFromJson(jsonStr);
+            data = getDescriptionDataFromJson(jsonStr);
 
         } catch (IOException e) {
             Log.e(LOG_TAG, "IOException", e);
@@ -91,16 +93,33 @@ public class GeoPlaceDetailsTask extends AsyncTask<String, Void, ArrayList<GeoDe
     @Override
     protected void onPreExecute() {
         Log.i(LOG_TAG, "Inside onPreExecute Method");
-
         super.onPreExecute();
     }
 
     @Override
-    protected void onPostExecute(ArrayList<GeoDetails> data) {
+    protected void onPostExecute(GeoPlaceDetails data) {
         Log.i(LOG_TAG, "Inside onPostExecute method");
         Log.i(LOG_TAG, "data {}" + data.toString());
-
-
         super.onPostExecute(data);
+    }
+
+    private GeoPlaceDetails getDescriptionDataFromJson(String jsonStr) {
+        GeoPlaceDetails geoPlaceDetails = new GeoPlaceDetails();
+        try {
+
+            // Create a JSON object hierarchy from the results
+            JSONObject jsonObj = new JSONObject(jsonStr);
+            JSONObject result = jsonObj.getJSONObject("result");
+            JSONObject geometry = result.getJSONObject("geometry");
+            JSONObject location = geometry.getJSONObject("location");
+            String latitude = location.getString("lat");
+            String longitude = location.getString("lng");
+            geoPlaceDetails.setLatitude(latitude);
+            geoPlaceDetails.setLongitude(longitude);
+
+        } catch (JSONException e) {
+            Log.e(LOG_TAG, "Cannot process JSON results", e);
+        }
+        return geoPlaceDetails;
     }
 }

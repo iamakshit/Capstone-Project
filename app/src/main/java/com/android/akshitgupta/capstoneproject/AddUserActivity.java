@@ -3,6 +3,8 @@ package com.android.akshitgupta.capstoneproject;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -20,15 +22,21 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.android.akshitgupta.capstoneproject.object.GeoDetails;
+import com.android.akshitgupta.capstoneproject.object.GeoPlaceDetails;
+import com.android.akshitgupta.capstoneproject.object.UserProfile;
+import com.android.akshitgupta.capstoneproject.task.GeoPlaceDetailsTask;
 import com.android.akshitgupta.capstoneproject.view.GooglePlacesAutocompleteAdapter;
+
+import org.apache.commons.lang3.StringUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
+import java.util.concurrent.ExecutionException;
 
 public class AddUserActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String LOG_TAG = AddUserActivity.class.getSimpleName();
-
+    String placeId;
     private EditText dobDate;
     private EditText dobTime;
     private EditText name;
@@ -38,10 +46,31 @@ public class AddUserActivity extends AppCompatActivity implements View.OnClickLi
     private RadioButton maleOption;
     private RadioButton femaleOption;
     private AutoCompleteTextView autoCompView;
-    String placeId;
     private GeoDetails geoDetails;
     private SimpleDateFormat dateFormatter;
     private SimpleDateFormat timeFormatter;
+
+    public static GeoPlaceDetails getLocationDetails(String input) {
+        GeoPlaceDetails geoPlaceDetails = null;
+        GeoPlaceDetailsTask task;
+        task = new GeoPlaceDetailsTask();
+        int maximumPoolSize = 80;
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
+            task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, input);
+        else
+            task.execute(input);
+
+        try {
+            geoPlaceDetails = task.get();
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return geoPlaceDetails;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,15 +115,10 @@ public class AddUserActivity extends AppCompatActivity implements View.OnClickLi
         autoCompView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Context context =  getApplicationContext();
+                Context context = getApplicationContext();
                 geoDetails = (GeoDetails) autoCompView.getAdapter().getItem(position);
-
-                Toast.makeText(context, "Following info: " + geoDetails.getDescription(), Toast.LENGTH_SHORT).show();
-
-                // Intent intent = new Intent(((Callback) context).onItemSelected(movie)).putExtra("movie", movie);
-                // startActivity(intent);
-
-
+                placeId = geoDetails.getPlaceId();
+                Toast.makeText(context, "You selected :: " + geoDetails.getDescription(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -131,6 +155,28 @@ public class AddUserActivity extends AppCompatActivity implements View.OnClickLi
         return true;
     }
 
+    public void errorAlerts() {
+        if (StringUtils.isEmpty(name.getText().toString())) {
+            name.setError("Name is mandatory");
+        }
+
+        if (StringUtils.isEmpty(dobDate.getText().toString())) {
+            dobDate.setError("Date of birth is mandatory");
+        }
+
+        if (StringUtils.isEmpty(dobTime.getText().toString())) {
+            dobTime.setError("Time of birth is mandatory");
+        }
+
+        if (StringUtils.isEmpty(maleOption.getText().toString()) && StringUtils.isEmpty(femaleOption.getText().toString())) {
+            maleOption.setError("Gender options has to be selected");
+        }
+
+        if (StringUtils.isEmpty(autoCompView.getText().toString())) {
+            autoCompView.setError("Place of birth is mandatory");
+        }
+    }
+
     @Override
     public void onClick(View view) {
 
@@ -138,37 +184,34 @@ public class AddUserActivity extends AppCompatActivity implements View.OnClickLi
             fromDatePickerDialog.show();
         } else if (view == dobTime) {
             toDatePickerDialog.show();
-        } else if (view == autoCompView) {
-            // Intent intent = new Intent(AddUserActivity.this, GeoPlacesAutoCompleteActivity.class);
-            // startActivity(intent);
-
-        } else if (view == maleOption) {
-            boolean maleOption = ((RadioButton) view).isChecked();
-            Log.i(LOG_TAG, "Option choosen Male = " + maleOption);
-
-        } else if (view == femaleOption) {
-            boolean femaleOption = ((RadioButton) view).isChecked();
-            Log.i(LOG_TAG, "Option choosen Female = " + femaleOption);
         } else if (view == saveButton) {
+
+            errorAlerts();
+
             String nameText = name.getText().toString();
-            Log.i(LOG_TAG, "NameText = " + nameText);
-            String placePickerText = autoCompView.getText().toString();
-            Log.i(LOG_TAG, "PlacePicker = " + placePickerText);
-
             String dobDateText = dobDate.getText().toString();
-            Log.i(LOG_TAG, "dobDate = " + dobDateText);
-
             String dobTimeText = dobTime.getText().toString();
-            Log.i(LOG_TAG, "dobTime = " + dobTimeText);
+            String location = autoCompView.getText().toString();
+            boolean isMale = maleOption.isChecked();
+            String gender = Gender.MALE.getCode();
+            if (!isMale) {
+                gender = Gender.FEMALE.getCode();
+            }
+            GeoPlaceDetails geoPlaceDetails = getLocationDetails(placeId);
 
-            autoCompView.getAdapter().toString();
-            Log.i(LOG_TAG,"PlaceId "+placeId);
 
-            Log.i(LOG_TAG, "Save Button");
+            UserProfile.User user = new UserProfile.User();
+            user.setUserName(nameText);
+            user.setDobDate(dobDateText);
+            user.setDobTIme(dobTimeText);
+            user.setUserGender(gender);
+            user.setCoordLat(geoPlaceDetails.getLatitude());
+            user.setCoordLong(geoPlaceDetails.getLongitude());
+            user.setCityName(location);
+
+            Log.i(LOG_TAG, "Save Button User ="+user);
         }
 
     }
-
-
 
 }
