@@ -19,4 +19,8 @@ public class ConstantUtils {
     public static final String API_LANGUAGE = "en";
     public static final String API_TYPES = "geocode";
     public static final String API_PLACEID_PARAM = "placeid";
+    public static final Integer PERMISSIONS_REQUEST_READ_CONTACTS=100;
+    public static final Integer PERMISSIONS_REQUEST_WRITE_CONTACTS=100;
+
 }
+

@@ -1,8 +1,13 @@
 package com.android.akshitgupta.capstoneproject;
 
+import android.Manifest;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.ContentUris;
+import android.content.ContentValues;
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -21,6 +26,7 @@ import android.widget.RadioButton;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.android.akshitgupta.capstoneproject.data.UserContract;
 import com.android.akshitgupta.capstoneproject.object.GeoDetails;
 import com.android.akshitgupta.capstoneproject.object.GeoPlaceDetails;
 import com.android.akshitgupta.capstoneproject.object.UserProfile;
@@ -33,6 +39,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.concurrent.ExecutionException;
+
+import static com.android.akshitgupta.capstoneproject.utils.ConstantUtils.PERMISSIONS_REQUEST_WRITE_CONTACTS;
 
 public class AddUserActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String LOG_TAG = AddUserActivity.class.getSimpleName();
@@ -206,8 +214,40 @@ public class AddUserActivity extends AppCompatActivity implements View.OnClickLi
             user.setCoordLat(geoPlaceDetails.getLatitude());
             user.setCoordLong(geoPlaceDetails.getLongitude());
             user.setCityName(location);
-
             Log.i(LOG_TAG, "Save Button User =" + user);
+
+            addUser(user);
         }
     }
+
+    public void addUser(UserProfile.User user) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.WRITE_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.WRITE_CONTACTS}, PERMISSIONS_REQUEST_WRITE_CONTACTS);
+            //After this point you wait for callback in onRequestPermissionsResult(int, String[], int[]) overriden method
+        } else {
+            getApplicationContext().deleteDatabase(UserContract.UserEntry.TABLE_NAME);
+            ContentValues userValues = new ContentValues();
+            userValues.put(UserContract.UserEntry._ID, user.getId());
+            userValues.put(UserContract.UserEntry.COLUMN_USER_NAME, user.getUserName());
+            userValues.put(UserContract.UserEntry.COLUMN_USER_GENDER, user.getUserGender());
+            userValues.put(UserContract.UserEntry.COLUMN_USER_DOB_DATE, user.getDobDate());
+            userValues.put(UserContract.UserEntry.COLUMN_USER_DOB_TIME, user.getDobTIme());
+            userValues.put(UserContract.UserEntry.COLUMN_USER_IMAGE, user.getUserImage());
+            userValues.put(UserContract.UserEntry.COLUMN_CITY_NAME, user.getCityName());
+            userValues.put(UserContract.UserEntry.COLUMN_COORD_LAT, user.getCoordLat());
+            userValues.put(UserContract.UserEntry.COLUMN_COORD_LONG, user.getCoordLong());
+
+
+            // Finally, insert location data into the database.
+            Uri insertedUri = getApplicationContext().getContentResolver().insert(
+                    UserContract.UserEntry.CONTENT_URI,
+                    userValues
+            );
+
+            // The resulting URI contains the ID for the row.  Extract the locationId from the Uri.
+            Long userId = ContentUris.parseId(insertedUri);
+            Log.i(LOG_TAG, "Inserted user with id = " + userId);
+        }
+    }
+
 }
