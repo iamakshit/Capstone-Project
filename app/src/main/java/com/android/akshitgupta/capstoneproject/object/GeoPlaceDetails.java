@@ -33,4 +33,13 @@ public class GeoPlaceDetails {
     public void setPlaceId(String placeId) {
         this.placeId = placeId;
     }
+
+    @Override
+    public String toString() {
+        return "GeoPlaceDetails{" +
+                "latitude='" + latitude + '\'' +
+                ", longitude='" + longitude + '\'' +
+                ", placeId='" + placeId + '\'' +
+                '}';
+    }
 }

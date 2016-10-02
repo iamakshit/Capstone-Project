@@ -54,7 +54,6 @@ public class AddUserActivity extends AppCompatActivity implements View.OnClickLi
         GeoPlaceDetails geoPlaceDetails = null;
         GeoPlaceDetailsTask task;
         task = new GeoPlaceDetailsTask();
-        int maximumPoolSize = 80;
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
             task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, input);
@@ -199,7 +198,6 @@ public class AddUserActivity extends AppCompatActivity implements View.OnClickLi
             }
             GeoPlaceDetails geoPlaceDetails = getLocationDetails(placeId);
 
-
             UserProfile.User user = new UserProfile.User();
             user.setUserName(nameText);
             user.setDobDate(dobDateText);
@@ -209,9 +207,7 @@ public class AddUserActivity extends AppCompatActivity implements View.OnClickLi
             user.setCoordLong(geoPlaceDetails.getLongitude());
             user.setCityName(location);
 
-            Log.i(LOG_TAG, "Save Button User ="+user);
+            Log.i(LOG_TAG, "Save Button User =" + user);
         }
-
     }
-
 }

@@ -99,7 +99,6 @@ public class GeoPlaceDetailsTask extends AsyncTask<String, Void, GeoPlaceDetails
     @Override
     protected void onPostExecute(GeoPlaceDetails data) {
         Log.i(LOG_TAG, "Inside onPostExecute method");
-        Log.i(LOG_TAG, "data {}" + data.toString());
         super.onPostExecute(data);
     }
 

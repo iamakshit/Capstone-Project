@@ -15,20 +15,18 @@ import android.support.annotation.Nullable;
  */
 public class UserProvider extends ContentProvider {
 
+    static final int USER = 100;
     // The URI Matcher used by this content provider.
     private static final UriMatcher sUriMatcher = buildUriMatcher();
-    private UserDbHelper mOpenHelper;
     private static final SQLiteQueryBuilder sUserByNameSettingQueryBuilder;
-    static final int USER = 100;
 
-
-    static{
+    static {
         sUserByNameSettingQueryBuilder = new SQLiteQueryBuilder();
 
         sUserByNameSettingQueryBuilder.setTables(UserContract.UserEntry.TABLE_NAME);
     }
 
-
+    private UserDbHelper mOpenHelper;
 
     static UriMatcher buildUriMatcher() {
         // I know what you're thinking.  Why create a UriMatcher when you can use regular
@@ -104,7 +102,7 @@ public class UserProvider extends ContentProvider {
 
             case USER: {
                 long _id = db.insert(UserContract.UserEntry.TABLE_NAME, null, values);
-                if ( _id > 0 )
+                if (_id > 0)
                     returnUri = UserContract.UserEntry.buildUserUri(_id);
                 else
                     throw new android.database.SQLException("Failed to insert row into " + uri);
@@ -124,7 +122,7 @@ public class UserProvider extends ContentProvider {
         final int match = sUriMatcher.match(uri);
         int rowsDeleted;
         // this makes delete all rows return the number of rows deleted
-        if ( null == selection ) selection = "1";
+        if (null == selection) selection = "1";
         switch (match) {
 
             case USER:
@@ -163,7 +161,6 @@ public class UserProvider extends ContentProvider {
         }
         return rowsUpdated;
     }
-
 
 
     @Override

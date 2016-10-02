@@ -8,9 +8,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
-/**
- * Created by Saeed on 9/12/2015.
- */
 public class SplashScreen extends Activity {
 
     @Override
