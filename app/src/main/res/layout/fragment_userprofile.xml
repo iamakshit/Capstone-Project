@@ -34,10 +34,10 @@
             <TextView
                 android:text="Akshit Gupta"
                 android:textSize="20dp"
-                android:layout_gravity="right|end"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/name_display" />
+                android:id="@+id/name_display"
+                android:textAlignment="center" />
 
             <LinearLayout
                 android:orientation="vertical"
