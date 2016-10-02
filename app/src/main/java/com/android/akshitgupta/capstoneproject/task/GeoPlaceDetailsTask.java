@@ -40,11 +40,8 @@ public class GeoPlaceDetailsTask extends AsyncTask<String, Void, ArrayList<GeoDe
         baseURL.append(ConstantUtils.PLACES_API_BASE).append(ConstantUtils.PLACE_DETAILS).append(ConstantUtils.OUT_JSON);
         ArrayList<GeoDetails> data = new ArrayList<GeoDetails>();
         try {
-
-
-            Uri buildUri = Uri.parse(baseURL.toString()).buildUpon().appendQueryParameter(ConstantUtils.API_PLACEID_PARAM, URLEncoder.encode(input, ConstantUtils.ENCODING_STANDARD)).appendQueryParameter(ConstantUtils.API_KEY_PARAM, ConstantUtils.AUTOCOMPLETE_API_KEY).build();
+            Uri buildUri = Uri.parse(baseURL.toString()).buildUpon().appendQueryParameter(ConstantUtils.API_PLACEID_PARAM, URLEncoder.encode(input, ConstantUtils.ENCODING_STANDARD)).appendQueryParameter(ConstantUtils.API_KEY_PARAM, ConstantUtils.PLACES_API_KEY).build();
             URL url = new URL(buildUri.toString());
-
 
             urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestMethod("GET");
@@ -69,7 +66,6 @@ public class GeoPlaceDetailsTask extends AsyncTask<String, Void, ArrayList<GeoDe
             }
 
             jsonStr = buffer.toString();
-
             //  data = getDescriptionDataFromJson(jsonStr);
 
         } catch (IOException e) {
@@ -85,15 +81,11 @@ public class GeoPlaceDetailsTask extends AsyncTask<String, Void, ArrayList<GeoDe
                     reader.close();
                 } catch (IOException e) {
                     Log.e("PlaceholderFragment", "Error closing stream", e);
-
                 }
             }
         }
 
-
         return data;
-
-
     }
 
     @Override
