@@ -232,7 +232,6 @@ public class AddUserActivity extends AppCompatActivity implements View.OnClickLi
             userValues.put(UserContract.UserEntry.COLUMN_USER_GENDER, user.getUserGender());
             userValues.put(UserContract.UserEntry.COLUMN_USER_DOB_DATE, user.getDobDate());
             userValues.put(UserContract.UserEntry.COLUMN_USER_DOB_TIME, user.getDobTIme());
-            userValues.put(UserContract.UserEntry.COLUMN_USER_IMAGE, user.getUserImage());
             userValues.put(UserContract.UserEntry.COLUMN_CITY_NAME, user.getCityName());
             userValues.put(UserContract.UserEntry.COLUMN_COORD_LAT, user.getCoordLat());
             userValues.put(UserContract.UserEntry.COLUMN_COORD_LONG, user.getCoordLong());

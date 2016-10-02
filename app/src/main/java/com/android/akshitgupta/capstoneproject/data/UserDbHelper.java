@@ -12,7 +12,7 @@ import com.android.akshitgupta.capstoneproject.data.UserContract.UserEntry;
 
 public class UserDbHelper extends SQLiteOpenHelper {
     static final String DATABASE_NAME = "user.db";
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 5;
 
     public UserDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -21,18 +21,15 @@ public class UserDbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
 
-        // Create a table to hold locations.  A location consists of the string supplied in the
-        // location setting, the city name, and the latitude and longitude
         final String SQL_CREATE_USER_TABLE = "CREATE TABLE " + UserEntry.TABLE_NAME + " (" +
-                UserEntry._ID + " INTEGER PRIMARY KEY, " +
+                UserEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 UserEntry.COLUMN_USER_NAME + " TEXT NOT NULL, " +
                 UserEntry.COLUMN_USER_GENDER + " TEXT NOT NULL, " +
                 UserEntry.COLUMN_USER_DOB_DATE + " TEXT NOT NULL, " +
                 UserEntry.COLUMN_USER_DOB_TIME + " TEXT NOT NULL, " +
-                UserEntry.COLUMN_USER_IMAGE + " TEXT NOT NULL, " +
-                UserEntry.COLUMN_CITY_NAME + " TEXT NOT NULL, " +
-                UserEntry.COLUMN_COORD_LAT + " REAL NOT NULL, " +
-                UserEntry.COLUMN_COORD_LONG + " REAL NOT NULL " +
+                UserEntry.COLUMN_COORD_LAT + " TEXT NOT NULL, " +
+                UserEntry.COLUMN_COORD_LONG + " TEXT NOT NULL, " +
+                UserEntry.COLUMN_CITY_NAME + " TEXT NOT NULL " +
                 " );";
 
         sqLiteDatabase.execSQL(SQL_CREATE_USER_TABLE);
