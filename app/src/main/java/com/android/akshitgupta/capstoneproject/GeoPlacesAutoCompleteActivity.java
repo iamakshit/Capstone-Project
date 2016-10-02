@@ -26,13 +26,6 @@ public class GeoPlacesAutoCompleteActivity extends AppCompatActivity implements 
 
     private static final String LOG_TAG = "PlacesActivity";
 
-    private static final String PLACES_API_BASE = "https://maps.googleapis.com/maps/api/place";
-    private static final String TYPE_AUTOCOMPLETE = "/autocomplete";
-    private static final String OUT_JSON = "/json";
-
-    //------------ make your specific key ------------
-    private static final String API_KEY = "AIzaSyBRDebf1HHJNQ5ixWYP03V0IoBpHnYARnk";
-
     public static ArrayList<String> autocomplete(String input) {
         ArrayList<String> resultList = null;
         ArrayList<String> list = new ArrayList<String>();
