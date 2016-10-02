@@ -217,6 +217,9 @@ public class AddUserActivity extends AppCompatActivity implements View.OnClickLi
             Log.i(LOG_TAG, "Save Button User =" + user);
 
             addUser(user);
+            Toast.makeText(getApplicationContext(), "Successfully added new user profile", Toast.LENGTH_SHORT).show();
+            finish();
+
         }
     }
 
@@ -246,6 +249,7 @@ public class AddUserActivity extends AppCompatActivity implements View.OnClickLi
             // The resulting URI contains the ID for the row.  Extract the locationId from the Uri.
             Long userId = ContentUris.parseId(insertedUri);
             Log.i(LOG_TAG, "Inserted user with id = " + userId);
+
         }
     }
 
