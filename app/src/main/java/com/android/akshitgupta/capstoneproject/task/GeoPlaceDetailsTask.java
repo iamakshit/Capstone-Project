@@ -4,7 +4,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.android.akshitgupta.capstoneproject.user.GeoDetails;
+import com.android.akshitgupta.capstoneproject.object.GeoDetails;
 import com.android.akshitgupta.capstoneproject.utils.ConstantUtils;
 
 import java.io.BufferedReader;

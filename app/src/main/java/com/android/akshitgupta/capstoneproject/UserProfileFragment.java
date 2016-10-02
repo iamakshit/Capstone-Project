@@ -11,7 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.android.akshitgupta.capstoneproject.user.UserProfile;
+import com.android.akshitgupta.capstoneproject.object.UserProfile;
 
 /**
  * A fragment representing a list of Items.

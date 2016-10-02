@@ -7,8 +7,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.android.akshitgupta.capstoneproject.UserProfileFragment.OnListFragmentInteractionListener;
-import com.android.akshitgupta.capstoneproject.user.UserProfile;
-import com.android.akshitgupta.capstoneproject.user.UserProfile.User;
+import com.android.akshitgupta.capstoneproject.object.UserProfile;
+import com.android.akshitgupta.capstoneproject.object.UserProfile.User;
 
 import java.util.List;
 

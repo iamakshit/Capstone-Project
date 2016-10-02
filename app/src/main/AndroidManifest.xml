@@ -31,10 +31,6 @@
             android:name=".AddUserActivity"
             android:label="@string/title_activity_add_user"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".GeoPlacesAutoCompleteActivity"
-            android:label="@string/title_activity_geo_places_auto_complete"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

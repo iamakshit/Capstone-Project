@@ -4,6 +4,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.android.akshitgupta.capstoneproject.object.GeoDetails;
 import com.android.akshitgupta.capstoneproject.utils.ConstantUtils;
 
 import org.json.JSONArray;
@@ -22,13 +23,13 @@ import java.util.ArrayList;
  * Created by akshitgupta on 29/09/16.
  */
 
-public class GeoPlacesAutoCompleteTask extends AsyncTask<String, Void, ArrayList<String>> {
+public class GeoPlacesAutoCompleteTask extends AsyncTask<String, Void, ArrayList<GeoDetails>> {
     public static final int size = 10;
 
     public static String LOG_TAG = GeoPlacesAutoCompleteTask.class.getSimpleName();
 
     @Override
-    protected ArrayList<String> doInBackground(String... params) {
+    protected ArrayList<GeoDetails> doInBackground(String... params) {
 
         if (params == null) {
             return null;
@@ -42,7 +43,7 @@ public class GeoPlacesAutoCompleteTask extends AsyncTask<String, Void, ArrayList
 
         StringBuilder baseURL = new StringBuilder();
         baseURL.append(ConstantUtils.PLACES_API_BASE).append(ConstantUtils.TYPE_AUTOCOMPLETE).append(ConstantUtils.OUT_JSON);
-        ArrayList<String> data = new ArrayList<String>();
+        ArrayList<GeoDetails> data = new ArrayList<GeoDetails>();
         try {
 
 
@@ -98,8 +99,8 @@ public class GeoPlacesAutoCompleteTask extends AsyncTask<String, Void, ArrayList
         return data;
     }
 
-    private ArrayList<String> getDescriptionDataFromJson(String jsonStr) {
-        ArrayList<String> dataList = new ArrayList<String>();
+    private ArrayList<GeoDetails> getDescriptionDataFromJson(String jsonStr) {
+        ArrayList<GeoDetails> dataList = new ArrayList<GeoDetails>();
         try {
 
             // Create a JSON object hierarchy from the results
@@ -107,9 +108,12 @@ public class GeoPlacesAutoCompleteTask extends AsyncTask<String, Void, ArrayList
             JSONArray predsJsonArray = jsonObj.getJSONArray("predictions");
 
             // Extract the Place descriptions from the results
-            dataList = new ArrayList<String>(predsJsonArray.length());
+            dataList = new ArrayList<GeoDetails>(predsJsonArray.length());
             for (int i = 0; i < predsJsonArray.length(); i++) {
-                dataList.add(predsJsonArray.getJSONObject(i).getString("description"));
+                GeoDetails geoDetails = new GeoDetails();
+                geoDetails.setDescription(predsJsonArray.getJSONObject(i).getString("description"));
+                geoDetails.setPlaceId(predsJsonArray.getJSONObject(i).getString("place_id"));
+                dataList.add(geoDetails);
             }
         } catch (JSONException e) {
             Log.e(LOG_TAG, "Cannot process JSON results", e);
@@ -120,16 +124,12 @@ public class GeoPlacesAutoCompleteTask extends AsyncTask<String, Void, ArrayList
     @Override
     protected void onPreExecute() {
         Log.i(LOG_TAG, "Inside onPreExecute Method");
-
         super.onPreExecute();
     }
 
     @Override
-    protected void onPostExecute(ArrayList<String> data) {
+    protected void onPostExecute(ArrayList<GeoDetails> data) {
         Log.i(LOG_TAG, "Inside onPostExecute method");
-        Log.i(LOG_TAG, "data {}" + data.toString());
-
-
         super.onPostExecute(data);
     }
 }
