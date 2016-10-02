@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="120dp"
-
+    android:layout_marginTop="@dimen/activity_vertical_margin"
+    android:layout_marginLeft="@dimen/activity_vertical_margin"
+    android:layout_marginBottom="@dimen/activity_vertical_margin"
     android:background="?android:attr/selectableItemBackground"
     android:clickable="true"
     android:focusable="true"
@@ -30,11 +32,12 @@
             android:layout_weight="1">
 
             <TextView
-                android:text="TextView"
-                android:layout_gravity="center_horizontal"
+                android:text="Akshit Gupta"
+                android:textSize="20dp"
+                android:layout_gravity="right|end"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView3" />
+                android:id="@+id/name_display" />
 
             <LinearLayout
                 android:orientation="vertical"
@@ -42,29 +45,20 @@
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:text="TextView"
+                    android:text="Ashok Vihar, Delhi, India"
                     android:layout_gravity="center_horizontal"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView2" />
 
                 <TextView
-                    android:id="@+id/id"
+                    android:id="@+id/dob_display"
                     android:layout_gravity="center_horizontal"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/text_margin"
-                    android:text="Balle"
+                    android:text="2016-02-01 12:10"
                     android:textAppearance="?attr/textAppearanceListItem" />
 
-                <TextView
-                    android:id="@+id/content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/text_margin"
-                    android:text="Shaaba"
-                    android:textAppearance="?attr/textAppearanceListItem" />
             </LinearLayout>
 
         </LinearLayout>

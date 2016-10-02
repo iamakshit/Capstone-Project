@@ -36,9 +36,9 @@ public class MyUserProfileRecyclerViewAdapter extends RecyclerView.Adapter<MyUse
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).getId().toString());
-        holder.mContentView.setText(mValues.get(position).getUserName());
+       // holder.mItem = mValues.get(position);
+      //  holder.mIdView.setText(mValues.get(position).getId().toString());
+      //  holder.mContentView.setText(mValues.get(position).getUserName());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,8 +66,8 @@ public class MyUserProfileRecyclerViewAdapter extends RecyclerView.Adapter<MyUse
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mIdView = (TextView) view.findViewById(R.id.id);
-            mContentView = (TextView) view.findViewById(R.id.content);
+            mIdView = (TextView) view.findViewById(R.id.name_display);
+            mContentView = (TextView) view.findViewById(R.id.dob_display);
         }
 
         @Override
