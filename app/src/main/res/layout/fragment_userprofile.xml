@@ -32,7 +32,6 @@
             android:layout_weight="1">
 
             <TextView
-                android:text="Akshit Gupta"
                 android:textSize="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -45,18 +44,16 @@
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:text="Ashok Vihar, Delhi, India"
                     android:layout_gravity="center_horizontal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textView2" />
+                    android:id="@+id/city_display" />
 
                 <TextView
                     android:id="@+id/dob_display"
                     android:layout_gravity="center_horizontal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="2016-02-01 12:10"
                     android:textAppearance="?attr/textAppearanceListItem" />
 
             </LinearLayout>

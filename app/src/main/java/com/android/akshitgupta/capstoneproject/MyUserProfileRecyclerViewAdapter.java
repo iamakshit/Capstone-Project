@@ -59,20 +59,26 @@ public class MyUserProfileRecyclerViewAdapter extends RecyclerView.Adapter<MyUse
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        public final TextView mIdView;
-        public final TextView mContentView;
+        public final TextView nameView;
+        public final TextView dobView;
+        public final TextView cityView;
         public UserProfile.User mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mIdView = (TextView) view.findViewById(R.id.name_display);
-            mContentView = (TextView) view.findViewById(R.id.dob_display);
+            nameView = (TextView) view.findViewById(R.id.name_display);
+            nameView.setText(mItem.getUserName());
+            dobView = (TextView) view.findViewById(R.id.dob_display);
+            nameView.setText(mItem.getDobDate());
+            cityView= (TextView) view.findViewById(R.id.city_display);
+            nameView.setText(mItem.getCityName());
+
         }
 
         @Override
         public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
+            return super.toString() + " '" + cityView.getText() + "'";
         }
     }
 }

@@ -1,6 +1,7 @@
 package com.android.akshitgupta.capstoneproject;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -11,7 +12,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.android.akshitgupta.capstoneproject.data.UserContract;
 import com.android.akshitgupta.capstoneproject.object.UserProfile;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A fragment representing a list of Items.
@@ -70,7 +75,38 @@ public class UserProfileFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyUserProfileRecyclerViewAdapter(UserProfile.ITEMS, mListener));
+
+
+            // First, check if the location with this city name exists in the db
+            Cursor userCursor = getContext().getContentResolver().query(
+                    UserContract.UserEntry.CONTENT_URI,
+                    new String[]{UserContract.UserEntry._ID, UserContract.UserEntry.COLUMN_USER_NAME, UserContract.UserEntry.COLUMN_USER_GENDER,
+                            UserContract.UserEntry.COLUMN_USER_DOB_DATE, UserContract.UserEntry.COLUMN_USER_DOB_TIME, UserContract.UserEntry.COLUMN_CITY_NAME
+                    }, null, null, null);
+
+            Log.i("UserProfileFragment","userCursor  = "+userCursor.getCount());
+            List<UserProfile.User> userList= new ArrayList<>();
+            if (userCursor.moveToFirst()){
+                do{
+                    UserProfile.User user = new UserProfile.User();
+                    String userName = userCursor.getString(userCursor.getColumnIndex(UserContract.UserEntry.COLUMN_USER_NAME));
+                    String userGender = userCursor.getString(userCursor.getColumnIndex(UserContract.UserEntry.COLUMN_USER_GENDER));
+                    String userDobDate = userCursor.getString(userCursor.getColumnIndex(UserContract.UserEntry.COLUMN_USER_DOB_DATE));
+                    String userDobTime = userCursor.getString(userCursor.getColumnIndex(UserContract.UserEntry.COLUMN_USER_DOB_TIME));
+                    String userCity = userCursor.getString(userCursor.getColumnIndex(UserContract.UserEntry.COLUMN_CITY_NAME));
+                    user.setUserName(userName);
+                    user.setUserGender(userGender);
+                    user.setDobDate(userDobDate);
+                    user.setDobTIme(userDobTime);
+                    user.setCityName(userCity);
+                    Log.i("UserProfileFragment","User added ==>"+user.toString());
+                    userList.add(user);
+                    // do what ever you want here
+                }while(userCursor.moveToNext());
+            }
+            userCursor.close();
+
+            recyclerView.setAdapter(new MyUserProfileRecyclerViewAdapter(userList, mListener));
         }
         return view;
     }
