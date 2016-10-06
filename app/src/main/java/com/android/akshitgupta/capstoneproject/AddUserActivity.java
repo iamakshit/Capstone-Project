@@ -281,15 +281,15 @@ public class AddUserActivity extends AppCompatActivity implements View.OnClickLi
 
         } else {
             ContentValues userValues = new ContentValues();
-            userValues.put(UserContract.UserEntry._ID, user.getId());
-            userValues.put(UserContract.UserEntry.COLUMN_USER_NAME, user.getUserName());
-          /*      userValues.put(UserContract.UserEntry.COLUMN_USER_GENDER, user.getUserGender());
-           userValues.put(UserContract.UserEntry.COLUMN_USER_DOB_DATE, user.getDobDate());
+            userValues.put(UserContract.UserEntry._ID, id);
+            userValues.put(UserContract.UserEntry.COLUMN_USER_NAME,user.getUserName());
+            userValues.put(UserContract.UserEntry.COLUMN_USER_GENDER, user.getUserGender());
+            userValues.put(UserContract.UserEntry.COLUMN_USER_DOB_DATE, user.getDobDate());
             userValues.put(UserContract.UserEntry.COLUMN_USER_DOB_TIME, user.getDobTIme());
             userValues.put(UserContract.UserEntry.COLUMN_CITY_NAME, user.getCityName());
             userValues.put(UserContract.UserEntry.COLUMN_COORD_LAT, user.getCoordLat());
             userValues.put(UserContract.UserEntry.COLUMN_COORD_LONG, user.getCoordLong());
-*/
+
            // Uri uri = ContentUris.withAppendedId(Words.CONTENT_URI, id);
             String[] args = {String.valueOf(id)};
             getApplicationContext().getContentResolver().update(UserContract.UserEntry.CONTENT_URI, userValues, UserContract.UserEntry._ID + "=?", args);
