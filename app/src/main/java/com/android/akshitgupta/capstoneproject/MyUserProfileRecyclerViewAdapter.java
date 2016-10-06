@@ -4,7 +4,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.akshitgupta.capstoneproject.object.UserProfile;
 import com.android.akshitgupta.capstoneproject.object.UserProfile.User;
@@ -40,17 +43,34 @@ public class MyUserProfileRecyclerViewAdapter extends RecyclerView.Adapter<MyUse
         return userList.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView nameView, cityView, dobView;
+        public ImageButton deleteButton, editButton;
+        public Button markDefaultButton;
 
         public MyViewHolder(View view) {
             super(view);
             nameView = (TextView) view.findViewById(R.id.name_display);
-            // nameView.setText(mItem.getUserName());
             dobView = (TextView) view.findViewById(R.id.dob_display);
-            // dobView.setText(mItem.getDobDate());
             cityView = (TextView) view.findViewById(R.id.city_display);
-            // cityView.setText(mItem.getCityName());
+
+            deleteButton.setOnClickListener(this);
+            editButton.setOnClickListener(this);
+            markDefaultButton.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+
+            if (v.getId() == deleteButton.getId()) {
+                Toast.makeText(v.getContext(), "ITEM PRESSED = " + String.valueOf(getAdapterPosition()), Toast.LENGTH_SHORT).show();
+            } else if (v.getId() == editButton.getId()) {
+
+            }
+            else if(v.getId() == markDefaultButton.getId())
+            {
+
+            }
         }
     }
 }
