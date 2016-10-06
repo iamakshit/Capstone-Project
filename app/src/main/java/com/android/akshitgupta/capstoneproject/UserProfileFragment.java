@@ -93,11 +93,14 @@ public class UserProfileFragment extends Fragment {
                     String userDobDate = userCursor.getString(userCursor.getColumnIndex(UserContract.UserEntry.COLUMN_USER_DOB_DATE));
                     String userDobTime = userCursor.getString(userCursor.getColumnIndex(UserContract.UserEntry.COLUMN_USER_DOB_TIME));
                     String userCity = userCursor.getString(userCursor.getColumnIndex(UserContract.UserEntry.COLUMN_CITY_NAME));
+                    Integer id = userCursor.getInt(userCursor.getColumnIndex(UserContract.UserEntry._ID));
+
                     user.setUserName(userName);
                     user.setUserGender(userGender);
                     user.setDobDate(userDobDate);
                     user.setDobTIme(userDobTime);
                     user.setCityName(userCity);
+                    user.setId(id);
                     Log.i("UserProfileFragment","User added ==>"+user.toString());
                     userList.add(user);
                     // do what ever you want here

@@ -104,4 +104,12 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onListFragmentInteraction(UserProfile.User item) {
     }
+
+    @Override
+    public void onRestart()
+    {
+        super.onRestart();
+        finish();
+        startActivity(getIntent());
+    }
 }
