@@ -6,6 +6,7 @@ import android.app.TimePickerDialog;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -14,6 +15,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -32,8 +34,6 @@ import com.android.akshitgupta.capstoneproject.object.GeoPlaceDetails;
 import com.android.akshitgupta.capstoneproject.object.UserProfile;
 import com.android.akshitgupta.capstoneproject.task.GeoPlaceDetailsTask;
 import com.android.akshitgupta.capstoneproject.view.GooglePlacesAutocompleteAdapter;
-
-import org.apache.commons.lang3.StringUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -57,6 +57,7 @@ public class AddUserActivity extends AppCompatActivity implements View.OnClickLi
     private GeoDetails geoDetails;
     private SimpleDateFormat dateFormatter;
     private SimpleDateFormat timeFormatter;
+    private Integer id;
 
     public static GeoPlaceDetails getLocationDetails(String input) {
         GeoPlaceDetails geoPlaceDetails = null;
@@ -89,12 +90,15 @@ public class AddUserActivity extends AppCompatActivity implements View.OnClickLi
         dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
         timeFormatter = new SimpleDateFormat("HH:mm", Locale.US);
 
-        findViewsById();
+        Intent intent = getIntent();
+        UserProfile.User user = (UserProfile.User) intent.getSerializableExtra("userProfile");
+        findViewsById(user);
         setDateTimeField();
         setOnClickListeners();
     }
 
-    private void findViewsById() {
+    private void findViewsById(UserProfile.User user) {
+
         dobDate = (EditText) findViewById(R.id.dob_date);
         dobDate.setInputType(InputType.TYPE_DATETIME_VARIATION_DATE);
         dobDate.requestFocus();
@@ -103,11 +107,22 @@ public class AddUserActivity extends AppCompatActivity implements View.OnClickLi
 
         dobTime = (EditText) findViewById(R.id.dob_time);
         dobTime.setInputType(InputType.TYPE_DATETIME_VARIATION_TIME);
-
         name = (EditText) findViewById(R.id.name);
         saveButton = (Button) findViewById(R.id.saveButton);
         maleOption = (RadioButton) findViewById(R.id.male);
         femaleOption = (RadioButton) findViewById(R.id.female);
+        if (user != null) {
+            this.id = user.getId();
+            name.setText(user.getUserName());
+            dobDate.setText(user.getDobDate());
+            dobTime.setText(user.getDobTIme());
+
+            if (user.getUserGender().equals(Gender.MALE)) {
+                maleOption.setChecked(true);
+            } else {
+                femaleOption.setChecked(true);
+            }
+        }
     }
 
     private void setOnClickListeners() {
@@ -162,26 +177,32 @@ public class AddUserActivity extends AppCompatActivity implements View.OnClickLi
         return true;
     }
 
-    public void errorAlerts() {
-        if (StringUtils.isEmpty(name.getText().toString())) {
+    public boolean errorAlerts() {
+        if (TextUtils.isEmpty(name.getText().toString())) {
             name.setError("Name is mandatory");
+            return false;
         }
 
-        if (StringUtils.isEmpty(dobDate.getText().toString())) {
+        if (TextUtils.isEmpty(dobDate.getText().toString())) {
             dobDate.setError("Date of birth is mandatory");
+            return false;
         }
 
-        if (StringUtils.isEmpty(dobTime.getText().toString())) {
+        if (TextUtils.isEmpty(dobTime.getText().toString())) {
             dobTime.setError("Time of birth is mandatory");
+            return false;
         }
 
-        if (StringUtils.isEmpty(maleOption.getText().toString()) && StringUtils.isEmpty(femaleOption.getText().toString())) {
+        if (TextUtils.isEmpty(maleOption.getText().toString()) && TextUtils.isEmpty(femaleOption.getText().toString())) {
             maleOption.setError("Gender options has to be selected");
+            return false;
         }
 
-        if (StringUtils.isEmpty(autoCompView.getText().toString())) {
+        if (TextUtils.isEmpty(autoCompView.getText().toString())) {
             autoCompView.setError("Place of birth is mandatory");
+            return false;
         }
+        return true;
     }
 
     @Override
@@ -193,7 +214,10 @@ public class AddUserActivity extends AppCompatActivity implements View.OnClickLi
             toDatePickerDialog.show();
         } else if (view == saveButton) {
 
-            errorAlerts();
+            boolean isAlertFound = errorAlerts();
+            if (!isAlertFound) {
+                return;
+            }
 
             String nameText = name.getText().toString();
             String dobDateText = dobDate.getText().toString();
@@ -204,7 +228,13 @@ public class AddUserActivity extends AppCompatActivity implements View.OnClickLi
             if (!isMale) {
                 gender = Gender.FEMALE.getCode();
             }
+
+            if (placeId == null) {
+                autoCompView.setError("Enter a valid place");
+                return;
+            }
             GeoPlaceDetails geoPlaceDetails = getLocationDetails(placeId);
+
 
             UserProfile.User user = new UserProfile.User();
             user.setUserName(nameText);
@@ -227,7 +257,7 @@ public class AddUserActivity extends AppCompatActivity implements View.OnClickLi
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.WRITE_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{Manifest.permission.WRITE_CONTACTS}, PERMISSIONS_REQUEST_WRITE_CONTACTS);
             //After this point you wait for callback in onRequestPermissionsResult(int, String[], int[]) overriden method
-        } else {
+        } else if (id == null) {
             getApplicationContext().deleteDatabase(UserContract.UserEntry.TABLE_NAME);
             ContentValues userValues = new ContentValues();
             userValues.put(UserContract.UserEntry._ID, user.getId());
@@ -238,8 +268,7 @@ public class AddUserActivity extends AppCompatActivity implements View.OnClickLi
             userValues.put(UserContract.UserEntry.COLUMN_CITY_NAME, user.getCityName());
             userValues.put(UserContract.UserEntry.COLUMN_COORD_LAT, user.getCoordLat());
             userValues.put(UserContract.UserEntry.COLUMN_COORD_LONG, user.getCoordLong());
-
-
+            Log.i(LOG_TAG, "Id =" + id);
             // Finally, insert location data into the database.
             Uri insertedUri = getApplicationContext().getContentResolver().insert(
                     UserContract.UserEntry.CONTENT_URI,
@@ -248,7 +277,23 @@ public class AddUserActivity extends AppCompatActivity implements View.OnClickLi
 
             // The resulting URI contains the ID for the row.  Extract the locationId from the Uri.
             Long userId = ContentUris.parseId(insertedUri);
-            Log.i(LOG_TAG, "Inserted user with id = " + userId);
+            Log.i(LOG_TAG, "Inserted user with id = " + userId + "  Id" + id);
+
+        } else {
+            ContentValues userValues = new ContentValues();
+            userValues.put(UserContract.UserEntry._ID, user.getId());
+            userValues.put(UserContract.UserEntry.COLUMN_USER_NAME, user.getUserName());
+          /*      userValues.put(UserContract.UserEntry.COLUMN_USER_GENDER, user.getUserGender());
+           userValues.put(UserContract.UserEntry.COLUMN_USER_DOB_DATE, user.getDobDate());
+            userValues.put(UserContract.UserEntry.COLUMN_USER_DOB_TIME, user.getDobTIme());
+            userValues.put(UserContract.UserEntry.COLUMN_CITY_NAME, user.getCityName());
+            userValues.put(UserContract.UserEntry.COLUMN_COORD_LAT, user.getCoordLat());
+            userValues.put(UserContract.UserEntry.COLUMN_COORD_LONG, user.getCoordLong());
+*/
+           // Uri uri = ContentUris.withAppendedId(Words.CONTENT_URI, id);
+            String[] args = {String.valueOf(id)};
+            getApplicationContext().getContentResolver().update(UserContract.UserEntry.CONTENT_URI, userValues, UserContract.UserEntry._ID + "=?", args);
+            Log.i(LOG_TAG, "Updated user with id = " + id + "  Id" + id);
 
         }
     }

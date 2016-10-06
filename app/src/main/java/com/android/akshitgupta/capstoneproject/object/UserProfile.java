@@ -1,5 +1,6 @@
 package com.android.akshitgupta.capstoneproject.object;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -53,7 +54,7 @@ public class UserProfile {
     /**
      * A dummy item representing a piece of content.
      */
-    public static class User {
+    public static class User implements Serializable{
         private Integer id;
         private String userName;
         private String userGender;

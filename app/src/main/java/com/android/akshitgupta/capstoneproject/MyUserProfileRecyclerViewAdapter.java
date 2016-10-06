@@ -1,6 +1,7 @@
 package com.android.akshitgupta.capstoneproject;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,6 +54,16 @@ public class MyUserProfileRecyclerViewAdapter extends RecyclerView.Adapter<MyUse
                 adapter.notifyDataSetChanged();
             }
         });
+
+        holder.editButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent= new Intent(context, AddUserActivity.class);
+                intent.putExtra("userProfile",userProfile   );
+                context.startActivity(intent);
+                //context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -71,6 +82,7 @@ public class MyUserProfileRecyclerViewAdapter extends RecyclerView.Adapter<MyUse
             dobView = (TextView) view.findViewById(R.id.dob_display);
             cityView = (TextView) view.findViewById(R.id.city_display);
             deleteButton = (ImageButton) view.findViewById(R.id.delete_button);
+            editButton = (ImageButton) view.findViewById(R.id.edit_button);
         }
     }
 }
