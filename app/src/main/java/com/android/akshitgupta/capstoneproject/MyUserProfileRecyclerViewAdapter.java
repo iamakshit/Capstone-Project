@@ -6,79 +6,51 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.android.akshitgupta.capstoneproject.UserProfileFragment.OnListFragmentInteractionListener;
 import com.android.akshitgupta.capstoneproject.object.UserProfile;
 import com.android.akshitgupta.capstoneproject.object.UserProfile.User;
 
 import java.util.List;
 
-/**
- * {@link RecyclerView.Adapter} that can display a {@link User} and makes a call to the
- * specified {@link OnListFragmentInteractionListener}.
- * TODO: Replace the implementation with code for your data type.
- */
-public class MyUserProfileRecyclerViewAdapter extends RecyclerView.Adapter<MyUserProfileRecyclerViewAdapter.ViewHolder> {
+public class MyUserProfileRecyclerViewAdapter extends RecyclerView.Adapter<MyUserProfileRecyclerViewAdapter.MyViewHolder> {
 
-    private final List<UserProfile.User> mValues;
-    private final OnListFragmentInteractionListener mListener;
+    private List<User> userList;
 
-    public MyUserProfileRecyclerViewAdapter(List<UserProfile.User> items, OnListFragmentInteractionListener listener) {
-        mValues = items;
-        mListener = listener;
+    public MyUserProfileRecyclerViewAdapter(List<User> userList) {
+        this.userList = userList;
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragment_userprofile, parent, false);
-        return new ViewHolder(view);
+
+        return new MyViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
-       // holder.mItem = mValues.get(position);
-      //  holder.mIdView.setText(mValues.get(position).getId().toString());
-      //  holder.mContentView.setText(mValues.get(position).getUserName());
-
-        holder.mView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (null != mListener) {
-                    // Notify the active callbacks interface (the activity, if the
-                    // fragment is attached to one) that an item has been selected.
-                    mListener.onListFragmentInteraction(holder.mItem);
-                }
-            }
-        });
+    public void onBindViewHolder(MyViewHolder holder, int position) {
+        UserProfile.User userProfile = userList.get(position);
+        holder.nameView.setText(userProfile.getUserName());
+        holder.cityView.setText(userProfile.getCityName());
+        holder.dobView.setText(userProfile.getDobDate());
     }
 
     @Override
     public int getItemCount() {
-        return mValues.size();
+        return userList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        public final View mView;
-        public final TextView nameView;
-        public final TextView dobView;
-        public final TextView cityView;
-        public UserProfile.User mItem;
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+        public TextView nameView, cityView, dobView;
 
-        public ViewHolder(View view) {
+        public MyViewHolder(View view) {
             super(view);
-            mView = view;
             nameView = (TextView) view.findViewById(R.id.name_display);
-            nameView.setText(mItem.getUserName());
+            // nameView.setText(mItem.getUserName());
             dobView = (TextView) view.findViewById(R.id.dob_display);
-            nameView.setText(mItem.getDobDate());
-            cityView= (TextView) view.findViewById(R.id.city_display);
-            nameView.setText(mItem.getCityName());
-
-        }
-
-        @Override
-        public String toString() {
-            return super.toString() + " '" + cityView.getText() + "'";
+            // dobView.setText(mItem.getDobDate());
+            cityView = (TextView) view.findViewById(R.id.city_display);
+            // cityView.setText(mItem.getCityName());
         }
     }
 }
