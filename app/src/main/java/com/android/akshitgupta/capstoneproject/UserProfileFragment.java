@@ -30,6 +30,7 @@ public class UserProfileFragment extends Fragment {
     private static final String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters
     private int mColumnCount = 1;
+    MyUserProfileRecyclerViewAdapter adapter;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -63,7 +64,6 @@ public class UserProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         Log.i("UserProfileFragment","Inside onCreateView");
         View view = inflater.inflate(R.layout.fragment_userprofile_list, container, false);
-
         // Set the adapter
         if (view instanceof RecyclerView) {
             Log.i("UserProfileFragment","Inside recylerview");
@@ -107,8 +107,10 @@ public class UserProfileFragment extends Fragment {
                 }while(userCursor.moveToNext());
             }
             userCursor.close();
+            adapter = new MyUserProfileRecyclerViewAdapter(userList,getContext());
+            adapter.notifyDataSetChanged();
+            recyclerView.setAdapter(adapter);
 
-            recyclerView.setAdapter(new MyUserProfileRecyclerViewAdapter(userList));
         }
         return view;
     }
