@@ -38,7 +38,7 @@ public class MyUserProfileRecyclerViewAdapter extends RecyclerView.Adapter<MyUse
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(MyViewHolder holder, final int position) {
         final UserProfile.User userProfile = userList.get(position);
         holder.nameView.setText(userProfile.getUserName());
         holder.cityView.setText(userProfile.getCityName());
@@ -47,6 +47,7 @@ public class MyUserProfileRecyclerViewAdapter extends RecyclerView.Adapter<MyUse
         holder.deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                userList.remove(position);
                 context.getContentResolver().delete(UserContract.UserEntry.CONTENT_URI, UserContract.UserEntry._ID + "=?", new String[]{userProfile.getId().toString()});
                 Toast.makeText(view.getContext(), "Successfully deleted the item", Toast.LENGTH_SHORT).show();
                 adapter.notifyDataSetChanged();
