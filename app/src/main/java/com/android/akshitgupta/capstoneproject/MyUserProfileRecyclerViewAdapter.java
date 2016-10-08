@@ -2,6 +2,9 @@ package com.android.akshitgupta.capstoneproject;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.preference.PreferenceManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,12 +25,13 @@ public class MyUserProfileRecyclerViewAdapter extends RecyclerView.Adapter<MyUse
     private List<User> userList;
     private Context context;
     private MyUserProfileRecyclerViewAdapter adapter;
-
+    private SharedPreferences prefs;
 
     public MyUserProfileRecyclerViewAdapter(List<User> userList, Context context) {
         this.userList = userList;
         this.context = context;
         this.adapter = this;
+        this.prefs = PreferenceManager.getDefaultSharedPreferences(context);
     }
 
     @Override
@@ -58,10 +62,30 @@ public class MyUserProfileRecyclerViewAdapter extends RecyclerView.Adapter<MyUse
         holder.editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent= new Intent(context, AddUserActivity.class);
-                intent.putExtra("userProfile",userProfile   );
+                Intent intent = new Intent(context, AddUserActivity.class);
+                intent.putExtra("userProfile", userProfile);
                 context.startActivity(intent);
                 //context.startActivity(intent);
+            }
+        });
+
+        String defaultUserId = prefs.getString("userDefaultId", "1");
+
+        if (userProfile.getId().toString().equals(defaultUserId)) {
+            holder.markDefaultButton.setTextColor(Color.BLUE);
+            holder.markDefaultButton.setText(R.string.marked_as_default);
+        }
+        holder.markDefaultButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                ((Button) view).setTextColor(Color.BLUE);
+                ((Button) view).setText(R.string.marked_as_default);
+
+                Toast.makeText(view.getContext(), "Successfully marking this item as default", Toast.LENGTH_SHORT).show();
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putString("userDefaultId", userProfile.getId().toString());
+                editor.commit();
             }
         });
     }
@@ -83,6 +107,7 @@ public class MyUserProfileRecyclerViewAdapter extends RecyclerView.Adapter<MyUse
             cityView = (TextView) view.findViewById(R.id.city_display);
             deleteButton = (ImageButton) view.findViewById(R.id.delete_button);
             editButton = (ImageButton) view.findViewById(R.id.edit_button);
+            markDefaultButton = (Button) view.findViewById(R.id.default_button);
         }
     }
 }

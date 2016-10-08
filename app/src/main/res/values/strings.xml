@@ -4,6 +4,7 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="mark_as_default">Mark As Default</string>
+    <string name="marked_as_default">Marked As Default</string>
     <string name="dob_date">Date of Birth</string>
     <string name="dob_time">Time of Birth</string>
     <string name="name">Name</string>
@@ -14,5 +15,6 @@
     <string name="saveText">Save And Continue</string>
     <string name="male">Male</string>
     <string name="female">Female</string>
+
 
 </resources>
