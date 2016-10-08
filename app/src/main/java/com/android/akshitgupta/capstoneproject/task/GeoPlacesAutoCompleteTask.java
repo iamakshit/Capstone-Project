@@ -50,16 +50,14 @@ public class GeoPlacesAutoCompleteTask extends AsyncTask<String, Void, ArrayList
             Uri buildUri = Uri.parse(baseURL.toString()).buildUpon().appendQueryParameter(ConstantUtils.API_LANGUAGE_PARAM, ConstantUtils.API_LANGUAGE).appendQueryParameter(ConstantUtils.API_TYPES_PARAM, ConstantUtils.API_TYPES).appendQueryParameter(ConstantUtils.API_INPUT_PARAM, URLEncoder.encode(input, ConstantUtils.ENCODING_STANDARD)).appendQueryParameter(ConstantUtils.API_KEY_PARAM, ConstantUtils.AUTOCOMPLETE_API_KEY).build();
             URL url = new URL(buildUri.toString());
 
-
             urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestMethod("GET");
             urlConnection.setReadTimeout(10000);
             urlConnection.setConnectTimeout(10000);
             urlConnection.setDoInput(true);
             urlConnection.connect();
-            int status = urlConnection.getResponseCode();
 
-            Log.i(LOG_TAG, "Google AutoComplete API Server status :" + status);
+            //  Log.i(LOG_TAG, "Google AutoComplete API Server status :" + status);
             BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
             StringBuilder buffer = new StringBuilder();
             String line;
@@ -123,13 +121,13 @@ public class GeoPlacesAutoCompleteTask extends AsyncTask<String, Void, ArrayList
 
     @Override
     protected void onPreExecute() {
-        Log.i(LOG_TAG, "Inside onPreExecute Method");
+        //  Log.i(LOG_TAG, "Inside onPreExecute Method");
         super.onPreExecute();
     }
 
     @Override
     protected void onPostExecute(ArrayList<GeoDetails> data) {
-        Log.i(LOG_TAG, "Inside onPostExecute method");
+        //  Log.i(LOG_TAG, "Inside onPostExecute method");
         super.onPostExecute(data);
     }
 }

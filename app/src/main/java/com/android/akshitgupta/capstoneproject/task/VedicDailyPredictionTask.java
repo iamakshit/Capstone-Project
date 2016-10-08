@@ -30,7 +30,6 @@ public class VedicDailyPredictionTask extends AsyncTask<AstroRequest, Void, Dail
 
         BufferedReader reader = null;
         String jsonStr = null;
-        Log.i(TAG, "Starting ...");
         HttpURLConnection myURLConnection = null;
         DailyPredictionResponse response = null;
         if (astroRequests == null) {
@@ -63,8 +62,8 @@ public class VedicDailyPredictionTask extends AsyncTask<AstroRequest, Void, Dail
 
             myURLConnection.connect();
             int status = myURLConnection.getResponseCode();
-            Log.i(TAG, "Astro API Server status :" + status);
-            Log.i(TAG, "Astro API Server response :" + myURLConnection.getResponseMessage());
+          //  Log.i(TAG, "Astro API Server status :" + status);
+         //   Log.i(TAG, "Astro API Server response :" + myURLConnection.getResponseMessage());
 
             BufferedReader br = new BufferedReader(new InputStreamReader(myURLConnection.getInputStream()));
             StringBuilder buffer = new StringBuilder();
@@ -80,7 +79,7 @@ public class VedicDailyPredictionTask extends AsyncTask<AstroRequest, Void, Dail
             }
 
             jsonStr = buffer.toString();
-            Log.i(TAG, "JsonStr = " + jsonStr);
+           // Log.i(TAG, "JsonStr = " + jsonStr);
             response = AstroUtils.getDailyPredictionResponse(jsonStr);
 
         } catch (IOException e) {

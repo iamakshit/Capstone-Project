@@ -33,7 +33,7 @@ public class VedicNumeroTask extends AsyncTask<AstroRequest, Void, NumeroRespons
 
         BufferedReader reader = null;
         String jsonStr = null;
-        Log.i(TAG, "Starting ...");
+      //  Log.i(TAG, "Starting ...");
         HttpURLConnection myURLConnection = null;
         NumeroResponse response = null;
         if (astroRequests == null) {
@@ -67,8 +67,8 @@ public class VedicNumeroTask extends AsyncTask<AstroRequest, Void, NumeroRespons
 
             myURLConnection.connect();
             int status = myURLConnection.getResponseCode();
-            Log.i(TAG, "Astro API Server status :" + status);
-            Log.i(TAG, "Astro API Server response :" + myURLConnection.getResponseMessage());
+          //  Log.i(TAG, "Astro API Server status :" + status);
+           // Log.i(TAG, "Astro API Server response :" + myURLConnection.getResponseMessage());
 
             BufferedReader br = new BufferedReader(new InputStreamReader(myURLConnection.getInputStream()));
             StringBuilder buffer = new StringBuilder();
@@ -84,7 +84,7 @@ public class VedicNumeroTask extends AsyncTask<AstroRequest, Void, NumeroRespons
             }
 
             jsonStr = buffer.toString();
-            Log.i(TAG, "JsonStr = " + jsonStr);
+          //  Log.i(TAG, "JsonStr = " + jsonStr);
             if (GENERAL_STATS.getCode().equals(astroRequest.getAstroURL())) {
                 NumeroBasicDetailsResponse numeroBasicDetailsResponse = new NumeroBasicDetailsResponse();
                 return numeroBasicDetailsResponse;

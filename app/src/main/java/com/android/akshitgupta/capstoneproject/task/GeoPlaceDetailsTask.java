@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.android.akshitgupta.capstoneproject.object.GeoPlaceDetails;
 import com.android.akshitgupta.capstoneproject.utils.ConstantUtils;
+import com.android.akshitgupta.capstoneproject.utils.GeoUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,7 +37,7 @@ public class GeoPlaceDetailsTask extends AsyncTask<String, Void, GeoPlaceDetails
         HttpURLConnection urlConnection = null;
         BufferedReader reader = null;
         String jsonStr = null;
-        Log.i(LOG_TAG, "Starting ...");
+      //  Log.i(LOG_TAG, "Starting ...");
 
         StringBuilder baseURL = new StringBuilder();
         baseURL.append(ConstantUtils.PLACES_API_BASE).append(ConstantUtils.PLACE_DETAILS).append(ConstantUtils.OUT_JSON);
@@ -53,7 +54,7 @@ public class GeoPlaceDetailsTask extends AsyncTask<String, Void, GeoPlaceDetails
             urlConnection.connect();
             int status = urlConnection.getResponseCode();
 
-            Log.i(LOG_TAG, "Google Place Details API Server status :" + status);
+          //  Log.i(LOG_TAG, "Google Place Details API Server status :" + status);
             BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
             StringBuilder buffer = new StringBuilder();
             String line;
@@ -68,7 +69,7 @@ public class GeoPlaceDetailsTask extends AsyncTask<String, Void, GeoPlaceDetails
             }
 
             jsonStr = buffer.toString();
-            data = getDescriptionDataFromJson(jsonStr);
+            data = GeoUtils.getDescriptionDataFromJson(jsonStr);
 
         } catch (IOException e) {
             Log.e(LOG_TAG, "IOException", e);
@@ -92,33 +93,13 @@ public class GeoPlaceDetailsTask extends AsyncTask<String, Void, GeoPlaceDetails
 
     @Override
     protected void onPreExecute() {
-        Log.i(LOG_TAG, "Inside onPreExecute Method");
+     //   Log.i(LOG_TAG, "Inside onPreExecute Method");
         super.onPreExecute();
     }
 
     @Override
     protected void onPostExecute(GeoPlaceDetails data) {
-        Log.i(LOG_TAG, "Inside onPostExecute method");
+      //  Log.i(LOG_TAG, "Inside onPostExecute method");
         super.onPostExecute(data);
-    }
-
-    private GeoPlaceDetails getDescriptionDataFromJson(String jsonStr) {
-        GeoPlaceDetails geoPlaceDetails = new GeoPlaceDetails();
-        try {
-
-            // Create a JSON object hierarchy from the results
-            JSONObject jsonObj = new JSONObject(jsonStr);
-            JSONObject result = jsonObj.getJSONObject("result");
-            JSONObject geometry = result.getJSONObject("geometry");
-            JSONObject location = geometry.getJSONObject("location");
-            String latitude = location.getString("lat");
-            String longitude = location.getString("lng");
-            geoPlaceDetails.setLatitude(latitude);
-            geoPlaceDetails.setLongitude(longitude);
-
-        } catch (JSONException e) {
-            Log.e(LOG_TAG, "Cannot process JSON results", e);
-        }
-        return geoPlaceDetails;
     }
 }

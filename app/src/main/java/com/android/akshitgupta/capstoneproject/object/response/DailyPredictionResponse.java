@@ -63,4 +63,15 @@ public class DailyPredictionResponse implements Serializable {
         this.travel = travel;
     }
 
+    @Override
+    public String toString() {
+        return "DailyPredictionResponse{" +
+                "health='" + health + '\'' +
+                ", emotions='" + emotions + '\'' +
+                ", profession='" + profession + '\'' +
+                ", luck='" + luck + '\'' +
+                ", personalLife='" + personalLife + '\'' +
+                ", travel='" + travel + '\'' +
+                '}';
+    }
 }

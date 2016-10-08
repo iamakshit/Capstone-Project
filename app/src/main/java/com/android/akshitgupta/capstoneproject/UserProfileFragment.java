@@ -101,7 +101,7 @@ public class UserProfileFragment extends Fragment {
                     user.setDobTIme(userDobTime);
                     user.setCityName(userCity);
                     user.setId(id);
-                    Log.i("UserProfileFragment","User added ==>"+user.toString());
+                   // Log.i("UserProfileFragment","User added ==>"+user.toString());
                     userList.add(user);
                     // do what ever you want here
                 }while(userCursor.moveToNext());
