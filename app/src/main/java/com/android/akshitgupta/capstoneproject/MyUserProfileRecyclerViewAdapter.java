@@ -82,10 +82,13 @@ public class MyUserProfileRecyclerViewAdapter extends RecyclerView.Adapter<MyUse
                 ((Button) view).setTextColor(Color.BLUE);
                 ((Button) view).setText(R.string.marked_as_default);
 
-                Toast.makeText(view.getContext(), "Successfully marking this item as default", Toast.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(), "Successfully marked this "+userProfile.getUserName()+" as default", Toast.LENGTH_SHORT).show();
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putString("userDefaultId", userProfile.getId().toString());
                 editor.commit();
+
+
+                notifyDataSetChanged();
             }
         });
     }

@@ -76,7 +76,6 @@ public class UserProfileFragment extends Fragment {
             }
 
 
-            // First, check if the location with this city name exists in the db
             Cursor userCursor = getContext().getContentResolver().query(
                     UserContract.UserEntry.CONTENT_URI,
                     new String[]{UserContract.UserEntry._ID, UserContract.UserEntry.COLUMN_USER_NAME, UserContract.UserEntry.COLUMN_USER_GENDER,
