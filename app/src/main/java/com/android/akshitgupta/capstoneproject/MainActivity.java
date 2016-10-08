@@ -1,7 +1,12 @@
 package com.android.akshitgupta.capstoneproject;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -9,15 +14,26 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
+import com.android.akshitgupta.capstoneproject.data.UserContract;
 import com.android.akshitgupta.capstoneproject.object.UserProfile;
+import com.android.akshitgupta.capstoneproject.object.request.AstroRequest;
+import com.android.akshitgupta.capstoneproject.object.response.DailyPredictionResponse;
+import com.android.akshitgupta.capstoneproject.task.VedicDailyPredictionTask;
+import com.android.akshitgupta.capstoneproject.utils.AstroUtils;
+
+import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, UserProfileFragment.OnListFragmentInteractionListener {
+    public static String TAG = MainActivity.class.getSimpleName();
 
+    public UserProfile.User userProfile;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +45,44 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
+                /*****************************************************************************************/
+
+                AstroRequest request= new AstroRequest();
+                request.setAstroURL(AstroUtils.DAILY_PREDICTION);
+                request.setName("Akshit Gupta");
+                request.setDay(27);
+                request.setMonth(2);
+                request.setYear(1992);
+                request.setHour(10);
+                request.setMin(54);
+                request.setLat(19.4334);
+                request.setLon(72.2342);
+                request.setTzone(5.5);
+                DailyPredictionResponse response = new DailyPredictionResponse();
+
+
+                VedicDailyPredictionTask    task;
+                task = new VedicDailyPredictionTask();
+                int maximumPoolSize = 80;
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
+                    task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,request);
+                else
+                    task.execute(request);
+
+                try {
+                    response= task.get();
+                    Log.i(TAG,"Response ="+response);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
+
+                /*****************************************************************************************/
+
                 Intent intent = new Intent(MainActivity.this, AddUserActivity.class);
                 startActivity(intent);
             }
@@ -42,7 +96,16 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        View header=navigationView.getHeaderView(0);
+        TextView userNameDisplayView = (TextView)header.findViewById(R.id.userName_display);
+        TextView birthDetailsView = (TextView)header.findViewById(R.id.birthDetails_display);
+
+        updateNavigationHeader(header);
+        userNameDisplayView.setText(userProfile.getUserName());
+        birthDetailsView.setText(userProfile.getDobDate()+" "+userProfile.getDobTIme());
+        Log.i(TAG,"UserProfile ="+userProfile);
     }
+
 
     @Override
     public void onBackPressed() {
@@ -76,6 +139,8 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+
+
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -106,10 +171,38 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onRestart()
-    {
+    public void onRestart() {
         super.onRestart();
         finish();
         startActivity(getIntent());
     }
-}
+
+    public void updateNavigationHeader(View header)
+    {
+
+        SharedPreferences prefs= PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        String defaultUserId = prefs.getString("userDefaultId", "1");
+
+        Cursor userCursor = getApplicationContext().getContentResolver().query(
+                UserContract.UserEntry.CONTENT_URI,
+                new String[]{UserContract.UserEntry._ID, UserContract.UserEntry.COLUMN_USER_NAME, UserContract.UserEntry.COLUMN_USER_GENDER,
+                        UserContract.UserEntry.COLUMN_USER_DOB_DATE, UserContract.UserEntry.COLUMN_USER_DOB_TIME, UserContract.UserEntry.COLUMN_CITY_NAME,
+                        UserContract.UserEntry.COLUMN_COORD_LAT, UserContract.UserEntry.COLUMN_COORD_LONG}, UserContract.UserEntry._ID + "=?", new String[]{defaultUserId.toString()}, null);
+
+        if (userCursor.moveToFirst()){
+            String userName = userCursor.getString(userCursor.getColumnIndex(UserContract.UserEntry.COLUMN_USER_NAME));
+            String userGender = userCursor.getString(userCursor.getColumnIndex(UserContract.UserEntry.COLUMN_USER_GENDER));
+            String userDobDate = userCursor.getString(userCursor.getColumnIndex(UserContract.UserEntry.COLUMN_USER_DOB_DATE));
+            String userDobTime = userCursor.getString(userCursor.getColumnIndex(UserContract.UserEntry.COLUMN_USER_DOB_TIME));
+            String userCity = userCursor.getString(userCursor.getColumnIndex(UserContract.UserEntry.COLUMN_CITY_NAME));
+            Integer id = userCursor.getInt(userCursor.getColumnIndex(UserContract.UserEntry._ID));
+            String coordLat = userCursor.getString(userCursor.getColumnIndex(UserContract.UserEntry.COLUMN_COORD_LAT));
+            String coordLong =     userCursor.getString(userCursor.getColumnIndex(UserContract.UserEntry.COLUMN_COORD_LONG));
+            this.userProfile = new UserProfile.User( id,  userName,  userGender,  userDobDate,  userDobTime,  null,  userCity,  coordLat,  coordLong);
+
+            }
+        userCursor.close();
+        }
+
+    }
+
