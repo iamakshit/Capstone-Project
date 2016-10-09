@@ -6,7 +6,10 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.util.Log;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.android.akshitgupta.capstoneproject.R;
 import com.android.akshitgupta.capstoneproject.object.UserProfile;
@@ -70,8 +73,10 @@ public class NumerologyDescriptionActivity extends AppCompatActivity {
         }
 
         Log.i(TAG, "Response =" + response);
-
-
+        TextView numerologyDesription= (TextView) findViewById(R.id.numero_desc);
+        numerologyDesription.setText(Html.fromHtml(response.getDescription()));
+        Toolbar toolbar = (Toolbar)findViewById(R.id.numero_toolbar);
+        toolbar.setTitle(response.getTitle());
     }
 
 
