@@ -10,7 +10,7 @@ import android.util.Log;
 
 import com.android.akshitgupta.capstoneproject.R;
 import com.android.akshitgupta.capstoneproject.object.NumeroPrediction;
-import com.android.akshitgupta.capstoneproject.object.UserProfile;
+import com.android.akshitgupta.capstoneproject.object.User;
 import com.android.akshitgupta.capstoneproject.object.request.AstroRequest;
 import com.android.akshitgupta.capstoneproject.object.response.DailyPredictionResponse;
 import com.android.akshitgupta.capstoneproject.task.VedicDailyPredictionTask;
@@ -29,7 +29,7 @@ public class DailyPredictionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         Intent intent = getIntent();
-        UserProfile.User userProfile = (UserProfile.User) intent.getSerializableExtra("userProfile");
+        User userProfile = (User) intent.getSerializableExtra("userProfile");
         dailyPrediction(userProfile);
 
         super.onCreate(savedInstanceState);
@@ -39,7 +39,7 @@ public class DailyPredictionActivity extends AppCompatActivity {
 
     }
 
-    public void dailyPrediction(UserProfile.User user) {
+    public void dailyPrediction(User user) {
         numeroPredictionList = new ArrayList<>();
         AstroRequest request = AstroUtils.getAstroRequestByUserProfile(user, AstroUtils.DAILY_PREDICTION);
         DailyPredictionResponse response = new DailyPredictionResponse();

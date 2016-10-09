@@ -32,7 +32,7 @@ import com.android.akshitgupta.capstoneproject.data.UserContract;
 import com.android.akshitgupta.capstoneproject.enums.Gender;
 import com.android.akshitgupta.capstoneproject.object.GeoDetails;
 import com.android.akshitgupta.capstoneproject.object.GeoPlaceDetails;
-import com.android.akshitgupta.capstoneproject.object.UserProfile;
+import com.android.akshitgupta.capstoneproject.object.User;
 import com.android.akshitgupta.capstoneproject.task.GeoPlaceDetailsTask;
 import com.android.akshitgupta.capstoneproject.view.GooglePlacesAutocompleteAdapter;
 
@@ -92,13 +92,13 @@ public class AddUserActivity extends AppCompatActivity implements View.OnClickLi
         timeFormatter = new SimpleDateFormat("HH:mm", Locale.US);
 
         Intent intent = getIntent();
-        UserProfile.User user = (UserProfile.User) intent.getSerializableExtra("userProfile");
+        User user = (User) intent.getSerializableExtra("userProfile");
         findViewsById(user);
         setDateTimeField();
         setOnClickListeners();
     }
 
-    private void findViewsById(UserProfile.User user) {
+    private void findViewsById(User user) {
 
         dobDate = (EditText) findViewById(R.id.dob_date);
         dobDate.setInputType(InputType.TYPE_DATETIME_VARIATION_DATE);
@@ -237,7 +237,7 @@ public class AddUserActivity extends AppCompatActivity implements View.OnClickLi
             GeoPlaceDetails geoPlaceDetails = getLocationDetails(placeId);
 
 
-            UserProfile.User user = new UserProfile.User();
+            User user = new User();
             user.setUserName(nameText);
             user.setDobDate(dobDateText);
             user.setDobTIme(dobTimeText);
@@ -254,7 +254,7 @@ public class AddUserActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
-    public void addUser(UserProfile.User user) {
+    public void addUser(User user) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.WRITE_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{Manifest.permission.WRITE_CONTACTS}, PERMISSIONS_REQUEST_WRITE_CONTACTS);
             //After this point you wait for callback in onRequestPermissionsResult(int, String[], int[]) overriden method

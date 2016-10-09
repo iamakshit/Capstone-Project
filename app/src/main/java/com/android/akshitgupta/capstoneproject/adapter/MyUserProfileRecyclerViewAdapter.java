@@ -17,8 +17,7 @@ import android.widget.Toast;
 import com.android.akshitgupta.capstoneproject.AddUserActivity;
 import com.android.akshitgupta.capstoneproject.R;
 import com.android.akshitgupta.capstoneproject.data.UserContract;
-import com.android.akshitgupta.capstoneproject.object.UserProfile;
-import com.android.akshitgupta.capstoneproject.object.UserProfile.User;
+import com.android.akshitgupta.capstoneproject.object.User;
 
 import java.util.List;
 
@@ -46,7 +45,7 @@ public class MyUserProfileRecyclerViewAdapter extends RecyclerView.Adapter<MyUse
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-        final UserProfile.User userProfile = userList.get(position);
+        final User userProfile = userList.get(position);
         holder.nameView.setText(userProfile.getUserName());
         holder.cityView.setText(userProfile.getCityName());
         holder.dobView.setText(userProfile.getDobDate());

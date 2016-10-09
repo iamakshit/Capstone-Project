@@ -10,7 +10,7 @@ import android.util.Log;
 
 import com.android.akshitgupta.capstoneproject.R;
 import com.android.akshitgupta.capstoneproject.object.NumeroPrediction;
-import com.android.akshitgupta.capstoneproject.object.UserProfile;
+import com.android.akshitgupta.capstoneproject.object.User;
 import com.android.akshitgupta.capstoneproject.object.request.AstroRequest;
 import com.android.akshitgupta.capstoneproject.object.response.NumeroBasicDetailsResponse;
 import com.android.akshitgupta.capstoneproject.task.VedicNumeroTask;
@@ -26,7 +26,7 @@ public class NumeroTableActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Intent intent = getIntent();
-        UserProfile.User userProfile = (UserProfile.User) intent.getSerializableExtra("userProfile");
+        User userProfile = (User) intent.getSerializableExtra("userProfile");
         String numerologyCode = intent.getStringExtra("astroURL");
         numerology(userProfile, numerologyCode);
         super.onCreate(savedInstanceState);
@@ -35,7 +35,7 @@ public class NumeroTableActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
     }
 
-    public void numerology(UserProfile.User user, String numerologyCode) {
+    public void numerology(User user, String numerologyCode) {
 
         AstroRequest request = AstroUtils.getAstroRequestByUserProfile(user, numerologyCode);
         NumeroBasicDetailsResponse response = new NumeroBasicDetailsResponse();

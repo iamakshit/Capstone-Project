@@ -22,15 +22,15 @@ import com.android.akshitgupta.capstoneproject.dailyprediction.DailyPredictionAc
 import com.android.akshitgupta.capstoneproject.data.UserContract;
 import com.android.akshitgupta.capstoneproject.numerology.NumerologyDescriptionActivity;
 import com.android.akshitgupta.capstoneproject.numerology.table.NumeroTableActivity;
-import com.android.akshitgupta.capstoneproject.object.UserProfile;
 import com.android.akshitgupta.capstoneproject.enums.Numerology;
+import com.android.akshitgupta.capstoneproject.object.User;
 
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, UserProfileFragment.OnListFragmentInteractionListener {
     public static String TAG = MainActivity.class.getSimpleName();
 
-    public UserProfile.User userProfile;
+    public User userProfile;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -156,7 +156,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onListFragmentInteraction(UserProfile.User item) {
+    public void onListFragmentInteraction(User item) {
     }
 
     @Override
@@ -187,7 +187,7 @@ public class MainActivity extends AppCompatActivity
             Integer id = userCursor.getInt(userCursor.getColumnIndex(UserContract.UserEntry._ID));
             String coordLat = userCursor.getString(userCursor.getColumnIndex(UserContract.UserEntry.COLUMN_COORD_LAT));
             String coordLong =     userCursor.getString(userCursor.getColumnIndex(UserContract.UserEntry.COLUMN_COORD_LONG));
-            this.userProfile = new UserProfile.User( id,  userName,  userGender,  userDobDate,  userDobTime,  null,  userCity,  coordLat,  coordLong);
+            this.userProfile = new User( id,  userName,  userGender,  userDobDate,  userDobTime,  null,  userCity,  coordLat,  coordLong);
 
             }
         userCursor.close();

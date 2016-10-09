@@ -11,7 +11,7 @@ import android.util.Log;
 import android.widget.TextView;
 
 import com.android.akshitgupta.capstoneproject.R;
-import com.android.akshitgupta.capstoneproject.object.UserProfile;
+import com.android.akshitgupta.capstoneproject.object.User;
 import com.android.akshitgupta.capstoneproject.object.request.AstroRequest;
 import com.android.akshitgupta.capstoneproject.object.response.NumeroResponse;
 import com.android.akshitgupta.capstoneproject.task.VedicNumeroTask;
@@ -29,13 +29,13 @@ public class NumerologyDescriptionActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Intent intent = getIntent();
-        UserProfile.User userProfile = (UserProfile.User) intent.getSerializableExtra("userProfile");
+        User userProfile = (User) intent.getSerializableExtra("userProfile");
         String numerologyCode = intent.getStringExtra("astroURL");
         numerology(userProfile, numerologyCode);
 
     }
 
-    public void numerology(UserProfile.User user, String numerologyCode) {
+    public void numerology(User user, String numerologyCode) {
 
         AstroRequest request = AstroUtils.getAstroRequestByUserProfile(user, numerologyCode);
         NumeroResponse response = new NumeroResponse();

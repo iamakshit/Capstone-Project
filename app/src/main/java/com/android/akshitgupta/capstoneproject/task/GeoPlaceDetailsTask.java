@@ -8,9 +8,6 @@ import com.android.akshitgupta.capstoneproject.object.GeoPlaceDetails;
 import com.android.akshitgupta.capstoneproject.utils.ConstantUtils;
 import com.android.akshitgupta.capstoneproject.utils.GeoUtils;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;

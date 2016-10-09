@@ -2,7 +2,7 @@ package com.android.akshitgupta.capstoneproject.utils;
 
 import com.android.akshitgupta.capstoneproject.enums.NumeroTable;
 import com.android.akshitgupta.capstoneproject.object.NumeroPrediction;
-import com.android.akshitgupta.capstoneproject.object.UserProfile;
+import com.android.akshitgupta.capstoneproject.object.User;
 import com.android.akshitgupta.capstoneproject.object.request.AstroRequest;
 import com.android.akshitgupta.capstoneproject.object.response.DailyPredictionResponse;
 import com.android.akshitgupta.capstoneproject.object.response.NumeroBasicDetailsResponse;
@@ -156,7 +156,7 @@ public class AstroUtils {
     }
 
 
-    public static AstroRequest getAstroRequestByUserProfile(UserProfile.User user, String numerologyCode) {
+    public static AstroRequest getAstroRequestByUserProfile(User user, String numerologyCode) {
         String[] date = user.getDobDate().split("-");
         String[] hour = user.getDobTIme().split(":");
 

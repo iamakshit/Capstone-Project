@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 
 import com.android.akshitgupta.capstoneproject.adapter.MyUserProfileRecyclerViewAdapter;
 import com.android.akshitgupta.capstoneproject.data.UserContract;
-import com.android.akshitgupta.capstoneproject.object.UserProfile;
+import com.android.akshitgupta.capstoneproject.object.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,10 +84,10 @@ public class UserProfileFragment extends Fragment {
                     }, null, null, null);
 
             Log.i("UserProfileFragment","userCursor  = "+userCursor.getCount());
-            List<UserProfile.User> userList= new ArrayList<>();
+            List<User> userList= new ArrayList<>();
             if (userCursor.moveToFirst()){
                 do{
-                    UserProfile.User user = new UserProfile.User();
+                    User user = new User();
                     String userName = userCursor.getString(userCursor.getColumnIndex(UserContract.UserEntry.COLUMN_USER_NAME));
                     String userGender = userCursor.getString(userCursor.getColumnIndex(UserContract.UserEntry.COLUMN_USER_GENDER));
                     String userDobDate = userCursor.getString(userCursor.getColumnIndex(UserContract.UserEntry.COLUMN_USER_DOB_DATE));
@@ -127,6 +127,6 @@ public class UserProfileFragment extends Fragment {
      */
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onListFragmentInteraction(UserProfile.User item);
+        void onListFragmentInteraction(User item);
     }
 }

@@ -1,5 +1,6 @@
 package com.android.akshitgupta.capstoneproject.utils;
 import com.android.akshitgupta.capstoneproject.object.GeoPlaceDetails;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
