@@ -81,14 +81,14 @@ public class MyUserProfileRecyclerViewAdapter extends RecyclerView.Adapter<MyUse
         String defaultUserId = prefs.getString("userDefaultId", "1");
 
         if (userProfile.getId().toString().equals(defaultUserId)) {
-            holder.markDefaultButton.setTextColor(Color.BLUE);
+            holder.markDefaultButton.setTextColor(Color.RED);
             holder.markDefaultButton.setText(R.string.marked_as_default);
         }
         holder.markDefaultButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                ((Button) view).setTextColor(Color.BLUE);
+                ((Button) view).setTextColor(Color.RED);
                 ((Button) view).setText(R.string.marked_as_default);
 
                 Toast.makeText(view.getContext(), "Successfully marked this " + userProfile.getUserName() + " as default", Toast.LENGTH_SHORT).show();
