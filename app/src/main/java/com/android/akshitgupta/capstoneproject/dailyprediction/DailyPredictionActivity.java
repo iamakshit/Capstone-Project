@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
 import com.android.akshitgupta.capstoneproject.R;
+import com.android.akshitgupta.capstoneproject.object.DailyPrediction;
 import com.android.akshitgupta.capstoneproject.object.UserProfile;
 import com.android.akshitgupta.capstoneproject.object.request.AstroRequest;
 import com.android.akshitgupta.capstoneproject.object.response.DailyPredictionResponse;
@@ -22,19 +23,20 @@ import java.util.concurrent.ExecutionException;
 public class DailyPredictionActivity extends AppCompatActivity {
     public static String TAG = DailyPredictionActivity.class.getSimpleName();
 
-    List<String> dailyPredictionList;
+    List<DailyPrediction> dailyPredictionList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_daily_prediction);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+
         Intent intent = getIntent();
         UserProfile.User userProfile = (UserProfile.User) intent.getSerializableExtra("userProfile");
         dailyPrediction(userProfile);
 
-        
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_daily_prediction);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
     }
 
     public void dailyPrediction(UserProfile.User user) {
@@ -62,16 +64,34 @@ public class DailyPredictionActivity extends AppCompatActivity {
 
         Log.i(TAG, "Response =" + response);
 
-        dailyPredictionList.add(response.getHealth());
-        dailyPredictionList.add(response.getEmotions());
-        dailyPredictionList.add(response.getProfession());
-        dailyPredictionList.add(response.getLuck());
-        dailyPredictionList.add(response.getTravel());
-        dailyPredictionList.add(response.getPersonalLife());
+        DailyPrediction health = new DailyPrediction();
+        health.setDescription(response.getHealth());
+        health.setTitle("HEALTH");
+        this.dailyPredictionList.add(health);
+        DailyPrediction emotions = new DailyPrediction();
+        emotions.setDescription(response.getEmotions());
+        emotions.setTitle("EMOTION");
+        this.dailyPredictionList.add(emotions);
+        DailyPrediction profession = new DailyPrediction();
+        profession.setDescription(response.getProfession());
+        profession.setTitle("PROFESSION");
+        this.dailyPredictionList.add(profession);
+        DailyPrediction luck = new DailyPrediction();
+        luck.setDescription(response.getLuck());
+        luck.setTitle("LUCK");
+        this.dailyPredictionList.add(luck);
+        DailyPrediction travel = new DailyPrediction();
+        travel.setDescription(response.getTravel());
+        travel.setTitle("TRAVEL");
+        this.dailyPredictionList.add(travel);
+        DailyPrediction personalLife = new DailyPrediction();
+        personalLife.setDescription(response.getPersonalLife());
+        personalLife.setTitle("PERSONAL LIFE");
+        this.dailyPredictionList.add(personalLife);
 
     }
 
-    public List<String> getDailyPredictionList() {
-        return dailyPredictionList;
+    public List<DailyPrediction> getDailyPredictionList() {
+        return this.dailyPredictionList;
     }
 }
