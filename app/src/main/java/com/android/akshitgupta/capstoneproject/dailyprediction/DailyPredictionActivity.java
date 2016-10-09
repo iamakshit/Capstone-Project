@@ -15,10 +15,14 @@ import com.android.akshitgupta.capstoneproject.object.response.DailyPredictionRe
 import com.android.akshitgupta.capstoneproject.task.VedicDailyPredictionTask;
 import com.android.akshitgupta.capstoneproject.utils.AstroUtils;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public class DailyPredictionActivity extends AppCompatActivity {
     public static String TAG = DailyPredictionActivity.class.getSimpleName();
+
+    List<String> dailyPredictionList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,10 +33,12 @@ public class DailyPredictionActivity extends AppCompatActivity {
         Intent intent = getIntent();
         UserProfile.User userProfile = (UserProfile.User) intent.getSerializableExtra("userProfile");
         dailyPrediction(userProfile);
+
+        
     }
 
     public void dailyPrediction(UserProfile.User user) {
-
+        dailyPredictionList = new ArrayList<>();
         AstroRequest request = AstroUtils.getAstroRequestByUserProfile(user, AstroUtils.DAILY_PREDICTION);
         DailyPredictionResponse response = new DailyPredictionResponse();
         Log.i(TAG, "request =" + request);
@@ -55,6 +61,17 @@ public class DailyPredictionActivity extends AppCompatActivity {
         }
 
         Log.i(TAG, "Response =" + response);
+
+        dailyPredictionList.add(response.getHealth());
+        dailyPredictionList.add(response.getEmotions());
+        dailyPredictionList.add(response.getProfession());
+        dailyPredictionList.add(response.getLuck());
+        dailyPredictionList.add(response.getTravel());
+        dailyPredictionList.add(response.getPersonalLife());
+
     }
 
+    public List<String> getDailyPredictionList() {
+        return dailyPredictionList;
+    }
 }
