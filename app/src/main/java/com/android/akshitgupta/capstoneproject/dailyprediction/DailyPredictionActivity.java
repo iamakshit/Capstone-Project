@@ -35,6 +35,7 @@ public class DailyPredictionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_daily_prediction);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("TODAY'S PERSONALIZED PREDICTION");
         setSupportActionBar(toolbar);
 
     }
