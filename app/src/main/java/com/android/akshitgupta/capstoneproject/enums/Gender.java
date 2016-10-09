@@ -1,4 +1,4 @@
-package com.android.akshitgupta.capstoneproject;
+package com.android.akshitgupta.capstoneproject.enums;
 
 
 /**

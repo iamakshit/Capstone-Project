@@ -17,7 +17,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
-import static com.android.akshitgupta.capstoneproject.utils.Numerology.GENERAL_STATS;
+import static com.android.akshitgupta.capstoneproject.enums.Numerology.GENERAL_STATS;
 
 /**
  * Created by akshitgupta on 07/10/16.

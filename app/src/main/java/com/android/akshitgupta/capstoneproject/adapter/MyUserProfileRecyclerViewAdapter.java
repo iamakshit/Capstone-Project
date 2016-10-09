@@ -1,4 +1,4 @@
-package com.android.akshitgupta.capstoneproject;
+package com.android.akshitgupta.capstoneproject.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,6 +14,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.akshitgupta.capstoneproject.AddUserActivity;
+import com.android.akshitgupta.capstoneproject.R;
 import com.android.akshitgupta.capstoneproject.data.UserContract;
 import com.android.akshitgupta.capstoneproject.object.UserProfile;
 import com.android.akshitgupta.capstoneproject.object.UserProfile.User;

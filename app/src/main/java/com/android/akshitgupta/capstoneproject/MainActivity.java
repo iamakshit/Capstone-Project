@@ -22,7 +22,7 @@ import com.android.akshitgupta.capstoneproject.dailyprediction.DailyPredictionAc
 import com.android.akshitgupta.capstoneproject.data.UserContract;
 import com.android.akshitgupta.capstoneproject.numerology.NumerologyDescriptionActivity;
 import com.android.akshitgupta.capstoneproject.object.UserProfile;
-import com.android.akshitgupta.capstoneproject.utils.Numerology;
+import com.android.akshitgupta.capstoneproject.enums.Numerology;
 
 
 public class MainActivity extends AppCompatActivity

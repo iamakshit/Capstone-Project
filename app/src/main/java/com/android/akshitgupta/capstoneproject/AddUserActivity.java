@@ -29,6 +29,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.android.akshitgupta.capstoneproject.data.UserContract;
+import com.android.akshitgupta.capstoneproject.enums.Gender;
 import com.android.akshitgupta.capstoneproject.object.GeoDetails;
 import com.android.akshitgupta.capstoneproject.object.GeoPlaceDetails;
 import com.android.akshitgupta.capstoneproject.object.UserProfile;

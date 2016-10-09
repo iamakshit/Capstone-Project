@@ -1,4 +1,4 @@
-package com.android.akshitgupta.capstoneproject.utils;
+package com.android.akshitgupta.capstoneproject.enums;
 
 /**
  * Created by akshitgupta on 08/10/16.
