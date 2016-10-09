@@ -62,8 +62,6 @@ public class DailyPredictionActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-       // Log.i(TAG, "Response =" + response);
-
         NumeroPrediction health = new NumeroPrediction();
         health.setDescription(response.getHealth());
         health.setTitle("HEALTH");

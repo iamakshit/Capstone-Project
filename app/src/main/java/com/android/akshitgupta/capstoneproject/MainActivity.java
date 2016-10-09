@@ -68,8 +68,6 @@ public class MainActivity extends AppCompatActivity
 
         updateUserProfile();
 
-        // drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_OPEN);
-
         if (userProfile != null) {
             userNameDisplayView.setText(userProfile.getUserName());
             cityNameView.setText(userProfile.getCityName());
@@ -83,7 +81,6 @@ public class MainActivity extends AppCompatActivity
             }
             Log.i(TAG, "UserProfile =" + userProfile);
         } else {
-            // drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
             noUserPresentToast();
         }
     }

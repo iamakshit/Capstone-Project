@@ -40,8 +40,5 @@ public class DailyPredictionActivityFragment extends Fragment {
             recyclerView.setAdapter(adapter);
         }
         return view;
-        //return inflater.inflate(R.layout.fragment_daily_prediction, container, false);
     }
-
-
 }

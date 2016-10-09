@@ -57,7 +57,6 @@ public class GeoPlacesAutoCompleteTask extends AsyncTask<String, Void, ArrayList
             urlConnection.setDoInput(true);
             urlConnection.connect();
 
-            //  Log.i(LOG_TAG, "Google AutoComplete API Server status :" + status);
             BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
             StringBuilder buffer = new StringBuilder();
             String line;
@@ -105,7 +104,6 @@ public class GeoPlacesAutoCompleteTask extends AsyncTask<String, Void, ArrayList
             JSONObject jsonObj = new JSONObject(jsonStr);
             JSONArray predsJsonArray = jsonObj.getJSONArray("predictions");
 
-            // Extract the Place descriptions from the results
             dataList = new ArrayList<GeoDetails>(predsJsonArray.length());
             for (int i = 0; i < predsJsonArray.length(); i++) {
                 GeoDetails geoDetails = new GeoDetails();
@@ -119,15 +117,4 @@ public class GeoPlacesAutoCompleteTask extends AsyncTask<String, Void, ArrayList
         return dataList;
     }
 
-    @Override
-    protected void onPreExecute() {
-        //  Log.i(LOG_TAG, "Inside onPreExecute Method");
-        super.onPreExecute();
-    }
-
-    @Override
-    protected void onPostExecute(ArrayList<GeoDetails> data) {
-        //  Log.i(LOG_TAG, "Inside onPostExecute method");
-        super.onPostExecute(data);
-    }
 }

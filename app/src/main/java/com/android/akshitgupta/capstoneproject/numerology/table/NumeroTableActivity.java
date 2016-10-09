@@ -39,7 +39,6 @@ public class NumeroTableActivity extends AppCompatActivity {
 
         AstroRequest request = AstroUtils.getAstroRequestByUserProfile(user, numerologyCode);
         NumeroBasicDetailsResponse response = new NumeroBasicDetailsResponse();
-      //  Log.i(TAG, "request =" + request);
 
         VedicNumeroTask task;
         task = new VedicNumeroTask();
@@ -57,8 +56,6 @@ public class NumeroTableActivity extends AppCompatActivity {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-
-       // Log.i(TAG, "Response =" + response);
         this.numeroPredictionList = AstroUtils.prepareNumeroPredictionFromBasicDetailsResponse(response);
     }
 

@@ -1,6 +1,5 @@
 package com.android.akshitgupta.capstoneproject.enums;
 
-
 /**
  * Created by akshitgupta on 02/10/16.
  */

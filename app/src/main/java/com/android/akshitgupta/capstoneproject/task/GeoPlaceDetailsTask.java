@@ -34,7 +34,6 @@ public class GeoPlaceDetailsTask extends AsyncTask<String, Void, GeoPlaceDetails
         HttpURLConnection urlConnection = null;
         BufferedReader reader = null;
         String jsonStr = null;
-      //  Log.i(LOG_TAG, "Starting ...");
 
         StringBuilder baseURL = new StringBuilder();
         baseURL.append(ConstantUtils.PLACES_API_BASE).append(ConstantUtils.PLACE_DETAILS).append(ConstantUtils.OUT_JSON);
@@ -49,9 +48,7 @@ public class GeoPlaceDetailsTask extends AsyncTask<String, Void, GeoPlaceDetails
             urlConnection.setConnectTimeout(10000);
             urlConnection.setDoInput(true);
             urlConnection.connect();
-            int status = urlConnection.getResponseCode();
 
-          //  Log.i(LOG_TAG, "Google Place Details API Server status :" + status);
             BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
             StringBuilder buffer = new StringBuilder();
             String line;
@@ -86,17 +83,5 @@ public class GeoPlaceDetailsTask extends AsyncTask<String, Void, GeoPlaceDetails
         }
 
         return data;
-    }
-
-    @Override
-    protected void onPreExecute() {
-     //   Log.i(LOG_TAG, "Inside onPreExecute Method");
-        super.onPreExecute();
-    }
-
-    @Override
-    protected void onPostExecute(GeoPlaceDetails data) {
-      //  Log.i(LOG_TAG, "Inside onPostExecute method");
-        super.onPostExecute(data);
     }
 }

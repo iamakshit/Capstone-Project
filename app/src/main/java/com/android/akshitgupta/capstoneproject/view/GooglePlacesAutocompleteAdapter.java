@@ -68,7 +68,6 @@ public class GooglePlacesAutocompleteAdapter extends ArrayAdapter<GeoDetails> im
         ArrayList<GeoDetails> resultList = null;
         GeoPlacesAutoCompleteTask task;
         task = new GeoPlacesAutoCompleteTask();
-        int maximumPoolSize = 80;
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
             task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, input);

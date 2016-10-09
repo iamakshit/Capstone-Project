@@ -283,11 +283,11 @@ public class AddUserActivity extends AppCompatActivity implements View.OnClickLi
 
             // The resulting URI contains the ID for the row.  Extract the locationId from the Uri.
             Long userId = ContentUris.parseId(insertedUri);
-            id=userId.intValue();
+            id = userId.intValue();
         } else {
             ContentValues userValues = new ContentValues();
             userValues.put(UserContract.UserEntry._ID, id);
-            userValues.put(UserContract.UserEntry.COLUMN_USER_NAME,user.getUserName());
+            userValues.put(UserContract.UserEntry.COLUMN_USER_NAME, user.getUserName());
             userValues.put(UserContract.UserEntry.COLUMN_USER_GENDER, user.getUserGender());
             userValues.put(UserContract.UserEntry.COLUMN_USER_DOB_DATE, user.getDobDate());
             userValues.put(UserContract.UserEntry.COLUMN_USER_DOB_TIME, user.getDobTIme());
@@ -295,7 +295,7 @@ public class AddUserActivity extends AppCompatActivity implements View.OnClickLi
             userValues.put(UserContract.UserEntry.COLUMN_COORD_LAT, user.getCoordLat());
             userValues.put(UserContract.UserEntry.COLUMN_COORD_LONG, user.getCoordLong());
 
-           // Uri uri = ContentUris.withAppendedId(Words.CONTENT_URI, id);
+            // Uri uri = ContentUris.withAppendedId(Words.CONTENT_URI, id);
             String[] args = {String.valueOf(id)};
             getApplicationContext().getContentResolver().update(UserContract.UserEntry.CONTENT_URI, userValues, UserContract.UserEntry._ID + "=?", args);
             Log.i(LOG_TAG, "Updated user with id = " + id + "  Id" + id);

@@ -39,7 +39,6 @@ public class NumerologyDescriptionActivity extends AppCompatActivity {
 
         AstroRequest request = AstroUtils.getAstroRequestByUserProfile(user, numerologyCode);
         NumeroResponse response = new NumeroResponse();
-       // Log.i(TAG, "request =" + request);
 
         VedicNumeroTask task;
         task = new VedicNumeroTask();
@@ -58,7 +57,6 @@ public class NumerologyDescriptionActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        //Log.i(TAG, "Response =" + response);
         TextView numerologyDesription = (TextView) findViewById(R.id.numero_desc);
         numerologyDesription.setText(Html.fromHtml(response.getDescription()));
         Toolbar toolbar = (Toolbar) findViewById(R.id.numero_toolbar);

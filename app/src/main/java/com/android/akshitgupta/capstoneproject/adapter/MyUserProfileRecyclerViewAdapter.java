@@ -74,7 +74,6 @@ public class MyUserProfileRecyclerViewAdapter extends RecyclerView.Adapter<MyUse
                 Intent intent = new Intent(context, AddUserActivity.class);
                 intent.putExtra("userProfile", userProfile);
                 context.startActivity(intent);
-                //context.startActivity(intent);
             }
         });
 
@@ -95,8 +94,6 @@ public class MyUserProfileRecyclerViewAdapter extends RecyclerView.Adapter<MyUse
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putString("userDefaultId", userProfile.getId().toString());
                 editor.commit();
-
-
                 notifyDataSetChanged();
             }
         });
