@@ -1,5 +1,6 @@
 package com.android.akshitgupta.capstoneproject.utils;
 
+import com.android.akshitgupta.capstoneproject.object.UserProfile;
 import com.android.akshitgupta.capstoneproject.object.request.AstroRequest;
 import com.android.akshitgupta.capstoneproject.object.response.DailyPredictionResponse;
 import com.android.akshitgupta.capstoneproject.object.response.NumeroBasicDetailsResponse;
@@ -147,5 +148,24 @@ public class AstroUtils {
             requestString.setLength(requestString.length() - 1);
         }
         return requestString.toString();
+    }
+
+
+    public static AstroRequest getAstroRequestByUserProfile(UserProfile.User user, String numerologyCode) {
+        String[] date = user.getDobDate().split("-");
+        String[] hour = user.getDobTIme().split(":");
+
+        AstroRequest request = new AstroRequest();
+        request.setAstroURL(numerologyCode);
+        request.setName(user.getUserName());
+        request.setDay(date[0]);
+        request.setMonth(date[1]);
+        request.setYear(date[2]);
+        request.setHour(hour[0]);
+        request.setMin(hour[1]);
+        request.setLat(user.getCoordLat());
+        request.setLon(user.getCoordLong());
+        request.setTzone(5.5);
+        return request;
     }
 }

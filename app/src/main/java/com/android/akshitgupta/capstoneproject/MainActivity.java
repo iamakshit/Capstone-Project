@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.android.akshitgupta.capstoneproject.dailyprediction.DailyPredictionActivity;
 import com.android.akshitgupta.capstoneproject.data.UserContract;
 import com.android.akshitgupta.capstoneproject.numerology.NumerologyDescriptionActivity;
 import com.android.akshitgupta.capstoneproject.object.UserProfile;
@@ -108,6 +109,9 @@ public class MainActivity extends AppCompatActivity
 
 
         if (id == R.id.daily_pred) {
+            Intent intent = new Intent(MainActivity.this, DailyPredictionActivity.class);
+            intent.putExtra("userProfile", userProfile);
+            startActivity(intent);
 
         } else if (id == R.id.num_report) {
 
