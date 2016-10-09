@@ -107,9 +107,9 @@ public class MainActivity extends AppCompatActivity
 
 
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.daily_pred) {
 
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.num_report) {
 
 
         } else if (id == R.id.fav_lord) {
