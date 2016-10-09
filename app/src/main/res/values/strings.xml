@@ -15,6 +15,7 @@
     <string name="saveText">Save And Continue</string>
     <string name="male">Male</string>
     <string name="female">Female</string>
+    <string name="title_activity_numerology_description">NumerologyDescriptionActivity</string>
 
 
 </resources>
