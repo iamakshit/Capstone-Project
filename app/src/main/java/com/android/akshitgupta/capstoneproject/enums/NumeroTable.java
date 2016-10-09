@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 public enum NumeroTable {
     NAME("name", "Name"),
-    DATE("date", "Date"),
+    DATE("date", "Date Of Birth"),
     DESTINY_NUMBER("destiny_number", "Destiny Number"),
     RADICAL_NUMBER("radical_number", "Radical Number"),
     NAME_NUMBER("name_number", "Name Number"),

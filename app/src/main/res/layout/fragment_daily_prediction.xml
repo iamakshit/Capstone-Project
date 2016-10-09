@@ -29,7 +29,8 @@
                 android:layout_margin="@dimen/cardview_compat_inset_shadow"
                 android:padding="@dimen/cardview_compat_inset_shadow"
                 android:id="@+id/daily_title"
-                android:textSize="24sp" />
+                android:textSize="21sp"
+                android:textStyle="normal|bold" />
 
             <TextView
                 android:layout_width="match_parent"

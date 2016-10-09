@@ -18,6 +18,7 @@
     <string name="title_activity_daily_prediction">TODAY\'S PERSONALIZED PREDICTION</string>
     <string name="title_activity_numero_table">PERSONALIZED NUMEROLOGY REPORTS</string>
     <string name="delete_success_msg">Successfully deleted the item</string>
+    <string name="about_us">About Us</string>
 
 
 </resources>
