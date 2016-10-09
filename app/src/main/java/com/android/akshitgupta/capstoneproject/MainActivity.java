@@ -21,6 +21,7 @@ import android.widget.TextView;
 import com.android.akshitgupta.capstoneproject.dailyprediction.DailyPredictionActivity;
 import com.android.akshitgupta.capstoneproject.data.UserContract;
 import com.android.akshitgupta.capstoneproject.numerology.NumerologyDescriptionActivity;
+import com.android.akshitgupta.capstoneproject.numerology.table.NumeroTableActivity;
 import com.android.akshitgupta.capstoneproject.object.UserProfile;
 import com.android.akshitgupta.capstoneproject.enums.Numerology;
 
@@ -114,6 +115,10 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
 
         } else if (id == R.id.num_report) {
+            Intent intent = new Intent(MainActivity.this, NumeroTableActivity.class);
+            intent.putExtra("userProfile", userProfile);
+            intent.putExtra("astroURL", Numerology.GENERAL_STATS.getCode());
+            startActivity(intent);
 
 
         } else if (id == R.id.fav_lord) {

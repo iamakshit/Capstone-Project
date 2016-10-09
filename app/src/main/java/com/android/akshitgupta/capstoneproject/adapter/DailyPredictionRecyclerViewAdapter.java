@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.android.akshitgupta.capstoneproject.R;
-import com.android.akshitgupta.capstoneproject.object.DailyPrediction;
+import com.android.akshitgupta.capstoneproject.object.NumeroPrediction;
 
 import java.util.List;
 
@@ -20,13 +20,13 @@ import java.util.List;
 
 public class DailyPredictionRecyclerViewAdapter extends RecyclerView.Adapter<DailyPredictionRecyclerViewAdapter.MyViewHolder> {
 
-    private List<DailyPrediction> dailyPredictions;
+    private List<NumeroPrediction> numeroPredictions;
     private Context context;
     private DailyPredictionRecyclerViewAdapter adapter;
     private SharedPreferences prefs;
 
-    public DailyPredictionRecyclerViewAdapter(List<DailyPrediction> dailyPredictions, Context context) {
-        this.dailyPredictions = dailyPredictions;
+    public DailyPredictionRecyclerViewAdapter(List<NumeroPrediction> numeroPredictions, Context context) {
+        this.numeroPredictions = numeroPredictions;
         this.context = context;
         this.adapter = this;
         this.prefs = PreferenceManager.getDefaultSharedPreferences(context);
@@ -42,15 +42,15 @@ public class DailyPredictionRecyclerViewAdapter extends RecyclerView.Adapter<Dai
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-        final DailyPrediction dailyPrediction = dailyPredictions.get(position);
-        holder.dailyTitleView.setText(dailyPrediction.getTitle());
-        holder.dailyDescriptionView.setText(dailyPrediction.getDescription());
+        final NumeroPrediction numeroPrediction = numeroPredictions.get(position);
+        holder.dailyTitleView.setText(numeroPrediction.getTitle());
+        holder.dailyDescriptionView.setText(numeroPrediction.getDescription());
 
     }
 
     @Override
     public int getItemCount() {
-        return dailyPredictions.size();
+        return numeroPredictions.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {

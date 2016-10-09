@@ -87,6 +87,7 @@ public class VedicNumeroTask extends AsyncTask<AstroRequest, Void, NumeroRespons
           //  Log.i(TAG, "JsonStr = " + jsonStr);
             if (GENERAL_STATS.getCode().equals(astroRequest.getAstroURL())) {
                 NumeroBasicDetailsResponse numeroBasicDetailsResponse = new NumeroBasicDetailsResponse();
+                numeroBasicDetailsResponse = AstroUtils.getNumeroBasicDetailsResponse(jsonStr);
                 return numeroBasicDetailsResponse;
             }
             response = AstroUtils.getNumeroResponse(jsonStr);

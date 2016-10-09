@@ -159,4 +159,27 @@ public class NumeroBasicDetailsResponse extends NumeroResponse {
     public void setRadicalRuler(String radicalRuler) {
         this.radicalRuler = radicalRuler;
     }
+
+    @Override
+    public String toString() {
+        return "NumeroBasicDetailsResponse{" +
+                "name='" + name + '\'' +
+                ", date='" + date + '\'' +
+                ", destinyNumber='" + destinyNumber + '\'' +
+                ", radicalNumber='" + radicalNumber + '\'' +
+                ", nameNumber='" + nameNumber + '\'' +
+                ", evilNumber='" + evilNumber + '\'' +
+                ", favColor='" + favColor + '\'' +
+                ", favDay='" + favDay + '\'' +
+                ", favGod='" + favGod + '\'' +
+                ", favMantra='" + favMantra + '\'' +
+                ", favMetal='" + favMetal + '\'' +
+                ", favStone='" + favStone + '\'' +
+                ", favSubStone='" + favSubStone + '\'' +
+                ", friendlyNum='" + friendlyNum + '\'' +
+                ", neutralNum='" + neutralNum + '\'' +
+                ", radicalNum='" + radicalNum + '\'' +
+                ", radicalRuler='" + radicalRuler + '\'' +
+                '}';
+    }
 }

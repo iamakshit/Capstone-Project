@@ -6,9 +6,20 @@ import java.io.Serializable;
  * Created by akshitgupta on 09/10/16.
  */
 
-public class DailyPrediction implements Serializable {
+public class NumeroPrediction implements Serializable {
     String title;
     String description;
+
+    public NumeroPrediction()
+    {
+
+    }
+
+    public NumeroPrediction(String title,String description)
+    {
+        this.title=title;
+        this.description=description;
+    }
 
     public String getTitle() {
         return title;

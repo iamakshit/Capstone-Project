@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 
 import com.android.akshitgupta.capstoneproject.R;
 import com.android.akshitgupta.capstoneproject.adapter.DailyPredictionRecyclerViewAdapter;
-import com.android.akshitgupta.capstoneproject.object.DailyPrediction;
+import com.android.akshitgupta.capstoneproject.object.NumeroPrediction;
 
 import java.util.List;
 
@@ -29,14 +29,14 @@ public class DailyPredictionActivityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         DailyPredictionActivity dailyPredictionActivity = (DailyPredictionActivity) getActivity();
-        List<DailyPrediction> dailyPredictions = dailyPredictionActivity.getDailyPredictionList();
-        Log.i(TAG,"dailyPredictionList size ="+dailyPredictions.size());
+        List<NumeroPrediction> numeroPredictions = dailyPredictionActivity.getNumeroPredictionList();
+        Log.i(TAG,"numeroPredictionList size ="+ numeroPredictions.size());
         View view = inflater.inflate(R.layout.fragment_daily_prediction_list, container, false);
 
         if (view instanceof RecyclerView) {
             RecyclerView recyclerView = (RecyclerView) view;
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-            adapter = new DailyPredictionRecyclerViewAdapter(dailyPredictions,getContext());
+            adapter = new DailyPredictionRecyclerViewAdapter(numeroPredictions,getContext());
             adapter.notifyDataSetChanged();
             recyclerView.setAdapter(adapter);
         }

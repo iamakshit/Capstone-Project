@@ -9,7 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
 import com.android.akshitgupta.capstoneproject.R;
-import com.android.akshitgupta.capstoneproject.object.DailyPrediction;
+import com.android.akshitgupta.capstoneproject.object.NumeroPrediction;
 import com.android.akshitgupta.capstoneproject.object.UserProfile;
 import com.android.akshitgupta.capstoneproject.object.request.AstroRequest;
 import com.android.akshitgupta.capstoneproject.object.response.DailyPredictionResponse;
@@ -23,7 +23,7 @@ import java.util.concurrent.ExecutionException;
 public class DailyPredictionActivity extends AppCompatActivity {
     public static String TAG = DailyPredictionActivity.class.getSimpleName();
 
-    List<DailyPrediction> dailyPredictionList;
+    List<NumeroPrediction> numeroPredictionList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +41,7 @@ public class DailyPredictionActivity extends AppCompatActivity {
     }
 
     public void dailyPrediction(UserProfile.User user) {
-        dailyPredictionList = new ArrayList<>();
+        numeroPredictionList = new ArrayList<>();
         AstroRequest request = AstroUtils.getAstroRequestByUserProfile(user, AstroUtils.DAILY_PREDICTION);
         DailyPredictionResponse response = new DailyPredictionResponse();
         Log.i(TAG, "request =" + request);
@@ -65,34 +65,34 @@ public class DailyPredictionActivity extends AppCompatActivity {
 
         Log.i(TAG, "Response =" + response);
 
-        DailyPrediction health = new DailyPrediction();
+        NumeroPrediction health = new NumeroPrediction();
         health.setDescription(response.getHealth());
         health.setTitle("HEALTH");
-        this.dailyPredictionList.add(health);
-        DailyPrediction emotions = new DailyPrediction();
+        this.numeroPredictionList.add(health);
+        NumeroPrediction emotions = new NumeroPrediction();
         emotions.setDescription(response.getEmotions());
         emotions.setTitle("EMOTION");
-        this.dailyPredictionList.add(emotions);
-        DailyPrediction profession = new DailyPrediction();
+        this.numeroPredictionList.add(emotions);
+        NumeroPrediction profession = new NumeroPrediction();
         profession.setDescription(response.getProfession());
         profession.setTitle("PROFESSION");
-        this.dailyPredictionList.add(profession);
-        DailyPrediction luck = new DailyPrediction();
+        this.numeroPredictionList.add(profession);
+        NumeroPrediction luck = new NumeroPrediction();
         luck.setDescription(response.getLuck());
         luck.setTitle("LUCK");
-        this.dailyPredictionList.add(luck);
-        DailyPrediction travel = new DailyPrediction();
+        this.numeroPredictionList.add(luck);
+        NumeroPrediction travel = new NumeroPrediction();
         travel.setDescription(response.getTravel());
         travel.setTitle("TRAVEL");
-        this.dailyPredictionList.add(travel);
-        DailyPrediction personalLife = new DailyPrediction();
+        this.numeroPredictionList.add(travel);
+        NumeroPrediction personalLife = new NumeroPrediction();
         personalLife.setDescription(response.getPersonalLife());
         personalLife.setTitle("PERSONAL LIFE");
-        this.dailyPredictionList.add(personalLife);
+        this.numeroPredictionList.add(personalLife);
 
     }
 
-    public List<DailyPrediction> getDailyPredictionList() {
-        return this.dailyPredictionList;
+    public List<NumeroPrediction> getNumeroPredictionList() {
+        return this.numeroPredictionList;
     }
 }

@@ -1,5 +1,7 @@
 package com.android.akshitgupta.capstoneproject.utils;
 
+import com.android.akshitgupta.capstoneproject.enums.NumeroTable;
+import com.android.akshitgupta.capstoneproject.object.NumeroPrediction;
 import com.android.akshitgupta.capstoneproject.object.UserProfile;
 import com.android.akshitgupta.capstoneproject.object.request.AstroRequest;
 import com.android.akshitgupta.capstoneproject.object.response.DailyPredictionResponse;
@@ -9,6 +11,9 @@ import com.android.akshitgupta.capstoneproject.object.response.NumeroResponse;
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by akshitgupta on 08/10/16.
@@ -167,5 +172,29 @@ public class AstroUtils {
         request.setLon(user.getCoordLong());
         request.setTzone(5.5);
         return request;
+    }
+
+    public static List<NumeroPrediction> prepareNumeroPredictionFromBasicDetailsResponse(NumeroBasicDetailsResponse response) {
+        List<NumeroPrediction> numeroPredictionList = new ArrayList<>();
+
+        numeroPredictionList.add(new NumeroPrediction(NumeroTable.NAME.getTitle(), response.getName()));
+        numeroPredictionList.add(new NumeroPrediction(NumeroTable.DATE.getTitle(), response.getDate()));
+        numeroPredictionList.add(new NumeroPrediction(NumeroTable.DESTINY_NUMBER.getTitle(), response.getDestinyNumber()));
+        numeroPredictionList.add(new NumeroPrediction(NumeroTable.RADICAL_NUMBER.getTitle(), response.getRadicalNumber()));
+        numeroPredictionList.add(new NumeroPrediction(NumeroTable.NAME_NUMBER.getTitle(), response.getNameNumber()));
+        numeroPredictionList.add(new NumeroPrediction(NumeroTable.EVIL_NUMBER.getTitle(), response.getEvilNumber()));
+        numeroPredictionList.add(new NumeroPrediction(NumeroTable.FAV_COLOR.getTitle(), response.getFavColor()));
+        numeroPredictionList.add(new NumeroPrediction(NumeroTable.FAV_DAY.getTitle(), response.getFavDay()));
+        numeroPredictionList.add(new NumeroPrediction(NumeroTable.FAV_GOD.getTitle(), response.getFavGod()));
+        numeroPredictionList.add(new NumeroPrediction(NumeroTable.FAV_MANTRA.getTitle(), response.getFavMantra()));
+        numeroPredictionList.add(new NumeroPrediction(NumeroTable.FAV_METAL.getTitle(), response.getFavMetal()));
+        numeroPredictionList.add(new NumeroPrediction(NumeroTable.FAV_STONE.getTitle(), response.getFavStone()));
+        numeroPredictionList.add(new NumeroPrediction(NumeroTable.FAV_SUBSTONE.getTitle(), response.getFavSubStone()));
+        numeroPredictionList.add(new NumeroPrediction(NumeroTable.FRIENDLY_NUMBER.getTitle(), response.getFriendlyNum()));
+        numeroPredictionList.add(new NumeroPrediction(NumeroTable.NEUTRAL_NUMER.getTitle(), response.getNeutralNum()));
+        numeroPredictionList.add(new NumeroPrediction(NumeroTable.RADICAL_NUMBER.getTitle(), response.getRadicalNum()));
+        numeroPredictionList.add(new NumeroPrediction(NumeroTable.RADICAL_RULER.getTitle(), response.getRadicalRuler()));
+
+        return numeroPredictionList;
     }
 }
