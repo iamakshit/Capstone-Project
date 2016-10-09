@@ -16,6 +16,11 @@
     <item android:title="Numerology">
         <menu>
             <item
+                android:id="@+id/num_details"
+                android:icon="@drawable/nos"
+                android:title="What Number Says" />
+
+            <item
                 android:id="@+id/fav_time"
                 android:icon="@drawable/time"
                 android:title="Fav Time" />
@@ -33,6 +38,7 @@
                 android:id="@+id/fav_lord"
                 android:icon="@drawable/lord"
                 android:title="Fav Lord" />
+
         </menu>
     </item>
 

@@ -161,6 +161,13 @@ public class MainActivity extends AppCompatActivity
             intent.putExtra("astroURL", Numerology.FAV_TIME.getCode());
             startActivity(intent);
         }
+        else if (id == R.id.num_details) {
+
+            Intent intent = new Intent(MainActivity.this, NumerologyDescriptionActivity.class);
+            intent.putExtra("userProfile", userProfile);
+            intent.putExtra("astroURL", Numerology.NUMBER_DETAILS.getCode());
+            startActivity(intent);
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

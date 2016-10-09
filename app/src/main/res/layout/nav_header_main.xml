@@ -34,17 +34,17 @@
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/nav_header_vertical_spacing"
             android:id="@+id/userName_display"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/navTextColor"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
         <TextView
             android:id="@+id/birthDetails_display"
             android:layout_width="match_parent"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/navTextColor"
             android:layout_height="wrap_content" />
 
         <TextView
-            android:textColor="#FFFFFF"
+            android:textColor="@color/navTextColor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/nav_cityName" />

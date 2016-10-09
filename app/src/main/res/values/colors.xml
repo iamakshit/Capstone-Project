@@ -3,4 +3,6 @@
     <color name="colorPrimary">#FF6006</color>
     <color name="colorPrimaryDark">#FF3806</color>
     <color name="colorAccent">#FF7C06</color>
+    <color name="navTextColor">#FFFFFF</color>
+
 </resources>
