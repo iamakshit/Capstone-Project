@@ -16,6 +16,7 @@
     <string name="male">Male</string>
     <string name="female">Female</string>
     <string name="title_activity_numerology_description">NumerologyDescriptionActivity</string>
+    <string name="title_activity_daily_prediction">DailyPredictionActivity</string>
 
 
 </resources>

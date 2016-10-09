@@ -41,6 +41,10 @@
         <activity
             android:name=".numerology.NumerologyDescriptionActivity"
             android:label="@string/title_activity_numerology_description"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".dailyprediction.DailyPredictionActivity"
+            android:label="@string/title_activity_daily_prediction"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
