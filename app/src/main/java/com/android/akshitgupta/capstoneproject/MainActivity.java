@@ -61,16 +61,20 @@ public class MainActivity extends AppCompatActivity
         View header=navigationView.getHeaderView(0);
         TextView userNameDisplayView = (TextView)header.findViewById(R.id.userName_display);
         TextView birthDetailsView = (TextView)header.findViewById(R.id.birthDetails_display);
+        TextView cityNameView = (TextView)header.findViewById(R.id.nav_cityName);
+
+
         updateNavigationHeader(header);
         userNameDisplayView.setText(userProfile.getUserName());
-        birthDetailsView.setText(userProfile.getDobDate()+" "+userProfile.getDobTIme());
+        cityNameView.setText(userProfile.getCityName());
         ImageView genderProfileView = (ImageView) header.findViewById(R.id.nav_user_image);
-/*
+        birthDetailsView.setText(userProfile.getDobDate()+" "+userProfile.getDobTIme());
+
         if (Gender.MALE.getCode().equals(userProfile.getUserGender())) {
            genderProfileView.setImageResource(R.drawable.male_default);
         } else {
            genderProfileView.setImageResource(R.drawable.female_default);
-        }*/
+        }
         Log.i(TAG,"UserProfile ="+userProfile);
     }
 
