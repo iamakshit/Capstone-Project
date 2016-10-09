@@ -30,7 +30,7 @@ public class DailyPredictionActivityFragment extends Fragment {
                              Bundle savedInstanceState) {
         DailyPredictionActivity dailyPredictionActivity = (DailyPredictionActivity) getActivity();
         List<NumeroPrediction> numeroPredictions = dailyPredictionActivity.getNumeroPredictionList();
-        Log.i(TAG,"numeroPredictionList size ="+ numeroPredictions.size());
+       // Log.i(TAG,"numeroPredictionList size ="+ numeroPredictions.size());
         View view = inflater.inflate(R.layout.fragment_daily_prediction_list, container, false);
 
         if (view instanceof RecyclerView) {

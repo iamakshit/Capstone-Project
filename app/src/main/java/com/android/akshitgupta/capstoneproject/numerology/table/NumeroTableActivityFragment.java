@@ -1,8 +1,7 @@
 package com.android.akshitgupta.capstoneproject.numerology.table;
 
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,9 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.akshitgupta.capstoneproject.R;
-import com.android.akshitgupta.capstoneproject.adapter.DailyPredictionRecyclerViewAdapter;
 import com.android.akshitgupta.capstoneproject.adapter.NumeroTableRecyclerViewAdapter;
-import com.android.akshitgupta.capstoneproject.dailyprediction.DailyPredictionActivity;
 import com.android.akshitgupta.capstoneproject.object.NumeroPrediction;
 
 import java.util.List;
@@ -23,6 +20,7 @@ import java.util.List;
 public class NumeroTableActivityFragment extends Fragment {
 
     NumeroTableRecyclerViewAdapter adapter;
+
     public NumeroTableActivityFragment() {
     }
 
@@ -38,12 +36,11 @@ public class NumeroTableActivityFragment extends Fragment {
         if (view instanceof RecyclerView) {
             RecyclerView recyclerView = (RecyclerView) view;
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-            adapter = new NumeroTableRecyclerViewAdapter(numeroPredictions,getContext());
+            adapter = new NumeroTableRecyclerViewAdapter(numeroPredictions, getContext());
             adapter.notifyDataSetChanged();
             recyclerView.setAdapter(adapter);
-
         }
 
-        return  view;
+        return view;
     }
 }

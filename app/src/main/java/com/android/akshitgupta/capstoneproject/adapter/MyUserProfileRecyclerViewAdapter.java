@@ -56,7 +56,7 @@ public class MyUserProfileRecyclerViewAdapter extends RecyclerView.Adapter<MyUse
             public void onClick(View view) {
                 userList.remove(position);
                 context.getContentResolver().delete(UserContract.UserEntry.CONTENT_URI, UserContract.UserEntry._ID + "=?", new String[]{userProfile.getId().toString()});
-                Toast.makeText(view.getContext(), "Successfully deleted the item", Toast.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(), context.getString(R.string.delete_success_msg), Toast.LENGTH_SHORT).show();
                 adapter.notifyDataSetChanged();
             }
         });

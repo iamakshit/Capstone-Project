@@ -15,8 +15,9 @@
     <string name="male">Male</string>
     <string name="female">Female</string>
     <string name="title_activity_numerology_description">NumerologyDescriptionActivity</string>
-    <string name="title_activity_daily_prediction">DailyPredictionActivity</string>
+    <string name="title_activity_daily_prediction">TODAY'S PERSONALIZED PREDICTION</string>
     <string name="title_activity_numero_table">PERSONALIZED NUMEROLOGY REPORTS</string>
+    <string name="delete_success_msg">Successfully deleted the item</string>
 
 
 </resources>

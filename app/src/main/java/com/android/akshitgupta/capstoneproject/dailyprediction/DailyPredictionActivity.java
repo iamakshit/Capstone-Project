@@ -35,7 +35,6 @@ public class DailyPredictionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_daily_prediction);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("TODAY'S PERSONALIZED PREDICTION");
         setSupportActionBar(toolbar);
 
     }
@@ -63,7 +62,7 @@ public class DailyPredictionActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        Log.i(TAG, "Response =" + response);
+       // Log.i(TAG, "Response =" + response);
 
         NumeroPrediction health = new NumeroPrediction();
         health.setDescription(response.getHealth());
