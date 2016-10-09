@@ -118,10 +118,14 @@ public class AddUserActivity extends AppCompatActivity implements View.OnClickLi
             dobDate.setText(user.getDobDate());
             dobTime.setText(user.getDobTIme());
 
-            if (user.getUserGender().equals(Gender.MALE)) {
+            if (user.getUserGender().equals(Gender.MALE.getCode())) {
                 maleOption.setChecked(true);
+                femaleOption.setChecked(false);
+
             } else {
                 femaleOption.setChecked(true);
+                femaleOption.setChecked(false);
+
             }
         }
     }

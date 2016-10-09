@@ -11,12 +11,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.akshitgupta.capstoneproject.AddUserActivity;
 import com.android.akshitgupta.capstoneproject.R;
 import com.android.akshitgupta.capstoneproject.data.UserContract;
+import com.android.akshitgupta.capstoneproject.enums.Gender;
 import com.android.akshitgupta.capstoneproject.object.User;
 
 import java.util.List;
@@ -49,6 +51,12 @@ public class MyUserProfileRecyclerViewAdapter extends RecyclerView.Adapter<MyUse
         holder.nameView.setText(userProfile.getUserName());
         holder.cityView.setText(userProfile.getCityName());
         holder.dobView.setText(userProfile.getDobDate());
+
+        if (Gender.MALE.getCode().equals(userProfile.getUserGender())) {
+            holder.genderProfileView.setImageResource(R.drawable.male_default);
+        } else {
+            holder.genderProfileView.setImageResource(R.drawable.female_default);
+        }
 
         holder.deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,7 +91,7 @@ public class MyUserProfileRecyclerViewAdapter extends RecyclerView.Adapter<MyUse
                 ((Button) view).setTextColor(Color.BLUE);
                 ((Button) view).setText(R.string.marked_as_default);
 
-                Toast.makeText(view.getContext(), "Successfully marked this "+userProfile.getUserName()+" as default", Toast.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(), "Successfully marked this " + userProfile.getUserName() + " as default", Toast.LENGTH_SHORT).show();
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putString("userDefaultId", userProfile.getId().toString());
                 editor.commit();
@@ -103,6 +111,7 @@ public class MyUserProfileRecyclerViewAdapter extends RecyclerView.Adapter<MyUse
         public TextView nameView, cityView, dobView;
         public ImageButton deleteButton, editButton;
         public Button markDefaultButton;
+        public ImageView genderProfileView;
 
         public MyViewHolder(View view) {
             super(view);
@@ -112,6 +121,7 @@ public class MyUserProfileRecyclerViewAdapter extends RecyclerView.Adapter<MyUse
             deleteButton = (ImageButton) view.findViewById(R.id.delete_button);
             editButton = (ImageButton) view.findViewById(R.id.edit_button);
             markDefaultButton = (Button) view.findViewById(R.id.default_button);
+            genderProfileView = (ImageView) view.findViewById(R.id.gender_profile);
         }
     }
 }

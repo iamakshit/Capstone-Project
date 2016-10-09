@@ -21,10 +21,9 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/female_default"
             android:layout_marginRight="@dimen/activity_vertical_margin"
             android:layout_gravity="center_horizontal"
-            android:id="@+id/imageView2"
+            android:id="@+id/gender_profile"
             android:layout_weight="1"
             android:scaleType="fitCenter" />
 

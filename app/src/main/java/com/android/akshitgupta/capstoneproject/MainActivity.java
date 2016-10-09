@@ -16,10 +16,12 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.akshitgupta.capstoneproject.dailyprediction.DailyPredictionActivity;
 import com.android.akshitgupta.capstoneproject.data.UserContract;
+import com.android.akshitgupta.capstoneproject.enums.Gender;
 import com.android.akshitgupta.capstoneproject.numerology.NumerologyDescriptionActivity;
 import com.android.akshitgupta.capstoneproject.numerology.table.NumeroTableActivity;
 import com.android.akshitgupta.capstoneproject.enums.Numerology;
@@ -59,10 +61,16 @@ public class MainActivity extends AppCompatActivity
         View header=navigationView.getHeaderView(0);
         TextView userNameDisplayView = (TextView)header.findViewById(R.id.userName_display);
         TextView birthDetailsView = (TextView)header.findViewById(R.id.birthDetails_display);
-
         updateNavigationHeader(header);
         userNameDisplayView.setText(userProfile.getUserName());
         birthDetailsView.setText(userProfile.getDobDate()+" "+userProfile.getDobTIme());
+        ImageView genderProfileView = (ImageView) header.findViewById(R.id.nav_user_image);
+/*
+        if (Gender.MALE.getCode().equals(userProfile.getUserGender())) {
+           genderProfileView.setImageResource(R.drawable.male_default);
+        } else {
+           genderProfileView.setImageResource(R.drawable.female_default);
+        }*/
         Log.i(TAG,"UserProfile ="+userProfile);
     }
 
