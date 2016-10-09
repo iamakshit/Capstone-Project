@@ -18,13 +18,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.akshitgupta.capstoneproject.dailyprediction.DailyPredictionActivity;
 import com.android.akshitgupta.capstoneproject.data.UserContract;
 import com.android.akshitgupta.capstoneproject.enums.Gender;
+import com.android.akshitgupta.capstoneproject.enums.Numerology;
 import com.android.akshitgupta.capstoneproject.numerology.NumerologyDescriptionActivity;
 import com.android.akshitgupta.capstoneproject.numerology.table.NumeroTableActivity;
-import com.android.akshitgupta.capstoneproject.enums.Numerology;
 import com.android.akshitgupta.capstoneproject.object.User;
 
 
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity
     public static String TAG = MainActivity.class.getSimpleName();
 
     public User userProfile;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,24 +60,32 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        View header=navigationView.getHeaderView(0);
-        TextView userNameDisplayView = (TextView)header.findViewById(R.id.userName_display);
-        TextView birthDetailsView = (TextView)header.findViewById(R.id.birthDetails_display);
-        TextView cityNameView = (TextView)header.findViewById(R.id.nav_cityName);
+        View header = navigationView.getHeaderView(0);
+        TextView userNameDisplayView = (TextView) header.findViewById(R.id.userName_display);
+        TextView birthDetailsView = (TextView) header.findViewById(R.id.birthDetails_display);
+        TextView cityNameView = (TextView) header.findViewById(R.id.nav_cityName);
 
 
-        updateNavigationHeader(header);
-        userNameDisplayView.setText(userProfile.getUserName());
-        cityNameView.setText(userProfile.getCityName());
-        ImageView genderProfileView = (ImageView) header.findViewById(R.id.nav_user_image);
-        birthDetailsView.setText(userProfile.getDobDate()+" "+userProfile.getDobTIme());
+        updateUserProfile();
 
-        if (Gender.MALE.getCode().equals(userProfile.getUserGender())) {
-           genderProfileView.setImageResource(R.drawable.male_default);
+        // drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_OPEN);
+
+        if (userProfile != null) {
+            userNameDisplayView.setText(userProfile.getUserName());
+            cityNameView.setText(userProfile.getCityName());
+            ImageView genderProfileView = (ImageView) header.findViewById(R.id.nav_user_image);
+            birthDetailsView.setText(userProfile.getDobDate() + " " + userProfile.getDobTIme());
+
+            if (Gender.MALE.getCode().equals(userProfile.getUserGender())) {
+                genderProfileView.setImageResource(R.drawable.male_default);
+            } else {
+                genderProfileView.setImageResource(R.drawable.female_default);
+            }
+            Log.i(TAG, "UserProfile =" + userProfile);
         } else {
-           genderProfileView.setImageResource(R.drawable.female_default);
+            // drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+            noUserPresentToast();
         }
-        Log.i(TAG,"UserProfile ="+userProfile);
     }
 
 
@@ -112,63 +122,66 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
 
-
-
-        if (id == R.id.daily_pred) {
-            Intent intent = new Intent(MainActivity.this, DailyPredictionActivity.class);
-            intent.putExtra("userProfile", userProfile);
-            startActivity(intent);
-
-        } else if (id == R.id.num_report) {
-            Intent intent = new Intent(MainActivity.this, NumeroTableActivity.class);
-            intent.putExtra("userProfile", userProfile);
-            intent.putExtra("astroURL", Numerology.GENERAL_STATS.getCode());
-            startActivity(intent);
-
-
-        } else if (id == R.id.fav_lord) {
-
-            Intent intent = new Intent(MainActivity.this, NumerologyDescriptionActivity.class);
-            intent.putExtra("userProfile", userProfile);
-            intent.putExtra("astroURL", Numerology.FAV_LORD.getCode());
-            startActivity(intent);
-
-        } else if (id == R.id.fav_vastu) {
-
-            Intent intent = new Intent(MainActivity.this, NumerologyDescriptionActivity.class);
-            intent.putExtra("userProfile", userProfile);
-            intent.putExtra("astroURL", Numerology.FAV_VASTU.getCode());
-            startActivity(intent);
-
-        } else if (id == R.id.fav_mantra) {
-
-            Intent intent = new Intent(MainActivity.this, NumerologyDescriptionActivity.class);
-            intent.putExtra("userProfile", userProfile);
-            intent.putExtra("astroURL", Numerology.FAV_MANTRA.getCode());
-            startActivity(intent);
-
-        } else if (id == R.id.fav_time) {
-
-            Intent intent = new Intent(MainActivity.this, NumerologyDescriptionActivity.class);
-            intent.putExtra("userProfile", userProfile);
-            intent.putExtra("astroURL", Numerology.FAV_TIME.getCode());
-            startActivity(intent);
+        updateUserProfile();
+        if (userProfile == null) {
+            noUserPresentToast();
         }
-        else if (id == R.id.num_details) {
+        else {
+            // Handle navigation view item clicks here.
+            int id = item.getItemId();
 
-            Intent intent = new Intent(MainActivity.this, NumerologyDescriptionActivity.class);
-            intent.putExtra("userProfile", userProfile);
-            intent.putExtra("astroURL", Numerology.NUMBER_DETAILS.getCode());
-            startActivity(intent);
+
+            if (id == R.id.daily_pred) {
+                Intent intent = new Intent(MainActivity.this, DailyPredictionActivity.class);
+                intent.putExtra("userProfile", userProfile);
+                startActivity(intent);
+
+            } else if (id == R.id.num_report) {
+                Intent intent = new Intent(MainActivity.this, NumeroTableActivity.class);
+                intent.putExtra("userProfile", userProfile);
+                intent.putExtra("astroURL", Numerology.GENERAL_STATS.getCode());
+                startActivity(intent);
+
+
+            } else if (id == R.id.fav_lord) {
+
+                Intent intent = new Intent(MainActivity.this, NumerologyDescriptionActivity.class);
+                intent.putExtra("userProfile", userProfile);
+                intent.putExtra("astroURL", Numerology.FAV_LORD.getCode());
+                startActivity(intent);
+
+            } else if (id == R.id.fav_vastu) {
+
+                Intent intent = new Intent(MainActivity.this, NumerologyDescriptionActivity.class);
+                intent.putExtra("userProfile", userProfile);
+                intent.putExtra("astroURL", Numerology.FAV_VASTU.getCode());
+                startActivity(intent);
+
+            } else if (id == R.id.fav_mantra) {
+
+                Intent intent = new Intent(MainActivity.this, NumerologyDescriptionActivity.class);
+                intent.putExtra("userProfile", userProfile);
+                intent.putExtra("astroURL", Numerology.FAV_MANTRA.getCode());
+                startActivity(intent);
+
+            } else if (id == R.id.fav_time) {
+
+                Intent intent = new Intent(MainActivity.this, NumerologyDescriptionActivity.class);
+                intent.putExtra("userProfile", userProfile);
+                intent.putExtra("astroURL", Numerology.FAV_TIME.getCode());
+                startActivity(intent);
+            } else if (id == R.id.num_details) {
+
+                Intent intent = new Intent(MainActivity.this, NumerologyDescriptionActivity.class);
+                intent.putExtra("userProfile", userProfile);
+                intent.putExtra("astroURL", Numerology.NUMBER_DETAILS.getCode());
+                startActivity(intent);
+            }
         }
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
@@ -185,10 +198,9 @@ public class MainActivity extends AppCompatActivity
         startActivity(getIntent());
     }
 
-    public void updateNavigationHeader(View header)
-    {
+    public void updateUserProfile() {
 
-        SharedPreferences prefs= PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         String defaultUserId = prefs.getString("userDefaultId", "1");
 
         Cursor userCursor = getApplicationContext().getContentResolver().query(
@@ -197,7 +209,7 @@ public class MainActivity extends AppCompatActivity
                         UserContract.UserEntry.COLUMN_USER_DOB_DATE, UserContract.UserEntry.COLUMN_USER_DOB_TIME, UserContract.UserEntry.COLUMN_CITY_NAME,
                         UserContract.UserEntry.COLUMN_COORD_LAT, UserContract.UserEntry.COLUMN_COORD_LONG}, UserContract.UserEntry._ID + "=?", new String[]{defaultUserId.toString()}, null);
 
-        if (userCursor.moveToFirst()){
+        if (userCursor.moveToFirst()) {
             String userName = userCursor.getString(userCursor.getColumnIndex(UserContract.UserEntry.COLUMN_USER_NAME));
             String userGender = userCursor.getString(userCursor.getColumnIndex(UserContract.UserEntry.COLUMN_USER_GENDER));
             String userDobDate = userCursor.getString(userCursor.getColumnIndex(UserContract.UserEntry.COLUMN_USER_DOB_DATE));
@@ -205,12 +217,15 @@ public class MainActivity extends AppCompatActivity
             String userCity = userCursor.getString(userCursor.getColumnIndex(UserContract.UserEntry.COLUMN_CITY_NAME));
             Integer id = userCursor.getInt(userCursor.getColumnIndex(UserContract.UserEntry._ID));
             String coordLat = userCursor.getString(userCursor.getColumnIndex(UserContract.UserEntry.COLUMN_COORD_LAT));
-            String coordLong =     userCursor.getString(userCursor.getColumnIndex(UserContract.UserEntry.COLUMN_COORD_LONG));
-            this.userProfile = new User( id,  userName,  userGender,  userDobDate,  userDobTime,  null,  userCity,  coordLat,  coordLong);
+            String coordLong = userCursor.getString(userCursor.getColumnIndex(UserContract.UserEntry.COLUMN_COORD_LONG));
+            this.userProfile = new User(id, userName, userGender, userDobDate, userDobTime, null, userCity, coordLat, coordLong);
 
-            }
-        userCursor.close();
         }
-
+        userCursor.close();
     }
+
+    public void noUserPresentToast() {
+        Toast.makeText(getApplicationContext(), getString(R.string.no_user_present), Toast.LENGTH_SHORT).show();
+    }
+}
 

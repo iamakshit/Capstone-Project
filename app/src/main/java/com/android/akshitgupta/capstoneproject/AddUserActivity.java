@@ -7,11 +7,13 @@ import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
@@ -273,7 +275,6 @@ public class AddUserActivity extends AppCompatActivity implements View.OnClickLi
             userValues.put(UserContract.UserEntry.COLUMN_CITY_NAME, user.getCityName());
             userValues.put(UserContract.UserEntry.COLUMN_COORD_LAT, user.getCoordLat());
             userValues.put(UserContract.UserEntry.COLUMN_COORD_LONG, user.getCoordLong());
-            Log.i(LOG_TAG, "Id =" + id);
             // Finally, insert location data into the database.
             Uri insertedUri = getApplicationContext().getContentResolver().insert(
                     UserContract.UserEntry.CONTENT_URI,
@@ -282,8 +283,7 @@ public class AddUserActivity extends AppCompatActivity implements View.OnClickLi
 
             // The resulting URI contains the ID for the row.  Extract the locationId from the Uri.
             Long userId = ContentUris.parseId(insertedUri);
-            Log.i(LOG_TAG, "Inserted user with id = " + userId + "  Id" + id);
-
+            id=userId.intValue();
         } else {
             ContentValues userValues = new ContentValues();
             userValues.put(UserContract.UserEntry._ID, id);
@@ -301,6 +301,10 @@ public class AddUserActivity extends AppCompatActivity implements View.OnClickLi
             Log.i(LOG_TAG, "Updated user with id = " + id + "  Id" + id);
 
         }
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("userDefaultId", id.toString());
+        editor.commit();
     }
 
 }

@@ -19,6 +19,7 @@
     <string name="title_activity_numero_table">PERSONALIZED NUMEROLOGY REPORTS</string>
     <string name="delete_success_msg">Successfully deleted the item</string>
     <string name="about_us">About Us</string>
+    <string name="no_user_present">Uh oh ! No User Profile is added. Quickly add one</string>
 
 
 </resources>
