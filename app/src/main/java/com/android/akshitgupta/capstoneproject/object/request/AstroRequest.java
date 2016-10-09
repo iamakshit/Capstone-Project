@@ -7,23 +7,79 @@ import java.io.Serializable;
  */
 public class AstroRequest implements Serializable {
 
-    Integer day;
-    Integer month;
-    Integer year;
-    Integer hour;
-    Integer min;
-    Double lat;
-    Double lon;
+    String day;
+    String month;
+    String year;
+    String hour;
+    String min;
+    String lat;
+    String lon;
     Double tzone;
     String name;
     String astroURL;
 
-    public String getAstroURL() {
-        return astroURL;
+    public String getDay() {
+        return day;
     }
 
-    public void setAstroURL(String astroURL) {
-        this.astroURL = astroURL;
+    public void setDay(String day) {
+        this.day = day;
+    }
+
+    public String getMonth() {
+        return month;
+    }
+
+    public void setMonth(String month) {
+        this.month = month;
+    }
+
+    public String getYear() {
+        return year;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
+    }
+
+    public String getHour() {
+        return hour;
+    }
+
+    public void setHour(String hour) {
+        this.hour = hour;
+    }
+
+    public String getMin() {
+        return min;
+    }
+
+    public void setMin(String min) {
+        this.min = min;
+    }
+
+    public String getLat() {
+        return lat;
+    }
+
+    public void setLat(String lat) {
+        this.lat = lat;
+    }
+
+    public String getLon() {
+        return lon;
+    }
+
+    public void setLon(String lon) {
+        this.lon = lon;
+    }
+
+    public Double getTzone() {
+        return tzone;
+    }
+
+    public void setTzone(Double tzone) {
+        this.tzone = tzone;
     }
 
     public String getName() {
@@ -34,67 +90,11 @@ public class AstroRequest implements Serializable {
         this.name = name;
     }
 
-    public Integer getDay() {
-        return day;
+    public String getAstroURL() {
+        return astroURL;
     }
 
-    public void setDay(Integer day) {
-        this.day = day;
-    }
-
-    public Integer getMonth() {
-        return month;
-    }
-
-    public void setMonth(Integer month) {
-        this.month = month;
-    }
-
-    public Integer getYear() {
-        return year;
-    }
-
-    public void setYear(Integer year) {
-        this.year = year;
-    }
-
-    public Integer getHour() {
-        return hour;
-    }
-
-    public void setHour(Integer hour) {
-        this.hour = hour;
-    }
-
-    public Integer getMin() {
-        return min;
-    }
-
-    public void setMin(Integer min) {
-        this.min = min;
-    }
-
-    public Double getLat() {
-        return lat;
-    }
-
-    public void setLat(Double lat) {
-        this.lat = lat;
-    }
-
-    public Double getLon() {
-        return lon;
-    }
-
-    public void setLon(Double lon) {
-        this.lon = lon;
-    }
-
-    public Double getTzone() {
-        return tzone;
-    }
-
-    public void setTzone(Double tzone) {
-        this.tzone = tzone;
+    public void setAstroURL(String astroURL) {
+        this.astroURL = astroURL;
     }
 }

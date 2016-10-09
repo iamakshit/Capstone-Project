@@ -3,8 +3,6 @@ package com.android.akshitgupta.capstoneproject;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
@@ -21,13 +19,10 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.android.akshitgupta.capstoneproject.data.UserContract;
+import com.android.akshitgupta.capstoneproject.numerology.NumerologyDescriptionActivity;
 import com.android.akshitgupta.capstoneproject.object.UserProfile;
-import com.android.akshitgupta.capstoneproject.object.request.AstroRequest;
-import com.android.akshitgupta.capstoneproject.object.response.DailyPredictionResponse;
-import com.android.akshitgupta.capstoneproject.task.VedicDailyPredictionTask;
-import com.android.akshitgupta.capstoneproject.utils.AstroUtils;
+import com.android.akshitgupta.capstoneproject.utils.Numerology;
 
-import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, UserProfileFragment.OnListFragmentInteractionListener {
@@ -45,43 +40,6 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
-                /*****************************************************************************************/
-
-                AstroRequest request= new AstroRequest();
-                request.setAstroURL(AstroUtils.DAILY_PREDICTION);
-                request.setName("Akshit Gupta");
-                request.setDay(27);
-                request.setMonth(2);
-                request.setYear(1992);
-                request.setHour(10);
-                request.setMin(54);
-                request.setLat(19.4334);
-                request.setLon(72.2342);
-                request.setTzone(5.5);
-                DailyPredictionResponse response = new DailyPredictionResponse();
-
-
-                VedicDailyPredictionTask    task;
-                task = new VedicDailyPredictionTask();
-                int maximumPoolSize = 80;
-
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
-                    task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,request);
-                else
-                    task.execute(request);
-
-                try {
-                    response= task.get();
-                    Log.i(TAG,"Response ="+response);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                }
-
-                /*****************************************************************************************/
 
                 Intent intent = new Intent(MainActivity.this, AddUserActivity.class);
                 startActivity(intent);
@@ -147,18 +105,40 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+
+
         if (id == R.id.nav_camera) {
-            // Handle the camera action
+
         } else if (id == R.id.nav_gallery) {
 
-        } else if (id == R.id.nav_slideshow) {
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.fav_lord) {
 
-        } else if (id == R.id.nav_share) {
+            Intent intent = new Intent(MainActivity.this, NumerologyDescriptionActivity.class);
+            intent.putExtra("userProfile", userProfile);
+            intent.putExtra("astroURL", Numerology.FAV_LORD.getCode());
+            startActivity(intent);
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.fav_vastu) {
 
+            Intent intent = new Intent(MainActivity.this, NumerologyDescriptionActivity.class);
+            intent.putExtra("userProfile", userProfile);
+            intent.putExtra("astroURL", Numerology.FAV_VASTU.getCode());
+            startActivity(intent);
+
+        } else if (id == R.id.fav_mantra) {
+
+            Intent intent = new Intent(MainActivity.this, NumerologyDescriptionActivity.class);
+            intent.putExtra("userProfile", userProfile);
+            intent.putExtra("astroURL", Numerology.FAV_MANTRA.getCode());
+            startActivity(intent);
+
+        } else if (id == R.id.fav_time) {
+
+            Intent intent = new Intent(MainActivity.this, NumerologyDescriptionActivity.class);
+            intent.putExtra("userProfile", userProfile);
+            intent.putExtra("astroURL", Numerology.FAV_TIME.getCode());
+            startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

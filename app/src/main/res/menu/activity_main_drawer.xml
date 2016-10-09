@@ -23,13 +23,23 @@
     <item android:title="Numerology">
         <menu>
             <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:id="@+id/fav_time"
+                android:icon="@drawable/time"
+                android:title="Fav Time" />
             <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:id="@+id/fav_mantra"
+                android:icon="@drawable/mantra"
+                android:title="Fav Mantra" />
+
+            <item
+                android:id="@+id/fav_vastu"
+                android:icon="@drawable/home"
+                android:title="Fav Mantra" />
+
+            <item
+                android:id="@+id/fav_lord"
+                android:icon="@drawable/lord"
+                android:title="Fav Lord" />
         </menu>
     </item>
 
