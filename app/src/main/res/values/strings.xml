@@ -1,6 +1,5 @@
 <resources>
-    <string name="app_name">Astro Future</string>
-
+    <string name="app_name">ASTRO FUTURE</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="mark_as_default">Mark As Default</string>
@@ -9,7 +8,7 @@
     <string name="dob_time">Time of Birth</string>
     <string name="name">Name</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_add_user">AddUserActivity</string>
+    <string name="title_activity_add_user"> ADD A NEW USER</string>
     <string name="geo_places_tag">GooglePlacesAutocompleteActivity</string>
     <string name="title_activity_geo_places_auto_complete">GeoPlacesAutoCompleteActivity</string>
     <string name="saveText">Save And Continue</string>
@@ -17,7 +16,7 @@
     <string name="female">Female</string>
     <string name="title_activity_numerology_description">NumerologyDescriptionActivity</string>
     <string name="title_activity_daily_prediction">DailyPredictionActivity</string>
-    <string name="title_activity_numero_table">NumeroTableActivity</string>
+    <string name="title_activity_numero_table">PERSONALIZED NUMEROLOGY REPORTS</string>
 
 
 </resources>

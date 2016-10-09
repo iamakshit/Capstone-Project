@@ -25,14 +25,14 @@ public class NumeroTableActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_numero_table);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
         Intent intent = getIntent();
         UserProfile.User userProfile = (UserProfile.User) intent.getSerializableExtra("userProfile");
         String numerologyCode = intent.getStringExtra("astroURL");
         numerology(userProfile, numerologyCode);
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_numero_table);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
 
     }
