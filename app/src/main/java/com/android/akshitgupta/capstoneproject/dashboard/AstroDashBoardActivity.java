@@ -139,6 +139,10 @@ public class AstroDashBoardActivity extends AppCompatActivity implements View.On
         if (favMantraView != null) {
             favMantraView.setBackgroundColor(Color.TRANSPARENT);
         }
+        if(numReportView !=null)
+        {
+            favMantraView.setBackgroundColor(Color.TRANSPARENT);
+        }
     }
 
 }
