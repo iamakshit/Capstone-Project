@@ -90,10 +90,11 @@
         <Button
             android:text="@string/kundli_button_text"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:id="@+id/kundli_button"
             android:background="?android:attr/selectableItemBackground"
-            android:layout_weight=".5" />
+            android:layout_weight=".5"
+            android:elevation="13dp" />
     </LinearLayout>
 
 </LinearLayout>

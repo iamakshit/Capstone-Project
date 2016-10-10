@@ -3,6 +3,7 @@ package com.android.akshitgupta.capstoneproject.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.preference.PreferenceManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -82,11 +83,10 @@ public class MyUserProfileRecyclerViewAdapter extends RecyclerView.Adapter<MyUse
         holder.viewKundliView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                view.setBackgroundColor(Color.LTGRAY);
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putString("userDefaultId", userProfile.getId().toString());
                 editor.commit();
-                notifyDataSetChanged();
                 Intent intent = new Intent(context, AstroDashBoardActivity.class);
                 intent.putExtra("userProfile", userProfile);
                 context.startActivity(intent);
