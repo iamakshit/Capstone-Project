@@ -20,6 +20,10 @@
     <string name="delete_success_msg">Successfully deleted the item</string>
     <string name="about_us">About Us</string>
     <string name="no_user_present">Uh oh ! No User Profile is added. Quickly add one</string>
+    <string name="intro_button_desc">Click on this button to add profile and proceed...</string>
+    <string name="intro_button_title">Hey There !!</string>
+
+    C
 
 
 </resources>

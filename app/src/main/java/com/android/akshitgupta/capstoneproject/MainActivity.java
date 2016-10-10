@@ -60,10 +60,10 @@ public class MainActivity extends AppCompatActivity
         animation.setInterpolator(new BounceInterpolator());
 
         ToolTip toolTip = new ToolTip()
-                .setTitle("Next Button")
-                .setDescription("Click on Next bu tton to proceed...")
-                .setTextColor(Color.parseColor("#bdc3c7"))
-                .setBackgroundColor(Color.parseColor("#e74c3c"))
+                .setTitle(getString(R.string.intro_button_title))
+                .setDescription(getString(R.string.intro_button_desc))
+                .setTextColor((getColor(R.color.introButtonTextColor)))
+                .setBackgroundColor(getColor(R.color.colorPrimaryDark))
                 .setShadow(true)
                 .setGravity(Gravity.TOP | Gravity.LEFT)
                 .setEnterAnimation(animation);
