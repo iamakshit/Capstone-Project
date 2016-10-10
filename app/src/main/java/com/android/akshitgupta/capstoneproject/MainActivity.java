@@ -3,7 +3,6 @@ package com.android.akshitgupta.capstoneproject;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
@@ -45,33 +44,18 @@ public class MainActivity extends AppCompatActivity
 
     public User userProfile;
     public TourGuide mTourGuideHandler;
+    SharedPreferences prefs = null;
+    FloatingActionButton fab;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-
-        Animation animation = new TranslateAnimation(0f, 0f, 200f, 0f);
-        animation.setDuration(1000);
-        animation.setFillAfter(true);
-        animation.setInterpolator(new BounceInterpolator());
-
-        ToolTip toolTip = new ToolTip()
-                .setTitle(getString(R.string.intro_button_title))
-                .setDescription(getString(R.string.intro_button_desc))
-                .setTextColor((getColor(R.color.introButtonTextColor)))
-                .setBackgroundColor(getColor(R.color.colorPrimaryDark))
-                .setShadow(true)
-                .setGravity(Gravity.TOP | Gravity.LEFT)
-                .setEnterAnimation(animation);
-        mTourGuideHandler = TourGuide.init(this).with(TourGuide.Technique.Click)
-                .setPointer(new Pointer())
-                .setToolTip(toolTip)
-                .setOverlay(new Overlay())
-                .playOn(fab);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,7 +78,6 @@ public class MainActivity extends AppCompatActivity
         TextView userNameDisplayView = (TextView) header.findViewById(R.id.userName_display);
         TextView birthDetailsView = (TextView) header.findViewById(R.id.birthDetails_display);
         TextView cityNameView = (TextView) header.findViewById(R.id.nav_cityName);
-
 
         updateUserProfile();
 
@@ -156,8 +139,7 @@ public class MainActivity extends AppCompatActivity
         updateUserProfile();
         if (userProfile == null) {
             noUserPresentToast();
-        }
-        else {
+        } else {
             // Handle navigation view item clicks here.
             int id = item.getItemId();
 
@@ -253,6 +235,35 @@ public class MainActivity extends AppCompatActivity
 
     public void noUserPresentToast() {
         Toast.makeText(getApplicationContext(), getString(R.string.no_user_present), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (prefs.getBoolean("firstrun", true)) {
+
+            Animation animation = new TranslateAnimation(0f, 0f, 200f, 0f);
+            animation.setDuration(1000);
+            animation.setFillAfter(true);
+            animation.setInterpolator(new BounceInterpolator());
+
+
+            ToolTip toolTip = new ToolTip()
+                    .setTitle(getString(R.string.intro_button_title))
+                    .setDescription(getString(R.string.intro_button_desc))
+                    .setTextColor((getColor(R.color.introButtonTextColor)))
+                    .setBackgroundColor(getColor(R.color.colorPrimaryDark))
+                    .setShadow(true)
+                    .setGravity(Gravity.TOP | Gravity.LEFT)
+                    .setEnterAnimation(animation);
+            mTourGuideHandler = TourGuide.init(this).with(TourGuide.Technique.Click)
+                    .setPointer(new Pointer())
+                    .setToolTip(toolTip)
+                    .setOverlay(new Overlay())
+                    .playOn(fab);
+
+            prefs.edit().putBoolean("firstrun", false).commit();
+        }
     }
 }
 
