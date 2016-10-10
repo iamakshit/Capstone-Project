@@ -138,12 +138,12 @@ public class AddUserActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void setOnClickListeners() {
-        dobDate.setOnClickListener((View.OnClickListener) this);
-        dobTime.setOnClickListener((View.OnClickListener) this);
-        saveButton.setOnClickListener((View.OnClickListener) this);
-        maleOption.setOnClickListener((View.OnClickListener) this);
-        femaleOption.setOnClickListener((View.OnClickListener) this);
-        name.setOnClickListener((View.OnClickListener) this);
+        dobDate.setOnClickListener(this);
+        dobTime.setOnClickListener(this);
+        saveButton.setOnClickListener(this);
+        maleOption.setOnClickListener(this);
+        femaleOption.setOnClickListener(this);
+        name.setOnClickListener(this);
 
         autoCompView.setAdapter(new GooglePlacesAutocompleteAdapter(this, R.layout.list_item));
         autoCompView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -256,7 +256,7 @@ public class AddUserActivity extends AppCompatActivity implements View.OnClickLi
             user.setCoordLat(geoPlaceDetails.getLatitude());
             user.setCoordLong(geoPlaceDetails.getLongitude());
             user.setCityName(location);
-            Log.i(LOG_TAG, "Save Button User =" + user);
+           // Log.i(LOG_TAG, "Save Button User =" + user);
 
             addUser(user);
             Toast.makeText(getApplicationContext(), getString(R.string.user_profile_success), Toast.LENGTH_SHORT).show();
@@ -309,7 +309,7 @@ public class AddUserActivity extends AppCompatActivity implements View.OnClickLi
             // Uri uri = ContentUris.withAppendedId(Words.CONTENT_URI, id);
             String[] args = {String.valueOf(id)};
             getApplicationContext().getContentResolver().update(UserContract.UserEntry.CONTENT_URI, userValues, UserContract.UserEntry._ID + "=?", args);
-            Log.i(LOG_TAG, "Updated user with id = " + id + "  Id" + id);
+           // Log.i(LOG_TAG, "Updated user with id = " + id + "  Id" + id);
 
         }
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());

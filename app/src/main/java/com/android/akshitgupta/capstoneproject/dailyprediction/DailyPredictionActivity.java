@@ -43,7 +43,7 @@ public class DailyPredictionActivity extends AppCompatActivity {
         numeroPredictionList = new ArrayList<>();
         AstroRequest request = AstroUtils.getAstroRequestByUserProfile(user, AstroUtils.DAILY_PREDICTION);
         DailyPredictionResponse response = new DailyPredictionResponse();
-        Log.i(TAG, "request =" + request);
+       // Log.i(TAG, "request =" + request);
 
         VedicDailyPredictionTask task;
         task = new VedicDailyPredictionTask();
@@ -55,7 +55,7 @@ public class DailyPredictionActivity extends AppCompatActivity {
 
         try {
             response = task.get();
-            Log.i(TAG, "Response =" + response);
+         //   Log.i(TAG, "Response =" + response);
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {

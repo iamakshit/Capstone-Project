@@ -39,7 +39,7 @@ public class GeoPlacesAutoCompleteTask extends AsyncTask<String, Void, ArrayList
         HttpURLConnection urlConnection = null;
         BufferedReader reader = null;
         String jsonStr = null;
-        Log.i(LOG_TAG, "Starting ...");
+       // Log.i(LOG_TAG, "Starting ...");
 
         StringBuilder baseURL = new StringBuilder();
         baseURL.append(ConstantUtils.PLACES_API_BASE).append(ConstantUtils.TYPE_AUTOCOMPLETE).append(ConstantUtils.OUT_JSON);

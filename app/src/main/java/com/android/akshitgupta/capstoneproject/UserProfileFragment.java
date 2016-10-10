@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserProfileFragment extends Fragment {
+    public static String TAG = UserProfileFragment.class.getSimpleName();
 
     private static final String ARG_COLUMN_COUNT = "column-count";
     private int mColumnCount = 1;
@@ -40,7 +41,7 @@ public class UserProfileFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.i("UserProfileFragment","Inside onCreate method");
+        //Log.i(TAG,"Inside onCreate method");
 
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
@@ -50,11 +51,11 @@ public class UserProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Log.i("UserProfileFragment","Inside onCreateView");
+      //  Log.i(TAG,"Inside onCreateView");
         View view = inflater.inflate(R.layout.fragment_userprofile_list, container, false);
         // Set the adapter
         if (view instanceof RecyclerView) {
-            Log.i("UserProfileFragment","Inside recylerview");
+          //  Log.i("UserProfileFragment","Inside recylerview");
             Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;
             if (mColumnCount <= 1) {
@@ -70,7 +71,7 @@ public class UserProfileFragment extends Fragment {
                             UserContract.UserEntry.COLUMN_USER_DOB_DATE, UserContract.UserEntry.COLUMN_USER_DOB_TIME, UserContract.UserEntry.COLUMN_CITY_NAME
                     }, null, null, null);
 
-            Log.i("UserProfileFragment","userCursor  = "+userCursor.getCount());
+            Log.i(TAG,"userCursor  = "+userCursor.getCount());
             List<User> userList= new ArrayList<>();
             if (userCursor.moveToFirst()){
                 do{

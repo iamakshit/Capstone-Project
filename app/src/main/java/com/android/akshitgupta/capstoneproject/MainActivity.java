@@ -235,7 +235,10 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void noUserPresentToast() {
-        Toast.makeText(getApplicationContext(), getString(R.string.no_user_present), Toast.LENGTH_SHORT).show();
+        Toast toast = Toast.makeText(getApplicationContext(), getString(R.string.no_user_present), Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0);
+        toast.show();
+
     }
 
     @Override

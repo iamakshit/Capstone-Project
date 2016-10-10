@@ -13,7 +13,7 @@
 
     </group>
 
-    <item android:title="Numerology">
+    <item android:title="@string/nav_drawer_subtitle">
         <menu>
             <item
                 android:id="@+id/num_details"

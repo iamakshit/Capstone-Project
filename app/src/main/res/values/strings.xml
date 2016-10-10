@@ -2,7 +2,6 @@
     <string name="app_name">ASTRO FUTURE</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="mark_as_default">Mark As Default</string>
     <string name="dob_date">Date of Birth</string>
     <string name="dob_time">Time of Birth</string>
     <string name="name">Name</string>
@@ -29,7 +28,7 @@
     <string name="time_empty_error">Time of birth is mandatory</string>
     <string name="gender_empty_error">Gender options has to be selected</string>
     <string name="empty_place_error">Place of birth is mandatory</string>
-    <string name="title_activity_astro_dash_board">AstroDashBoardActivity</string>
+    <string name="title_activity_astro_dash_board">KUNDLI DASHBOARD</string>
 
 
     <string name="num_details_text">What Number Says</string>
@@ -41,9 +40,11 @@
     <string name="num_report_text">Numero Report</string>
     <string name="name_hint">Name</string>
     <string name="place_of_birth_hint">Please enter your place of birth</string>
-    <string name="dob_hint">Date (dd-MM-YYYY</string>
+    <string name="dob_hint">Date (dd-mm-yyyy)</string>
     <string name="dob_time_hint">Time (hh:mm)</string>
     <string name="add_user_toast">Enter the birth related details</string>
 
-
+    <string name="nav_drawer_subtitle">Numerology</string>
+    <string name="default_string">TextView</string>
+    <string name="kundli_button_text">View Kindli</string>
 </resources>

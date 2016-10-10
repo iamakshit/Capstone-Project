@@ -50,7 +50,7 @@ public class NumerologyDescriptionActivity extends AppCompatActivity {
 
         try {
             response = task.get();
-            Log.i(TAG, "Response =" + response);
+            //Log.i(TAG, "Response =" + response);
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {

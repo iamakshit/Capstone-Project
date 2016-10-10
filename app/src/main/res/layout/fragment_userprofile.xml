@@ -88,7 +88,7 @@
             android:layout_weight=".25" />
 
         <Button
-            android:text="@string/mark_as_default"
+            android:text="@string/kundli_button_text"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:id="@+id/kundli_button"
