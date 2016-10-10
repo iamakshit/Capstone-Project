@@ -186,27 +186,27 @@ public class AddUserActivity extends AppCompatActivity implements View.OnClickLi
 
     public boolean errorAlerts() {
         if (TextUtils.isEmpty(name.getText().toString())) {
-            name.setError("Name is mandatory");
+            name.setError(getString(R.string.name_empty_error));
             return false;
         }
 
         if (TextUtils.isEmpty(dobDate.getText().toString())) {
-            dobDate.setError("Date of birth is mandatory");
+            dobDate.setError(getString(R.string.dob_empty_error));
             return false;
         }
 
         if (TextUtils.isEmpty(dobTime.getText().toString())) {
-            dobTime.setError("Time of birth is mandatory");
+            dobTime.setError(getString(R.string.time_empty_error));
             return false;
         }
 
         if (TextUtils.isEmpty(maleOption.getText().toString()) && TextUtils.isEmpty(femaleOption.getText().toString())) {
-            maleOption.setError("Gender options has to be selected");
+            maleOption.setError(getString(R.string.gender_empty_error));
             return false;
         }
 
         if (TextUtils.isEmpty(autoCompView.getText().toString())) {
-            autoCompView.setError("Place of birth is mandatory");
+            autoCompView.setError(getString(R.string.valid_place_error));
             return false;
         }
         return true;
@@ -237,7 +237,7 @@ public class AddUserActivity extends AppCompatActivity implements View.OnClickLi
             }
 
             if (placeId == null) {
-                autoCompView.setError("Enter a valid place");
+                autoCompView.setError(getString(R.string.valid_place_error));
                 return;
             }
             GeoPlaceDetails geoPlaceDetails = getLocationDetails(placeId);
@@ -254,7 +254,7 @@ public class AddUserActivity extends AppCompatActivity implements View.OnClickLi
             Log.i(LOG_TAG, "Save Button User =" + user);
 
             addUser(user);
-            Toast.makeText(getApplicationContext(), "Successfully added new user profile", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), getString(R.string.user_profile_success), Toast.LENGTH_SHORT).show();
             finish();
 
         }
@@ -330,7 +330,7 @@ public class AddUserActivity extends AppCompatActivity implements View.OnClickLi
 
                     // permission denied, boo! Disable the
                     // functionality that depends on this permission.
-                    Toast.makeText(AddUserActivity.this, "Permission denied to read your External storage", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddUserActivity.this, getString(R.string.contacts_access_denied), Toast.LENGTH_SHORT).show();
                 }
                 return;
             }

@@ -22,8 +22,13 @@
     <string name="no_user_present">Uh oh ! No User Profile is added. Quickly add one</string>
     <string name="intro_button_desc">Click on this button to add profile and proceed...</string>
     <string name="intro_button_title">Hey There !!</string>
-
-    C
-
+    <string name="contacts_access_denied">Permission denied to read your External storage</string>
+    <string name="user_profile_success">Successfully added new user profile</string>
+    <string name="valid_place_error">Enter a valid place</string>
+    <string name="name_empty_error">Name is mandatory</string>
+    <string name="dob_empty_error">Date of birth is mandatory</string>
+    <string name="time_empty_error">Time of birth is mandatory</string>
+    <string name="gender_empty_error">Gender options has to be selected</string>
+    <string name="empty_place_error">Place of birth is mandatory</string>
 
 </resources>
