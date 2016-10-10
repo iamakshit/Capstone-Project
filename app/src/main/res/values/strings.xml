@@ -30,5 +30,6 @@
     <string name="time_empty_error">Time of birth is mandatory</string>
     <string name="gender_empty_error">Gender options has to be selected</string>
     <string name="empty_place_error">Place of birth is mandatory</string>
+    <string name="title_activity_astro_dash_board">AstroDashBoardActivity</string>
 
 </resources>

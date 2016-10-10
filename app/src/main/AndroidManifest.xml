@@ -49,6 +49,10 @@
         <activity
             android:name=".numerology.table.NumeroTableActivity"
             android:label="@string/title_activity_numero_table"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".dashboard.AstroDashBoardActivity"
+            android:label="@string/title_activity_astro_dash_board"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
