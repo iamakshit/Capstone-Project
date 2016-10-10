@@ -3,15 +3,11 @@ package com.android.akshitgupta.capstoneproject.dashboard;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.android.akshitgupta.capstoneproject.MainActivity;
 import com.android.akshitgupta.capstoneproject.R;
 import com.android.akshitgupta.capstoneproject.dailyprediction.DailyPredictionActivity;
 import com.android.akshitgupta.capstoneproject.enums.Numerology;
@@ -63,20 +59,20 @@ public class AstroDashBoardActivity extends AppCompatActivity implements View.On
 
     @Override
     public void onClick(View view) {
-        if (view == dailyPredView) {
+     /*   if (view == dailyPredView) {
             view.setBackgroundColor(Color.GRAY);
             Intent intent = new Intent(AstroDashBoardActivity.this, DailyPredictionActivity.class);
             intent.putExtra("userProfile", userProfile);
             startActivity(intent);
-        //    view.setBackgroundColor(Color.TRANSPARENT);
+            //    view.setBackgroundColor(Color.TRANSPARENT);
 
-        } else if (view == numReportView) {
+        } else*/ if (view == numReportView) {
             view.setBackgroundColor(Color.GRAY);
             Intent intent = new Intent(AstroDashBoardActivity.this, NumeroTableActivity.class);
             intent.putExtra("userProfile", userProfile);
             intent.putExtra("astroURL", Numerology.GENERAL_STATS.getCode());
             startActivity(intent);
-          //  view.setBackgroundColor(Color.TRANSPARENT);
+            //  view.setBackgroundColor(Color.TRANSPARENT);
 
         } else if (view == favMantraView) {
             view.setBackgroundColor(Color.GRAY);
@@ -84,15 +80,15 @@ public class AstroDashBoardActivity extends AppCompatActivity implements View.On
             intent.putExtra("userProfile", userProfile);
             intent.putExtra("astroURL", Numerology.FAV_MANTRA.getCode());
             startActivity(intent);
-         //   view.setBackgroundColor(Color.TRANSPARENT);
+            //   view.setBackgroundColor(Color.TRANSPARENT);
 
         } else if (view == lordView) {
-           view.setBackgroundColor(Color.GRAY);
+            view.setBackgroundColor(Color.GRAY);
             Intent intent = new Intent(AstroDashBoardActivity.this, NumerologyDescriptionActivity.class);
             intent.putExtra("userProfile", userProfile);
             intent.putExtra("astroURL", Numerology.FAV_LORD.getCode());
             startActivity(intent);
-         //   view.setBackgroundColor(Color.TRANSPARENT);
+            //   view.setBackgroundColor(Color.TRANSPARENT);
 
         } else if (view == favTimeView) {
             view.setBackgroundColor(Color.GRAY);
@@ -100,7 +96,7 @@ public class AstroDashBoardActivity extends AppCompatActivity implements View.On
             intent.putExtra("userProfile", userProfile);
             intent.putExtra("astroURL", Numerology.FAV_TIME.getCode());
             startActivity(intent);
-         //   view.setBackgroundColor(Color.TRANSPARENT);
+            //   view.setBackgroundColor(Color.TRANSPARENT);
 
         } else if (view == numDetailsView) {
             view.setBackgroundColor(Color.GRAY);
@@ -108,7 +104,7 @@ public class AstroDashBoardActivity extends AppCompatActivity implements View.On
             intent.putExtra("userProfile", userProfile);
             intent.putExtra("astroURL", Numerology.NUMBER_DETAILS.getCode());
             startActivity(intent);
-        //    view.setBackgroundColor(Color.TRANSPARENT);
+            //    view.setBackgroundColor(Color.TRANSPARENT);
 
         } else if (view == favVastuView) {
             view.setBackgroundColor(Color.GRAY);
@@ -116,18 +112,9 @@ public class AstroDashBoardActivity extends AppCompatActivity implements View.On
             intent.putExtra("userProfile", userProfile);
             intent.putExtra("astroURL", Numerology.FAV_VASTU.getCode());
             startActivity(intent);
-          //  view.setBackgroundColor(Color.TRANSPARENT);
+            //  view.setBackgroundColor(Color.TRANSPARENT);
 
         }
-    }
-
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        super.onRestart();
-        finish();
-        startActivity(getIntent());
     }
 
 }
