@@ -46,5 +46,5 @@
 
     <string name="nav_drawer_subtitle">Numerology</string>
     <string name="default_string">TextView</string>
-    <string name="kundli_button_text">View Kindli</string>
+    <string name="kundli_button_text">View Kundli</string>
 </resources>
