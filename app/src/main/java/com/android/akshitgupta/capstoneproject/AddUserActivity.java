@@ -98,6 +98,11 @@ public class AddUserActivity extends AppCompatActivity implements View.OnClickLi
         findViewsById(user);
         setDateTimeField();
         setOnClickListeners();
+        startToast();
+    }
+
+    private void startToast() {
+        Toast.makeText(getApplicationContext(), getString(R.string.add_user_toast), Toast.LENGTH_SHORT).show();
     }
 
     private void findViewsById(User user) {

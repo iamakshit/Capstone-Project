@@ -39,5 +39,11 @@
     <string name="fav_lord_text">Fav Lord</string>
     <string name="daily_pred_text">Daily Prediction</string>
     <string name="num_report_text">Numero Report</string>
+    <string name="name_hint">Name</string>
+    <string name="place_of_birth_hint">Please enter your place of birth</string>
+    <string name="dob_hint">Date (dd-MM-YYYY</string>
+    <string name="dob_time_hint">Time (hh:mm)</string>
+    <string name="add_user_toast">Enter the birth related details</string>
+
 
 </resources>
