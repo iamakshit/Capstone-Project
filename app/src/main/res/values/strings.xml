@@ -31,4 +31,13 @@
     <string name="empty_place_error">Place of birth is mandatory</string>
     <string name="title_activity_astro_dash_board">AstroDashBoardActivity</string>
 
+
+    <string name="num_details_text">What Number Says</string>
+    <string name="fav_time_text">Fav Time</string>
+    <string name="fav_mantra_text">Fav Mantra</string>
+    <string name="fav_vastu_text">Fav Mantra</string>
+    <string name="fav_lord_text">Fav Lord</string>
+    <string name="daily_pred_text">Daily Prediction</string>
+    <string name="num_report_text">Numero Report</string>
+
 </resources>

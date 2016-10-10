@@ -36,12 +36,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <ImageView
+                    <ImageButton
+                        android:background="@android:color/transparent"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:srcCompat="@drawable/daily"
                         android:id="@+id/dash_daily_pred" />
 
+                    <TextView
+                        android:text="@string/daily_pred_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/dash_daily_pred_text"
+                        android:textAlignment="center" />
+
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 
@@ -56,11 +64,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <ImageView
+                    <ImageButton
+                        android:background="@android:color/transparent"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:srcCompat="@drawable/report"
                         android:id="@+id/dash_num_report" />
+
+                    <TextView
+                        android:text="@string/num_report_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/dash_num_report_text"
+                        android:textAlignment="center" />
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 
@@ -75,12 +91,21 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <ImageView
+                    <ImageButton
+                        android:background="@android:color/transparent"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:srcCompat="@drawable/nos"
                         android:id="@+id/dash_num_details"
                         android:cropToPadding="false" />
+
+                    <TextView
+                        android:text="@string/num_details_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/dash_num_details_text"
+                        android:layout_weight="1"
+                        android:textAlignment="center" />
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 
@@ -103,11 +128,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <ImageView
+                    <ImageButton
+                        android:background="@android:color/transparent"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:srcCompat="@drawable/time"
                         android:id="@+id/dash_fav_time" />
+
+                    <TextView
+                        android:text="@string/fav_time_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/dash_fav_time_text"
+                        android:textAlignment="center" />
+
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 
@@ -122,11 +156,21 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <ImageView
+                    <ImageButton
+                        android:background="@android:color/transparent"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:srcCompat="@drawable/mantra"
                         android:id="@+id/dash_fav_mantra" />
+
+                    <TextView
+                        android:text="@string/fav_mantra_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/dash_fav_mantra_text"
+                        android:layout_weight="1"
+                        android:textAlignment="center" />
+
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 
@@ -149,11 +193,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <ImageView
+                    <ImageButton
+                        android:background="@android:color/transparent"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:srcCompat="@drawable/home"
                         android:id="@+id/dash_fav_vastu" />
+
+                    <TextView
+                        android:text="@string/fav_vastu_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/dash_fav_vastu_text"
+                        android:textAlignment="center" />
+
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 
@@ -168,11 +221,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <ImageView
+                    <ImageButton
+                        android:background="@android:color/transparent"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:srcCompat="@drawable/lord"
                         android:id="@+id/dash_lord" />
+
+                    <TextView
+                        android:text="@string/fav_lord_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/dash_lord_text"
+                        android:textAlignment="center" />
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 

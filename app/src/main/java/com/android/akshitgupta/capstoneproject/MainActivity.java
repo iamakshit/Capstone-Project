@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity
 
                 Picasso.with(getApplicationContext()).load(R.drawable.female_default).into(genderProfileView);
             }
-            Log.i(TAG, "UserProfile =" + userProfile);
+           // Log.i(TAG, "UserProfile =" + userProfile);
         } else {
             noUserPresentToast();
         }

@@ -5,11 +5,11 @@
         <item
             android:id="@+id/daily_pred"
             android:icon="@drawable/daily"
-            android:title="Daily Prediction" />
+            android:title="@string/daily_pred_text" />
         <item
             android:id="@+id/num_report"
             android:icon="@drawable/report"
-            android:title="Numero Report" />
+            android:title="@string/num_report_text" />
 
     </group>
 
@@ -18,26 +18,26 @@
             <item
                 android:id="@+id/num_details"
                 android:icon="@drawable/nos"
-                android:title="What Number Says" />
+                android:title="@string/num_details_text" />
 
             <item
                 android:id="@+id/fav_time"
                 android:icon="@drawable/time"
-                android:title="Fav Time" />
+                android:title="@string/fav_time_text" />
             <item
                 android:id="@+id/fav_mantra"
                 android:icon="@drawable/mantra"
-                android:title="Fav Mantra" />
+                android:title= "@string/fav_mantra_text"/>
 
             <item
                 android:id="@+id/fav_vastu"
                 android:icon="@drawable/home"
-                android:title="Fav Mantra" />
+                android:title="@string/fav_vastu_text" />
 
             <item
                 android:id="@+id/fav_lord"
                 android:icon="@drawable/lord"
-                android:title="Fav Lord" />
+                android:title="@string/fav_lord_text" />
 
         </menu>
     </item>
