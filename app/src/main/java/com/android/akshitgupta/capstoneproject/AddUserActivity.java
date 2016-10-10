@@ -260,11 +260,17 @@ public class AddUserActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
-    public void addUser(User user) {
+    public void addUserPermission(User user) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.WRITE_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{Manifest.permission.WRITE_CONTACTS}, PERMISSIONS_REQUEST_WRITE_CONTACTS);
             //After this point you wait for callback in onRequestPermissionsResult(int, String[], int[]) overriden method
-        } else if (id == null) {
+        } else {
+            addUser(user);
+        }
+    }
+
+    public void addUser(User user) {
+        if (id == null) {
             getApplicationContext().deleteDatabase(UserContract.UserEntry.TABLE_NAME);
             ContentValues userValues = new ContentValues();
             userValues.put(UserContract.UserEntry._ID, user.getId());
@@ -305,6 +311,31 @@ public class AddUserActivity extends AppCompatActivity implements View.OnClickLi
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString("userDefaultId", id.toString());
         editor.commit();
+    }
+
+    //Reference :https://developer.android.com/training/permissions/requesting.html
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case PERMISSIONS_REQUEST_WRITE_CONTACTS: {
+
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+
+                } else {
+
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                    Toast.makeText(AddUserActivity.this, "Permission denied to read your External storage", Toast.LENGTH_SHORT).show();
+                }
+                return;
+            }
+
+        }
     }
 
 }

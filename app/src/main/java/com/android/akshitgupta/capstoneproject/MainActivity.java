@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mTourGuideHandler.cleanUp();
+              //  mTourGuideHandler.cleanUp();
                 Intent intent = new Intent(MainActivity.this, AddUserActivity.class);
                 startActivity(intent);
             }
