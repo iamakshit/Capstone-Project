@@ -91,7 +91,7 @@
             android:text="@string/mark_as_default"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:id="@+id/default_button"
+            android:id="@+id/kundli_button"
             android:background="?android:attr/selectableItemBackground"
             android:layout_weight=".5" />
     </LinearLayout>

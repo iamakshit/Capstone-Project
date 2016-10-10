@@ -3,7 +3,6 @@ package com.android.akshitgupta.capstoneproject.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.preference.PreferenceManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,6 +16,7 @@ import android.widget.Toast;
 
 import com.android.akshitgupta.capstoneproject.AddUserActivity;
 import com.android.akshitgupta.capstoneproject.R;
+import com.android.akshitgupta.capstoneproject.dashboard.AstroDashBoardActivity;
 import com.android.akshitgupta.capstoneproject.data.UserContract;
 import com.android.akshitgupta.capstoneproject.enums.Gender;
 import com.android.akshitgupta.capstoneproject.object.User;
@@ -78,24 +78,18 @@ public class MyUserProfileRecyclerViewAdapter extends RecyclerView.Adapter<MyUse
             }
         });
 
-        String defaultUserId = prefs.getString("userDefaultId", "1");
 
-        if (userProfile.getId().toString().equals(defaultUserId)) {
-            holder.markDefaultButton.setTextColor(Color.RED);
-            holder.markDefaultButton.setText(R.string.marked_as_default);
-        }
-        holder.markDefaultButton.setOnClickListener(new View.OnClickListener() {
+        holder.viewKundliView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                ((Button) view).setTextColor(Color.RED);
-                ((Button) view).setText(R.string.marked_as_default);
-
-                Toast.makeText(view.getContext(), "Successfully marked this profile as default", Toast.LENGTH_SHORT).show();
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putString("userDefaultId", userProfile.getId().toString());
                 editor.commit();
                 notifyDataSetChanged();
+                Intent intent = new Intent(context, AstroDashBoardActivity.class);
+                intent.putExtra("userProfile", userProfile);
+                context.startActivity(intent);
             }
         });
     }
@@ -108,7 +102,7 @@ public class MyUserProfileRecyclerViewAdapter extends RecyclerView.Adapter<MyUse
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView nameView, cityView, dobView;
         public ImageButton deleteButton, editButton;
-        public Button markDefaultButton;
+        public Button viewKundliView;
         public ImageView genderProfileView;
 
         public MyViewHolder(View view) {
@@ -118,7 +112,7 @@ public class MyUserProfileRecyclerViewAdapter extends RecyclerView.Adapter<MyUse
             cityView = (TextView) view.findViewById(R.id.city_display);
             deleteButton = (ImageButton) view.findViewById(R.id.delete_button);
             editButton = (ImageButton) view.findViewById(R.id.edit_button);
-            markDefaultButton = (Button) view.findViewById(R.id.default_button);
+            viewKundliView = (Button) view.findViewById(R.id.kundli_button);
             genderProfileView = (ImageView) view.findViewById(R.id.gender_profile);
         }
     }
