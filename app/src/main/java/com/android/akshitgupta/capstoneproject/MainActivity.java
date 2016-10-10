@@ -31,6 +31,7 @@ import com.android.akshitgupta.capstoneproject.enums.Numerology;
 import com.android.akshitgupta.capstoneproject.numerology.NumerologyDescriptionActivity;
 import com.android.akshitgupta.capstoneproject.numerology.table.NumeroTableActivity;
 import com.android.akshitgupta.capstoneproject.object.User;
+import com.squareup.picasso.Picasso;
 
 import tourguide.tourguide.Overlay;
 import tourguide.tourguide.Pointer;
@@ -88,9 +89,10 @@ public class MainActivity extends AppCompatActivity
             birthDetailsView.setText(userProfile.getDobDate() + " " + userProfile.getDobTIme());
 
             if (Gender.MALE.getCode().equals(userProfile.getUserGender())) {
-                genderProfileView.setImageResource(R.drawable.male_default);
+                Picasso.with(getApplicationContext()).load(R.drawable.male_default).into(genderProfileView);
             } else {
-                genderProfileView.setImageResource(R.drawable.female_default);
+
+                Picasso.with(getApplicationContext()).load(R.drawable.female_default).into(genderProfileView);
             }
             Log.i(TAG, "UserProfile =" + userProfile);
         } else {

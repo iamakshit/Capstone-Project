@@ -20,6 +20,7 @@ import com.android.akshitgupta.capstoneproject.R;
 import com.android.akshitgupta.capstoneproject.data.UserContract;
 import com.android.akshitgupta.capstoneproject.enums.Gender;
 import com.android.akshitgupta.capstoneproject.object.User;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -53,9 +54,9 @@ public class MyUserProfileRecyclerViewAdapter extends RecyclerView.Adapter<MyUse
         holder.dobView.setText(userProfile.getDobDate());
 
         if (Gender.MALE.getCode().equals(userProfile.getUserGender())) {
-            holder.genderProfileView.setImageResource(R.drawable.male_default);
+            Picasso.with(context).load(R.drawable.male_default).into(holder.genderProfileView);
         } else {
-            holder.genderProfileView.setImageResource(R.drawable.female_default);
+            Picasso.with(context).load(R.drawable.female_default).into(holder.genderProfileView);
         }
 
         holder.deleteButton.setOnClickListener(new View.OnClickListener() {
@@ -90,7 +91,7 @@ public class MyUserProfileRecyclerViewAdapter extends RecyclerView.Adapter<MyUse
                 ((Button) view).setTextColor(Color.RED);
                 ((Button) view).setText(R.string.marked_as_default);
 
-                Toast.makeText(view.getContext(), "Successfully marked this " + userProfile.getUserName() + " as default", Toast.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(), "Successfully marked this profile as default", Toast.LENGTH_SHORT).show();
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putString("userDefaultId", userProfile.getId().toString());
                 editor.commit();
