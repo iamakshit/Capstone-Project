@@ -16,6 +16,8 @@ import com.android.akshitgupta.capstoneproject.object.response.NumeroResponse;
 import com.android.akshitgupta.capstoneproject.task.VedicNumeroTask;
 import com.android.akshitgupta.capstoneproject.utils.AstroUtils;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.concurrent.ExecutionException;
 
 public class NumerologyDescriptionActivity extends AppCompatActivity {
@@ -30,7 +32,15 @@ public class NumerologyDescriptionActivity extends AppCompatActivity {
         Intent intent = getIntent();
         User userProfile = (User) intent.getSerializableExtra("userProfile");
         String numerologyCode = intent.getStringExtra("astroURL");
-        numerology(userProfile, numerologyCode);
+        if (StringUtils.isNotEmpty(numerologyCode)) {
+            numerology(userProfile, numerologyCode);
+        } else {
+            //Need to fill the About Us page
+            TextView numerologyDesription = (TextView) findViewById(R.id.numero_desc);
+            numerologyDesription.setText(Html.fromHtml(AstroUtils.getAboutUsContent()));
+            toolbar = (Toolbar) findViewById(R.id.numero_toolbar);
+            toolbar.setTitle(getString(R.string.about_us));
+        }
 
     }
 

@@ -126,6 +126,8 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.about_us) {
+            Intent intent = new Intent(MainActivity.this, NumerologyDescriptionActivity.class);
+            startActivity(intent);
             return true;
         }
 

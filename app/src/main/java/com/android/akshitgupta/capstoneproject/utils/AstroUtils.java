@@ -197,4 +197,14 @@ public class AstroUtils {
 
         return numeroPredictionList;
     }
+
+    public static String getAboutUsContent() {
+        StringBuilder aboutUsContent = new StringBuilder();
+        aboutUsContent.append("This app provides the user with personalized daily horoscope prediction (based on vedic calculations) as well as vedic numerology report. Users can get daily notifications on daily basis on how their day would be based on following calculations. <p> 1>Health <p>2> Emotions <p>3> Personal Life<p> 4>Profession<p> 5>Luck<p> 6>Travel<p>" +
+
+                "The user also has the option to save one or more profiles so that he/she does not have to enter his details every\u00ADtime. The app provides easy to read information for user which are easy to understand and interpret as well. Problem that app addresses <p>● Current horoscope apps provide too much jargon<p> ● Almost all the apps have terrible UI<p> ● None of the APIs have the option to save the user profile. He would have to enter his details every time.<p> ● Current apps don’t provide daily notifications automatically telling user about his daily predictions and automatically saving them for a user" +
+                "\n");
+
+        return aboutUsContent.toString();
+    }
 }
