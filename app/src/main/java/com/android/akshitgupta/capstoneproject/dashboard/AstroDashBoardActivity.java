@@ -16,7 +16,7 @@ import com.android.akshitgupta.capstoneproject.numerology.NumerologyDescriptionA
 import com.android.akshitgupta.capstoneproject.numerology.table.NumeroTableActivity;
 import com.android.akshitgupta.capstoneproject.object.User;
 
-public class AstroDashBoardActivity extends AppCompatActivity implements View.OnClickListener,View.OnTouchListener {
+public class AstroDashBoardActivity extends AppCompatActivity implements View.OnClickListener {
 
 
     ImageView dailyPredView;
@@ -45,7 +45,6 @@ public class AstroDashBoardActivity extends AppCompatActivity implements View.On
         numDetailsView = (ImageView) findViewById(R.id.dash_num_details);
         favVastuView = (ImageView) findViewById(R.id.dash_fav_vastu);
         setOnClickListeners();
-        setOnTouchListeners();
     }
 
     private void setOnClickListeners() {
@@ -58,35 +57,29 @@ public class AstroDashBoardActivity extends AppCompatActivity implements View.On
         favVastuView.setOnClickListener((View.OnClickListener) this);
 
     }
-    private void setOnTouchListeners() {
-        dailyPredView.setOnTouchListener((View.OnTouchListener) this);
-        numReportView.setOnTouchListener((View.OnTouchListener) this);
-        favMantraView.setOnTouchListener((View.OnTouchListener) this);
-        lordView.setOnTouchListener((View.OnTouchListener) this);
-        favTimeView.setOnTouchListener((View.OnTouchListener) this);
-        numDetailsView.setOnTouchListener((View.OnTouchListener) this);
-        favVastuView.setOnTouchListener((View.OnTouchListener) this);
-
-    }
 
     @Override
     public void onClick(View view) {
         if (view == dailyPredView) {
+            view.setBackgroundColor(Color.GRAY);
             Intent intent = new Intent(AstroDashBoardActivity.this, DailyPredictionActivity.class);
             intent.putExtra("userProfile", userProfile);
             startActivity(intent);
 
         } else if (view == numReportView) {
+            view.setBackgroundColor(Color.GRAY);
             Intent intent = new Intent(AstroDashBoardActivity.this, NumeroTableActivity.class);
             intent.putExtra("userProfile", userProfile);
             intent.putExtra("astroURL", Numerology.GENERAL_STATS.getCode());
             startActivity(intent);
         } else if (view == favMantraView) {
+            view.setBackgroundColor(Color.GRAY);
             Intent intent = new Intent(AstroDashBoardActivity.this, NumerologyDescriptionActivity.class);
             intent.putExtra("userProfile", userProfile);
             intent.putExtra("astroURL", Numerology.FAV_MANTRA.getCode());
             startActivity(intent);
         } else if (view == lordView) {
+            view.setBackgroundColor(Color.GRAY);
             Intent intent = new Intent(AstroDashBoardActivity.this, NumerologyDescriptionActivity.class);
             intent.putExtra("userProfile", userProfile);
             intent.putExtra("astroURL", Numerology.FAV_LORD.getCode());
@@ -97,48 +90,18 @@ public class AstroDashBoardActivity extends AppCompatActivity implements View.On
             intent.putExtra("astroURL", Numerology.FAV_TIME.getCode());
             startActivity(intent);
         } else if (view == numDetailsView) {
+            view.setBackgroundColor(Color.GRAY);
             Intent intent = new Intent(AstroDashBoardActivity.this, NumerologyDescriptionActivity.class);
             intent.putExtra("userProfile", userProfile);
             intent.putExtra("astroURL", Numerology.NUMBER_DETAILS.getCode());
             startActivity(intent);
         } else if (view == favVastuView) {
+            view.setBackgroundColor(Color.GRAY);
             Intent intent = new Intent(AstroDashBoardActivity.this, NumerologyDescriptionActivity.class);
             intent.putExtra("userProfile", userProfile);
             intent.putExtra("astroURL", Numerology.FAV_VASTU.getCode());
             startActivity(intent);
         }
 
-    }
-
-    @Override
-    public boolean onTouch(View view, MotionEvent motionEvent) {
-        if (view == dailyPredView) {
-            view.setBackgroundColor(Color.GRAY);
-            return true;
-        } else if (view == numReportView) {
-            view.setBackgroundColor(Color.GRAY);
-            return true;
-
-        } else if (view == favMantraView) {
-            view.setBackgroundColor(Color.GRAY);
-            return true;
-
-        } else if (view == lordView) {
-            view.setBackgroundColor(Color.GRAY);
-            return true;
-
-        } else if (view == favTimeView) {
-            view.setBackgroundColor(Color.GRAY);
-            return true;
-
-        } else if (view == numDetailsView) {
-            view.setBackgroundColor(Color.GRAY);
-            return true;
-
-        } else if (view == favVastuView) {
-            view.setBackgroundColor(Color.GRAY);
-            return true;
-        }
-        return false;
     }
 }
