@@ -86,7 +86,7 @@ public class GeoPlacesAutoCompleteTask extends AsyncTask<String, Void, ArrayList
                 try {
                     reader.close();
                 } catch (IOException e) {
-                    Log.e("PlaceholderFragment", "Error closing stream", e);
+                    Log.e(LOG_TAG, "Error closing stream", e);
 
                 }
             }

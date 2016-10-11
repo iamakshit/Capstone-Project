@@ -77,7 +77,7 @@ public class GeoPlaceDetailsTask extends AsyncTask<String, Void, GeoPlaceDetails
                 try {
                     reader.close();
                 } catch (IOException e) {
-                    Log.e("PlaceholderFragment", "Error closing stream", e);
+                    Log.e(LOG_TAG, "Error closing stream", e);
                 }
             }
         }

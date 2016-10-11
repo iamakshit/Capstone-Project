@@ -151,7 +151,7 @@ public class AddUserActivity extends AppCompatActivity implements View.OnClickLi
                 Context context = getApplicationContext();
                 geoDetails = (GeoDetails) autoCompView.getAdapter().getItem(position);
                 placeId = geoDetails.getPlaceId();
-                Toast.makeText(context, "You selected :: " + geoDetails.getDescription(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, getString(R.string.you_selected) + geoDetails.getDescription(), Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -48,4 +48,5 @@
     <string name="default_string">TextView</string>
     <string name="kundli_button_text">View Kundli</string>
     <string name="splash_sub_title">Your Own Personalized Astrology App</string>
+    <string name="you_selected">You selected</string>
 </resources>

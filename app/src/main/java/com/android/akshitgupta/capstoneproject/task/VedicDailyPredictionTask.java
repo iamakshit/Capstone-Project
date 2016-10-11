@@ -90,7 +90,7 @@ public class VedicDailyPredictionTask extends AsyncTask<AstroRequest, Void, Dail
                 try {
                     reader.close();
                 } catch (IOException e) {
-                    Log.e("PlaceholderFragment", "Error closing stream", e);
+                    Log.e(TAG, "Error closing stream", e);
 
                 }
             }
