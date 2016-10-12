@@ -54,6 +54,14 @@
             android:name=".dashboard.AstroDashBoardActivity"
             android:label="@string/title_activity_astro_dash_board"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+
+        <receiver android:name="SimpleWidgetProvider" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider"
+                android:resource="@layout/simple_widget_info" />
+        </receiver>
     </application>
 
 </manifest>
