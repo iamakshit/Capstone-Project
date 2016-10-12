@@ -27,6 +27,11 @@ public class SimpleWidgetProvider extends AppWidgetProvider {
                     R.layout.simple_widget);
             remoteViews.setTextViewText(R.id.textView, number);
 
+            // Create intent to launch MainActivity
+            Intent intent1 = new Intent(context, MainActivity.class);
+            PendingIntent pendingIntent1 = PendingIntent.getActivity(context, 0, intent1, 0);
+            remoteViews.setOnClickPendingIntent(R.id.simple_widget, pendingIntent1);
+
             Intent intent = new Intent(context, SimpleWidgetProvider.class);
             intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
             intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds);
