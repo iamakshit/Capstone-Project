@@ -1,8 +1,9 @@
-package com.android.akshitgupta.capstoneproject;
+package com.android.akshitgupta.capstoneproject.widget;
 
+import android.app.IntentService;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
-import android.appwidget.AppWidgetProvider;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,6 +11,7 @@ import android.database.Cursor;
 import android.preference.PreferenceManager;
 import android.widget.RemoteViews;
 
+import com.android.akshitgupta.capstoneproject.R;
 import com.android.akshitgupta.capstoneproject.dailyprediction.DailyPredictionActivity;
 import com.android.akshitgupta.capstoneproject.data.UserContract;
 import com.android.akshitgupta.capstoneproject.enums.Gender;
@@ -17,42 +19,54 @@ import com.android.akshitgupta.capstoneproject.object.User;
 import com.android.akshitgupta.capstoneproject.utils.ConstantUtils;
 
 /**
- * Created by akshitgupta on 12/10/16.
+ * Created by akshitgupta on 10/13/16.
  */
 
-public class SimpleWidgetProvider extends AppWidgetProvider {
+
+public class WidgetIntentService extends IntentService {
 
     SharedPreferences prefs;
     private User userProfile;
 
+    public WidgetIntentService() {
+        super("WidgetIntentService");
+    }
+
+
     @Override
-    public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
+    protected void onHandleIntent(Intent intent) {
+
+        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
+        int[] appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(this,
+                SimpleWidgetProvider.class));
+
         final int count = appWidgetIds.length;
-        prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
         for (int i = 0; i < count; i++) {
             int widgetId = appWidgetIds[i];
 
-            RemoteViews remoteViews = new RemoteViews(context.getPackageName(),
+            RemoteViews remoteViews = new RemoteViews(this.getPackageName(),
                     R.layout.simple_widget);
 
             String defaultUserId = prefs.getString("userDefaultId", ConstantUtils.DEFAULT_WIDGET_USER_ID);
             if (ConstantUtils.DEFAULT_WIDGET_USER_ID.equals(defaultUserId)) {
-                disableWidgetOnInvalidUserProfile(remoteViews, context);
+                disableWidgetOnInvalidUserProfile(remoteViews, this);
             } else {
-                updateUserProfile(context, defaultUserId, remoteViews);
+                updateUserProfile(this, defaultUserId, remoteViews);
             }
 
-            Intent intent = new Intent(context, SimpleWidgetProvider.class);
-            intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
-            intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds);
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(context,
-                    0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+            Intent launchIntent = new Intent(this, SimpleWidgetProvider.class);
+            launchIntent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+            launchIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds);
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(this,
+                    0, launchIntent, PendingIntent.FLAG_UPDATE_CURRENT);
             remoteViews.setOnClickPendingIntent(R.id.widget_refresh, pendingIntent);
 
             appWidgetManager.updateAppWidget(widgetId, remoteViews);
         }
     }
+
 
     public void disableWidgetOnInvalidUserProfile(RemoteViews remoteViews, Context context) {
         remoteViews.setTextViewText(R.id.widget_msg, context.getString(R.string.widget_error_msg));
@@ -96,5 +110,5 @@ public class SimpleWidgetProvider extends AppWidgetProvider {
             remoteViews.setImageViewResource(R.id.simple_widget_image, R.drawable.female_default);
         }
     }
-}
 
+}
