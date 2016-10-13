@@ -9,5 +9,7 @@
     <dimen name="text_margin">16dp</dimen>
     <dimen name="widget_height">16dp</dimen>
     <dimen name="widget_width">16dp</dimen>
+    <dimen name="widget_image_height">165dp</dimen>
+    <dimen name="widget_image_width">120dp</dimen>
 
 </resources>
