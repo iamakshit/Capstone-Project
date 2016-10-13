@@ -66,6 +66,13 @@
         android:textAlignment="center" />
 
     <Button
+        android:text="@string/widget_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/widget_refresh"
+        android:layout_weight="0.04" />
+
+    <Button
         android:id="@+id/widget_action"
         android:layout_height="47dp"
         android:layout_width="363dp"

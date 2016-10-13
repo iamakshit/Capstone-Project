@@ -15,7 +15,6 @@ import com.android.akshitgupta.capstoneproject.data.UserContract;
 import com.android.akshitgupta.capstoneproject.enums.Gender;
 import com.android.akshitgupta.capstoneproject.object.User;
 import com.android.akshitgupta.capstoneproject.utils.ConstantUtils;
-import com.squareup.picasso.Picasso;
 
 /**
  * Created by akshitgupta on 12/10/16.
@@ -23,8 +22,8 @@ import com.squareup.picasso.Picasso;
 
 public class SimpleWidgetProvider extends AppWidgetProvider {
 
-    private User userProfile;
     SharedPreferences prefs;
+    private User userProfile;
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
@@ -36,35 +35,32 @@ public class SimpleWidgetProvider extends AppWidgetProvider {
 
             RemoteViews remoteViews = new RemoteViews(context.getPackageName(),
                     R.layout.simple_widget);
+
             String defaultUserId = prefs.getString("userDefaultId", ConstantUtils.DEFAULT_WIDGET_USER_ID);
             if (ConstantUtils.DEFAULT_WIDGET_USER_ID.equals(defaultUserId)) {
-                remoteViews.setTextViewText(R.id.widget_msg, context.getString(R.string.widget_error_msg));
-                remoteViews.setBoolean(R.id.widget_action, "setEnabled", false);
-
+                disableWidgetOnInvalidUserProfile(remoteViews, context);
             } else {
-                updateUserProfile(context, defaultUserId);
-                Intent intent = new Intent(context, DailyPredictionActivity.class);
-                intent.putExtra("userProfile", userProfile);
-                PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
-                remoteViews.setOnClickPendingIntent(R.id.widget_action, pendingIntent);
-                remoteViews.setTextViewText(R.id.simple_widget_user_name, userProfile.getUserName());
-                remoteViews.setTextViewText(R.id.simple_widget_user_dob, userProfile.getDobDate()+" "+userProfile.getDobTIme());
-                remoteViews.setTextViewText(R.id.simple_widget_user_city, userProfile.getCityName());
-                if (Gender.MALE.getCode().equals(userProfile.getUserGender())) {
-                    remoteViews.setImageViewResource(R.id.simple_widget_image,R.drawable.male_default);
-                } else {
-                    remoteViews.setImageViewResource(R.id.simple_widget_image,R.drawable.female_default);
-
-                }
-
-
+                updateUserProfile(context, defaultUserId, remoteViews);
             }
+
+            Intent intent = new Intent(context, SimpleWidgetProvider.class);
+            intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+            intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds);
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(context,
+                    0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+            remoteViews.setOnClickPendingIntent(R.id.widget_refresh, pendingIntent);
 
             appWidgetManager.updateAppWidget(widgetId, remoteViews);
         }
     }
 
-    public void updateUserProfile(Context context, String defaultUserId) {
+    public void disableWidgetOnInvalidUserProfile(RemoteViews remoteViews, Context context) {
+        remoteViews.setTextViewText(R.id.widget_msg, context.getString(R.string.widget_error_msg));
+        remoteViews.setBoolean(R.id.widget_action, "setEnabled", false);
+
+    }
+
+    public void updateUserProfile(Context context, String defaultUserId, RemoteViews remoteViews) {
 
 
         Cursor userCursor = context.getContentResolver().query(
@@ -86,6 +82,19 @@ public class SimpleWidgetProvider extends AppWidgetProvider {
 
         }
         userCursor.close();
+        Intent intent = new Intent(context, DailyPredictionActivity.class);
+        intent.putExtra("userProfile", userProfile);
+        remoteViews.setBoolean(R.id.widget_action, "setEnabled", true);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
+        remoteViews.setOnClickPendingIntent(R.id.widget_action, pendingIntent);
+        remoteViews.setTextViewText(R.id.simple_widget_user_name, userProfile.getUserName());
+        remoteViews.setTextViewText(R.id.simple_widget_user_dob, userProfile.getDobDate() + " " + userProfile.getDobTIme());
+        remoteViews.setTextViewText(R.id.simple_widget_user_city, userProfile.getCityName());
+        if (Gender.MALE.getCode().equals(userProfile.getUserGender())) {
+            remoteViews.setImageViewResource(R.id.simple_widget_image, R.drawable.male_default);
+        } else {
+            remoteViews.setImageViewResource(R.id.simple_widget_image, R.drawable.female_default);
+        }
     }
 }
 
