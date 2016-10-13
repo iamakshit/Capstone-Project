@@ -16,8 +16,7 @@
             android:id="@+id/simple_widget_image"
             android:layout_height="@dimen/widget_image_height"
             android:layout_width="@dimen/widget_image_width"
-            android:adjustViewBounds="true"
-            android:src="@drawable/male_default"/>
+            android:adjustViewBounds="true"/>
 
         <LinearLayout
             android:orientation="vertical"
