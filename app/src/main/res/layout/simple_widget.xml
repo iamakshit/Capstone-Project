@@ -14,7 +14,7 @@
 
         <ImageView
             android:id="@+id/simple_widget_image"
-            android:layout_height="217dp"
+            android:layout_height="165dp"
             android:layout_width="120dp"
             android:adjustViewBounds="true"
             android:src="@drawable/male_default"/>
