@@ -6,50 +6,68 @@
     android:id="@+id/simple_widget_layout"
     android:background="#55000000">
 
-    <ImageView
-        android:id="@+id/simple_widget_image"
-        android:layout_height="0dp"
-        android:layout_width="match_parent"
-        android:layout_weight="1"
-        android:src="@drawable/male_default"/>
-
     <LinearLayout
-        android:orientation="vertical"
-        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight=".3"
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:text="Akshit Gupta"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/simple_widget_user_name"
-            android:textAlignment="center" />
+        <ImageView
+            android:id="@+id/simple_widget_image"
+            android:layout_height="217dp"
+            android:layout_width="120dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/male_default"/>
 
-        <TextView
-            android:text="27-02-1992 10:34"
-            android:layout_weight="1"
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_margin="@dimen/activity_horizontal_margin"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/simple_widget_user_dob"
-            android:textAlignment="center" />
+            android:layout_height="match_parent"
+            android:layout_weight="1">
 
-        <TextView
-            android:text="New Delhi"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/simple_widget_user_city"
-            android:textAlignment="center" />
+            <TextView
+                android:text="Akshit Gupta"
+                android:layout_weight="1"
+                android:textColor="@color/AliceBlue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/simple_widget_user_name"
+                android:textAlignment="center" />
+
+            <TextView
+                android:text="27-02-1992 10:34"
+                android:layout_weight="1"
+                android:textColor="@color/AliceBlue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/simple_widget_user_dob"
+                android:textAlignment="center" />
+
+            <TextView
+                android:text="New Delhi"
+                android:layout_weight="1"
+                android:textColor="@color/AliceBlue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/simple_widget_user_city"
+                android:textAlignment="center" />
+        </LinearLayout>
     </LinearLayout>
 
 
+    <TextView
+        android:text="TextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/widget_msg"
+        android:textColor="@color/AliceBlue"
+        android:layout_gravity="center_horizontal"
+        android:textAlignment="center" />
 
     <Button
-        android:id="@+id/actionButton"
-        android:layout_height="120dp"
+        android:id="@+id/widget_action"
+        android:layout_height="47dp"
         android:layout_width="363dp"
-        android:text="@string/widget_get_prediction"/>
+        android:text="@string/widget_get_prediction" />
 </LinearLayout>

@@ -6,4 +6,6 @@
     <color name="navTextColor">#FFFFFF</color>
     <color name="introButtonTextColor">#bdc3c7</color>
     <color name="splashTextColor">#FFEBF6</color>
+    <color name="widgetTextColor">#FFFFFF</color>
+
 </resources>

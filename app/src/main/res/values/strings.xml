@@ -50,4 +50,5 @@
     <string name="splash_sub_title">Your Own Personalized Astrology App</string>
     <string name="you_selected">You selected</string>
     <string name="widget_get_prediction">GET TODAY\'S PREDICTION</string>
+    <string name="widget_error_msg">Kindly add a profile first</string>
 </resources>
