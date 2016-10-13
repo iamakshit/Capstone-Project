@@ -29,7 +29,7 @@ public class WidgetIntentService extends IntentService {
     private User userProfile;
 
     public WidgetIntentService() {
-        super("WidgetIntentService");
+        super(WidgetIntentService.class.getSimpleName());
     }
 
 
